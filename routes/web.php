@@ -19,7 +19,7 @@ Route::middleware(['web'])->group(function(){
 });
 
 Route::prefix('admin')->middleware(['auth:sanctum', 'verified','isMember'])->group(function () {
-   Route::get('dashboard',function(){ return view('dashboard');})->name('dashboard');
+   Route::get('/',function(){ return view('dashboard');})->name('dashboard');
    Route::resource('posts',PostController::class);
    Route::get('autors',function(){ return view('dashboard');})->name('autors');
 });

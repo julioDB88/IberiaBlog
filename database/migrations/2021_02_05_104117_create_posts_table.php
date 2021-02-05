@@ -17,12 +17,14 @@ class CreatePostsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->char('title',55);
-            $table->text('content');
+            $table->longText('content');
             $table->unsignedBigInteger('author_id');
             $table->foreign('author_id')->references('id')->on('users');
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories');
             $table->string('img_file')->nullable();
+            $table->string('keywords',255)->nullable();
+            $table->string('description',255)->nullable();
         });
 
     }

@@ -4,48 +4,94 @@
             {{ __('Posts') }}
         </h2>
     </x-slot>
-    <div class="p-4">
+    <div class="p-4 flex flex-wrap">
+        @if($errors->any())
+        <div class="bg-red-500 p-3 w-full rounded">
+            @foreach ($errors->all() as $error)
+            <p class=text-white">{{$error}} </p>
+            @endforeach
+        </div>
+        @endif
 
 
-        <form action="{{route('posts.store')}}" method="post">
-            @csrf
-            <div class="form-group my-3 md:w-1/2">
-                <div class="py-2 m-3">
-                    <label for="title" class="block">{{__('Title')}}</label>
-                    <input type="text" name="title"
-                        class="block w-full mt-1 rounded-md border-transparent focus:border-gray-500 focus:bg-white focus:ring-"
-                        autocomplete="off">
+        <div class="w-full md:w-1/2">
+            <h1 class="text-center py-3 my-3">{{__('Last Posts') }}</h1>
+        <table class="border-collapse table-auto w-full whitespace-no-wrap bg-white table-striped relative">
+            <thead>
+                <tr class="border-b">
+                    <th> {{__('Date')}}</th>
+                    <th> {{__('Title')}}</th>
+                    <th> {{__('Edit')}}</th>
+                    <th> {{__('Stats')}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($posts as $post)
+                    <tr >
+                        <td class="text-center">{{\Carbon\Carbon::parse($post->created_at)->format('d-m-Y')}}</td>
+                        <td class="text-center">{{$post->title}}</td>
+                        <td class="p-4 text-center"><a href="{{route('posts.edit',$post)}}" class="bg-yellow-500 text-white px-4 py-2">Edit</a></td>
+                        <td class="text-center">1 <i class="far fa-thumbs-up"></i>  3 <i class="far fa-comment-alt"></i></td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+        </div>
+        <div class="w-full md:w-1/2">
+            <form action="{{route('posts.store')}}" method="post" enctype="multipart/form-data">
+                @csrf
+                <div class="form-group my-3 flex flex-wrap">
+                    <div class="p-3 w-full md:w-2/4">
+                        <label for="title" class="block">{{__('Title')}}</label>
+                        <input type="text" name="title" value="{{ old('title') }}"
+                            class="block w-full mt-1 rounded-md border-transparent focus:border-gray-500 focus:bg-white focus:ring-"
+                            autocomplete="off">
+                    </div>
+                    <div class="p-3 w-full md:w-2/4">
+                        <label for="category" class="block">{{__('Category')}}</label>
+
+                        <select name="category"
+                            class="block w-full mt-1 rounded-md border-transparent focus:border-gray-500 focus:bg-white focus:ring-0">
+                            @foreach ($cats as $cat)
+                            <option value="{{$cat->id}}">{{$cat->name}}</option>
+                            @endforeach
+
+                        </select>
+                    </div>
+
+                    <div class="p-3 w-full md:w-2/4">
+                        <label for="title" class="block">{{__('Meta keywords')}}</label>
+                        <input type="text" name="keywords" value="{{ old('keywords') }}"
+                            class="block w-full mt-1 rounded-md border-transparent focus:border-gray-500 focus:bg-white focus:ring-"
+                            autocomplete="off">
+                    </div>
+                    <div class="p-3 w-full md:w-2/4">
+                        <label for="title" class="block">{{__('Meta Description')}}</label>
+                        <input type="text" name="description" value="{{ old('description') }}"
+                            class="block w-full mt-1 rounded-md border-transparent focus:border-gray-500 focus:bg-white focus:ring-"
+                            autocomplete="off">
+                    </div>
+                    <div class="p-3 w-full md:w-1/4">
+                        <label for="image_file" class="bg-green-400 p-4 rounded">{{__('Add Mmage')}}
+                            <input type="file" name="image_file" id="image_file" class="hidden">
+                        </label>
+
+                    </div>
+
                 </div>
-                <div class="py-2 m-3">
-                    <label for="category" class="block">{{__('Category')}}</label>
-
-                    <select name="category"
-                        class="block w-full mt-1 rounded-md border-transparent focus:border-gray-500 focus:bg-white focus:ring-0">
-                        <option value="national">national</option>
-                        <option value="national">International</option>
-                        <option value="national">Various</option>
-                        <option value="national">Misc</option>
-                    </select>
-                </div>
-                <div class="py-2 m-3">
-                    <label for="image_file" class="bg-green-400 p-4 rounded">{{__('Add Image')}}
-                        <input type="file" name="image_file" id="image_file" class="hidden">
-                    </label>
-
-                </div>
 
 
-            </div>
+                <textarea name="content" id="contents">Hello, World!</textarea>
+                <input type="submit" class="bg-green-400 p-4 rounded m-6" value="{{__('Submit')}}">
+
+            </form>
+        </div>
 
 
-            <textarea name="content" id="contents">Hello, World!</textarea>
-            <input type="submit" class="bg-green-400 p-4 rounded m-6" value="{{__('Submit')}}">
-    </div>
-    </form>
 
     </div>
 
-    </div>
+
 
     @push('js')
     <script defer>
