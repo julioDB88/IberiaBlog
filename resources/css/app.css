@@ -1,0 +1,40 @@
+
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap');
+@font-face {
+    font-family: "unzialish";
+    src: url("../fonts/unzialish.ttf");
+}
+
+*{
+    font-family: 'Montserrat', sans-serif;
+}
+
+.c-shadow{
+    box-shadow: 0 4px 8px 2px;
+}
+
+.main-banner{
+    backdrop-filter:brightness(0.4) ;
+
+}
+
+.h-80{
+    height: 50vh;
+}
+.header-section{
+    width: 100%;
+    font-family: 'Montserrat', sans-serif;
+}
+
+video{
+    object-fit: cover;
+    left: 0;
+}
+.fzial{
+    font-family: 'unzialish';
+
+}
