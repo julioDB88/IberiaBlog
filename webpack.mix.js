@@ -17,6 +17,11 @@ mix.js('resources/js/app.js', 'public/js')
         require('tailwindcss'),
         require('autoprefixer'),
     ]);
+    mix.copy('node_modules/tinymce/tinymce.min.js', 'public/js/tinymce');
+    mix.copy('node_modules/tinymce/themes', 'public/js/tinymce/themes');
+    mix.copy('node_modules/tinymce/skins', 'public/js/tinymce/skins');
+    mix.copy('node_modules/tinymce/plugins', 'public/js/tinymce/plugins');
+    mix.copy('node_modules/tinymce/icons', 'public/js/tinymce/icons');
 
 if (mix.inProduction()) {
     mix.version();

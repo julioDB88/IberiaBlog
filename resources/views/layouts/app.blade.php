@@ -17,6 +17,9 @@
 
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
+        <script src="{{ asset('js/tinymce/tinymce.min.js') }}"></script>
+
+
     </head>
     <body class="font-sans antialiased">
         <x-jet-banner />
@@ -40,6 +43,8 @@
         </div>
 
         @stack('modals')
+        <!--stack js -->
+        @stack('js')
 
         @livewireScripts
     </body>
