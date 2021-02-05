@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class IsWriter
+class IsMember
 {
     /**
      * Handle an incoming request.
@@ -16,6 +16,13 @@ class IsWriter
      */
     public function handle(Request $request, Closure $next)
     {
-        return $next($request);
+        if(auth()->user()){
+
+            if(in_array(auth()->user()->role_id,[0,1])){
+            return $next($request);
+            }
+        }
+        abort(403);
+
     }
 }

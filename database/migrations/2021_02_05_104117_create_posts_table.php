@@ -19,11 +19,12 @@ class CreatePostsTable extends Migration
             $table->char('title',55);
             $table->text('content');
             $table->unsignedBigInteger('author_id');
-            $table->foreign('author_id')->references('users')->on('id');
+            $table->foreign('author_id')->references('id')->on('users');
             $table->unsignedBigInteger('category_id');
-            $table->foreign('category_id')->references('categories')->on('id');
+            $table->foreign('category_id')->references('id')->on('categories');
             $table->string('img_file')->nullable();
         });
+
     }
 
     /**

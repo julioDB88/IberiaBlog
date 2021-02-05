@@ -28,6 +28,7 @@ class CreateNewUser implements CreatesNewUsers
             'password' => $this->passwordRules(),
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['required', 'accepted'] : '',
         ])->validate();
+        $count= User::count();
 
         return DB::transaction(function () use ($input) {
             return tap(User::create([
@@ -35,6 +36,13 @@ class CreateNewUser implements CreatesNewUsers
                 'email' => $input['email'],
                 'password' => Hash::make($input['password']),
             ]), function (User $user) {
+                $count= User::count();
+
+                if($count==1){
+                    $user->role_id==0;
+                    $user->save();
+                }
+
                 $this->createTeam($user);
             });
         });
@@ -53,5 +61,7 @@ class CreateNewUser implements CreatesNewUsers
             'name' => explode(' ', $user->name, 2)[0]."'s Team",
             'personal_team' => true,
         ]));
+
+
     }
 }

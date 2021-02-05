@@ -18,11 +18,10 @@ class IsAdmin
     {
         if(auth()->user()){
 
-            if(auth()->user()->id==1){
+            if(auth()->user()->role_id===0){
             return $next($request);
             }
         }
         abort(403);
-
     }
 }

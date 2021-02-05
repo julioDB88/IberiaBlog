@@ -2,6 +2,7 @@
 
 namespace App\Actions\Jetstream;
 
+use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Jetstream\Contracts\AddsTeamMembers;
@@ -30,6 +31,8 @@ class AddTeamMember implements AddsTeamMembers
         $newTeamMember = Jetstream::findUserByEmailOrFail($email);
 
         AddingTeamMember::dispatch($team, $newTeamMember);
+
+        User::where('email',$email)->update(['role_id'=>1]);
 
         $team->users()->attach(
             $newTeamMember, ['role' => $role]
