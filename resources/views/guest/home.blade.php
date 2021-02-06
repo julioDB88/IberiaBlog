@@ -18,11 +18,13 @@
        @include('guest.includes.relatedcontent')
     </div>
 
-    <div class="header-section w-full text-xl md:text-3xl py-16 text-center">
-        @lang('main.authors')
-    </div>
-    <div class="section">
-        <div class="grid grid-cols-1 md:grid-cols-4 bg-gray-700">
+
+    <div class="section bg-gray-700">
+        <div class="header-section w-full text-xl md:text-3xl py-16 text-center text-white">
+            @lang('main.authors')
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-4 ">
+
             <section class="text-gray-700 body-font ">
                 <div class="container p-6">
                     <div class="flex flex-wrap">
