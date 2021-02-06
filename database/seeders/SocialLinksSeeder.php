@@ -15,10 +15,10 @@ class SocialLinksSeeder extends Seeder
     public function run()
     {
         $links=[
-            ['name'=>'twitter','url'=>'none','active'=>1],
-            ['name'=>'facebook','url'=>'none','active'=>1],
-            ['name'=>'instagram','url'=>'none','active'=>1],
-            ['name'=>'youtube','url'=>'none','active'=>1]
+            ['name'=>'twitter','url'=>'none','active'=>0],
+            ['name'=>'facebook','url'=>'none','active'=>0],
+            ['name'=>'instagram','url'=>'none','active'=>0],
+            ['name'=>'youtube','url'=>'none','active'=>0]
         ];
         DB::table('social_links')->insert($links);
     }

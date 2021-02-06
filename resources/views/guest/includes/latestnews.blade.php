@@ -8,7 +8,7 @@
         <div class="container px-3 ">
             <div class=" grid grid-cols-1 md:grid-cols-2">
                 <div class="flex flex-wrap">
-                    @foreach ($posts as $key => $post)
+                    @foreach ($latest_posts as $key => $post)
                     @if(in_array($key,[0,1,2]))
                     <div class="@if(in_array($key,[0,1,4,5])) w-1/2 @else w-full @endif p-1 md:p-2">
                         <a href="{{route('news.show',$post->slug)}}">
@@ -24,7 +24,7 @@
 
                 </div>
                 <div class="flex flex-wrap">
-                    @foreach ($posts as $key => $post)
+                    @foreach ($latest_posts as $key => $post)
                     @if(in_array($key,[3,4,5]))
                     <div class="@if(in_array($key,[0,1,4,5])) w-1/2 @else w-full @endif p-1 md:p-2">
                         <a href="{{route('news.show',$post->slug)}}">

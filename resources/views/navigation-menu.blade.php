@@ -22,8 +22,8 @@
                     <x-jet-nav-link href="{{ route('pages.edit','about') }}" :active="request()->routeIs('posts')">
                         {{ __('About') }}
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('lorem')">
-                        {{ __('Lorem') }}
+                    <x-jet-nav-link href="{{ route('pages.edit','settings') }}" :active="request()->routeIs('lorem')">
+                        {{ __('Settings') }}
                     </x-jet-nav-link>
                 </div>
             </div>

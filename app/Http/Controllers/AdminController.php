@@ -18,9 +18,23 @@ class AdminController extends Controller
 
     }
 
-    public function editPage($page){
+    public function changeBgVideo(Request $request){
+        $request->validate(['video'=>'file|mimes:mp4']);
+        unlink(public_path('media/bg-video.mp4'));
+        $request->file('video')->move(public_path('/media'),'bg-video.mp4');
+        return redirect()->back()->with('success','Video updated');
+    }
+    public function changeLogo(Request $request){
+        $request->validate(['logo'=>'image|mimes:png']);
+        unlink(public_path('media/logo.png'));
+        $request->file('logo')->move(public_path('/media'),'logo.png');
+        return redirect()->back()->with('success','Logo updated');
+    }
 
-        return view("pages.".$page);
+    public function editPage($page){
+        $cats= Category::all(); ;
+
+        return view("pages.".$page,compact('cats'));
     }
 
     public function updatePage(Request $request,$page){

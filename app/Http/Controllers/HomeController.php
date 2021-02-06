@@ -23,8 +23,11 @@ class HomeController extends Controller
 
     public function index(){
 
-        $posts= Post::take(6)->get();
-        return view('guest.home',compact('posts'));
+        $latest_posts= Post::take(6)->get();
+        $top_comment=Post::withCount('Comments')->take(6)->get();
+        //related algorithm
+        $related =Post::where('category_id',1)->take(6)->get();
+        return view('guest.home',compact('latest_posts','top_comment'));
 
     }
     public function showCategoryNews($slug){

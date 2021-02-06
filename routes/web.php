@@ -36,4 +36,6 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'verified','isMember'])->gro
    Route::resource('posts',PostController::class);
    Route::get('pages/{page}',[AdminController::class,'editPage'])->name('pages.edit');
    Route::put('pages/{page}',[AdminController::class,'updatePage'])->name('pages.update');
+   Route::put('settings/video',[AdminController::class,'changeBgVideo'])->name('changeVideo');
+   Route::put('settings/logo',[AdminController::class,'changeLogo'])->name('changeLogo');
 });

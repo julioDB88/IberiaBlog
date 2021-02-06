@@ -1,7 +1,7 @@
 <x-guest-layout>
 @if (count($posts)!==0)
-{{__('here i show')}}
+ <p>{{__('here i show')}}</p>
 @else
-    {{__('Nothing to show')}}
+    <p class="font-bold text-center py-4">{{__('Nothing to show')}}</p>
 @endif
 </x-guest-layout>
