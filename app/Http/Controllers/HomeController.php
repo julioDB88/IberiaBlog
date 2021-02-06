@@ -57,8 +57,13 @@ class HomeController extends Controller
         }
 
         return abort(404);
+    }
+    public function showLegal($page){
 
-
+        if (view()->exists("guest.legal.{$page}")) {
+            return view("guest.legal.{$page}");
+        }
+        return abort(404);
     }
     public function contactMe(Request $request){
 

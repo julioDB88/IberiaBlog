@@ -23,6 +23,7 @@ Route::middleware(['web'])->group(function(){
     Route::get('/',[HomeController::class,'index'])->name('home');
     Route::get('news/category/{slug}',[HomeController::class,'showCategoryNews'])->name('news.category');
     Route::get('news/{slug}',[HomeController::class,'showNews'])->name('news.show');
+    Route::get('legal/{page}',[HomeController::class,'showLegal'])->name('legal.show');
     Route::get('{page}',[HomeController::class,'showPage'])->name('page.show');
     Route::post('contact',[HomeController::class,'contactMe'])->name('contact');
 

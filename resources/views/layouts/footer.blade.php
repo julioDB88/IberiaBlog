@@ -4,8 +4,9 @@
             <a class="flex items-center w-48 mb-4 font-medium text-gray-900 title-font md:mb-0">
                 <x-jet-application-logo></x-jet-application-logo>
             </a>
-            <div class="flex flex-wrap items-center justify-center py-6 mx-auto text-base bg-blueGray-900 ">
+            <div class="grid items-center justify-center py-4 mx-auto text-base bg-blueGray-900 ">
                 <p class="text-sm text-center text-gray-700 ">© {{config('app.name')}} — {{Carbon\Carbon::now()->format('Y')}}</p>
+                <p class="p-2 text-xs md:text-base"> <a href="{{route('legal.show','terms')}}">{{__('Terms and Conditions')}}</a>&nbsp; and &nbsp;<a href="{{route('legal.show','policy')}}">{{__('Privacy Policy')}}</a></p>
             </div>
             @php
             $socials = DB::table('social_links')->get();
