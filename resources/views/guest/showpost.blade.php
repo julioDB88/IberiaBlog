@@ -31,7 +31,10 @@
                     <h1 class="mb-6 text-2xl font-semibold tracking-tighter text-blue-800 sm:text-3xl title-font">
                       {{$post->title}}
                     </h1>
-
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{Request::url()}}" target="_blank">
+                        Share on Facebook
+                      </a>
+                    <a href="whatsapp://send?text={{Request::url()}}" data-action="share/whatsapp/share">Share via Whatsapp</a>
                 </div>
                 <div class="tinymce">
                     {!! $post->content !!}

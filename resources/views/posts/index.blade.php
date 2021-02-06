@@ -17,19 +17,19 @@
         @endif
 
 
-        <div class="w-full md:w-1/2 border-2">
-            <h1 class="text-center py-3 my-3">{{__('Last Posts') }}</h1>
-        <table class="border-collapse table-auto w-full whitespace-no-wrap bg-white table-striped relative">
+        <div class="w-full md:w-1/2 p-4 border-2 bg-gray-300">
+            <h1 class="text-center py-3 my-3 font-bold">{{__('Last Posts') }}</h1>
+            <table class="border-collapse table-auto w-full whitespace-no-wrap bg-white table-striped relative">
             <thead>
-                <tr class="border-b py-3">
-                    <th> {{__('Date')}}</th>
+                <tr class="border-b-2">
+                    <th class="py-3"> {{__('Date')}}</th>
                     <th> {{__('Title')}}</th>
                     <th> {{__('Edit')}}</th>
                     <th> {{__('Trash')}}</th>
                     <th> {{__('Stats')}}</th>
                 </tr>
             </thead>
-            <tbody class="bg-gray-300">
+            <tbody class="bg-gray-300 text-gray-700">
                 @foreach ($posts as $post)
                     <tr >
                         <td class="text-center">{{\Carbon\Carbon::parse($post->created_at)->format('d-m-y')}}</td>
@@ -47,22 +47,22 @@
             </tbody>
         </table>
         </div>
-        <div class="w-full md:w-1/2 p-4 border-2">
-            <h1 class="text-center py-3 my-3">{{__('New Post') }}</h1>
+        <div class="w-full md:w-1/2 p-4 border-2 bg-gray-700 text-white">
+            <h1 class="text-center py-3 my-3 font-bold">{{__('New Post') }}</h1>
             <form action="{{route('posts.store')}}" method="post" enctype="multipart/form-data">
                 @csrf
-                <div class="form-group my-3 flex flex-wrap ">
+                <div class="form-group my-3 flex flex-wrap">
                     <div class="p-3 w-full md:w-2/4">
                         <label for="title" class="block">{{__('Title')}}</label>
                         <input type="text" name="title" value="{{ old('title') }}"
-                            class="block w-full mt-1 rounded-md border-transparent focus:border-gray-500 focus:bg-white focus:ring-"
+                            class="block w-full mt-1 rounded-md border-transparent focus:border-gray-500 focus:bg-white text-gray-700"
                             autocomplete="off">
                     </div>
                     <div class="p-3 w-full md:w-2/4">
                         <label for="category" class="block">{{__('Category')}}</label>
 
                         <select name="category"
-                            class="block w-full mt-1 rounded-md border-transparent focus:border-gray-500 focus:bg-white focus:ring-0">
+                            class="block w-full mt-1 rounded-md border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-gray-700">
                             @foreach ($cats as $cat)
                             <option value="{{$cat->id}}">{{$cat->name}}</option>
                             @endforeach
@@ -73,18 +73,18 @@
                     <div class="p-3 w-full md:w-2/4">
                         <label for="title" class="block">{{__('Meta keywords')}}</label>
                         <input type="text" name="keywords" value="{{ old('keywords') }}"
-                            class="block w-full mt-1 rounded-md border-transparent focus:border-gray-500 focus:bg-white focus:ring-"
+                            class="block w-full mt-1 rounded-md border-transparent focus:border-gray-500 focus:bg-white text-gray-700"
                             autocomplete="off">
                     </div>
                     <div class="p-3 w-full md:w-2/4">
                         <label for="title" class="block">{{__('Meta Description')}}</label>
                         <input type="text" name="description" value="{{ old('description') }}"
-                            class="block w-full mt-1 rounded-md border-transparent focus:border-gray-500 focus:bg-white focus:ring-"
+                            class="block w-full mt-1 rounded-md border-transparent focus:border-gray-500 focus:bg-white text-gray-700"
                             autocomplete="off">
                     </div>
                     <div class="p-3 w-full  bg-green-300 rounded ">
 
-                            <input type="file" name="image_file" id="image_file" class="rounded">
+                            <input type="file" name="image_file" id="image_file" class="rounded text-xs md:text-base">
 
                     </div>
 

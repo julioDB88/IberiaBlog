@@ -4,16 +4,15 @@
             <a class="flex items-center w-48 mb-4 font-medium text-gray-900 title-font md:mb-0">
                 <x-jet-application-logo></x-jet-application-logo>
             </a>
-            <div class="flex flex-wrap items-center justify-center mx-auto text-base ">
-
-                <a href="#" class="justify-center mr-5 text-sm text-center text-gray-600 hover:text-gray-800">
-                    Contact</a>
-                <a href="#" class="justify-center mr-5 text-sm text-center text-gray-600 hover:text-gray-800">
-                    Services</a>
-                <a href="#" class="justify-center mr-5 text-sm text-center text-gray-600 hover:text-gray-800">
-                    About</a>
-            </div>
+            @php
+                $socials = DB::table('social_links')->get();
+            @endphp
             <div class="inline-flex items-center justify-center md:justify-start ">
+                @foreach ($socials as $ilink)
+                    @if($ilink->active)
+                    <a href="/{{$ilink->url}}" target="_blank">{{$ilink->name}}</a>
+                    @endif
+                @endforeach
                 <span class="inline-flex justify-center mt-2 sm:ml-auto sm:mt-0 sm:justify-start">
                     <a class="text-blue-807 hover:text-blue-500">
                         <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

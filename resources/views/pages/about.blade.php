@@ -4,7 +4,7 @@
             {{ __('About') }}
         </h2>
     </x-slot>
-    <div class="p-5">
+    <div class="p-5 bg-gray-300">
         @if (Session::has('success'))
         <div class="alert-banner w-full fixed top-0 ">
             <input type="checkbox" class="hidden" id="banneralert">

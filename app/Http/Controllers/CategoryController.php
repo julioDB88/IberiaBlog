@@ -35,6 +35,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        $request['slug']= $this->createSlug($request->title);
         Category::create($request->except('_token'));
         return  redirect()->back()->with('success');
     }
@@ -83,4 +84,12 @@ class CategoryController extends Controller
     {
         //
     }
+    public function createSlug($str){
+
+        $str = strtolower(trim($str));
+        $str = preg_replace('/[^a-z0-9-]/', '-', $str);
+        $str = preg_replace('/-+/', "-", $str);
+        return $str;
+
+}
 }
