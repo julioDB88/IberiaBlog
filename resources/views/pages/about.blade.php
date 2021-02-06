@@ -6,7 +6,7 @@
     </x-slot>
     <div class="p-5">
         @if (Session::has('success'))
-        <div class="alert-banner w-full fixed top-0">
+        <div class="alert-banner w-full fixed top-0 ">
             <input type="checkbox" class="hidden" id="banneralert">
 
             <label class="close cursor-pointer flex items-center justify-between w-full p-2 bg-red-500 shadow text-white" title="close" for="banneralert">
@@ -26,10 +26,11 @@
             @endforeach
         </div>
         @endif
+        <h1  class="my-4 py-4"> {{__('pages.about.edit')}}</h1>
         <form action="{{ route('pages.update','about') }}" method="post">
             @csrf
             @method('PUT')
-            <label for="content">{{__('pages.about.edit')}}</label>
+
             <textarea name="content" id="contents">Hello, World!</textarea>
                 <input type="submit" class="bg-green-400 p-4 rounded m-6" value="{{__('Submit')}}">
         </form>

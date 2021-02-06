@@ -32,7 +32,6 @@ class AddTeamMember implements AddsTeamMembers
 
         AddingTeamMember::dispatch($team, $newTeamMember);
 
-        User::where('email',$email)->update(['role_id'=>1]);
 
         $team->users()->attach(
             $newTeamMember, ['role' => $role]

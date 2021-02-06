@@ -28,9 +28,11 @@ class HomeController extends Controller
 
     }
     public function showCategoryNews($slug){
-        $cat_id= Category::where('slug',$slug)->first()->id;
-
-        $posts= Post::where('category_id',$cat_id)->orderBy('id','desc')->get();
+        $cat= Category::where('slug',$slug)->first();
+        if(!$cat){
+         return abort(404)    ;
+        }
+        $posts= Post::where('category_id',$cat->id)->orderBy('id','desc')->get();
 
         return view('guest.pages.newscategory',compact('posts'));
 
@@ -46,8 +48,12 @@ class HomeController extends Controller
 
     public function showPage($page){
         $content= DB::table('pages_content')->where('page',$page)->first();
+        if (view()->exists("guest.pages.{$page}")) {
+            return view("guest.pages.{$page}",compact('content'));
+        }
 
-        return view("guest.pages.".$page,compact('content'));
+        return abort(404);
+
 
     }
     public function contactMe(Request $request){

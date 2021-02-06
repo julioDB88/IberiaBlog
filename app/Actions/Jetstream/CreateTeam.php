@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Jetstream\Contracts\CreatesTeams;
 use Laravel\Jetstream\Events\AddingTeam;
+use Laravel\Jetstream\Events\AddingTeamMember;
+use Laravel\Jetstream\Events\TeamMemberAdded;
 use Laravel\Jetstream\Jetstream;
 
 class CreateTeam implements CreatesTeams
@@ -27,10 +29,20 @@ class CreateTeam implements CreatesTeams
 
         AddingTeam::dispatch($user);
 
+
         $user->switchTeam($team = $user->ownedTeams()->create([
             'name' => $input['name'],
-            'personal_team' => false,
+            'personal_team' => true,
         ]));
+        $newTeamMember = Jetstream::findUserByEmailOrFail($user->email);
+
+        AddingTeamMember::dispatch($team, $newTeamMember);
+        $team->users()->attach(
+            $newTeamMember, ['role' => 'admin']
+        );
+
+        TeamMemberAdded::dispatch($team, $newTeamMember);
+
 
         return $team;
     }

@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/logout','Laravel\Fortify\Http\Controllers\AuthenticatedSessionController@destroy');
 
 Route::middleware(['web'])->group(function(){
 
@@ -28,7 +29,8 @@ Route::middleware(['web'])->group(function(){
 });
 
 Route::prefix('admin')->middleware(['auth:sanctum', 'verified','isMember'])->group(function () {
-   Route::get('/dashboard',function(){ return view('dashboard');})->name('dashboard');
+   Route::get('/dashboard',[AdminController::class,'index'])->name('dashboard');
+   Route::resource('categories',CategoryController::class);
    Route::resource('posts',PostController::class);
    Route::get('pages/{page}',[AdminController::class,'editPage'])->name('pages.edit');
    Route::put('pages/{page}',[AdminController::class,'updatePage'])->name('pages.update');

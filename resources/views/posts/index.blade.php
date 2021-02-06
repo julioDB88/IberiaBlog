@@ -17,11 +17,11 @@
         @endif
 
 
-        <div class="w-full md:w-1/2">
+        <div class="w-full md:w-1/2 border-2">
             <h1 class="text-center py-3 my-3">{{__('Last Posts') }}</h1>
         <table class="border-collapse table-auto w-full whitespace-no-wrap bg-white table-striped relative">
             <thead>
-                <tr class="border-b">
+                <tr class="border-b py-3">
                     <th> {{__('Date')}}</th>
                     <th> {{__('Title')}}</th>
                     <th> {{__('Edit')}}</th>
@@ -29,7 +29,7 @@
                     <th> {{__('Stats')}}</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="bg-gray-300">
                 @foreach ($posts as $post)
                     <tr >
                         <td class="text-center">{{\Carbon\Carbon::parse($post->created_at)->format('d-m-y')}}</td>
@@ -47,11 +47,11 @@
             </tbody>
         </table>
         </div>
-        <div class="w-full md:w-1/2">
+        <div class="w-full md:w-1/2 p-4 border-2">
             <h1 class="text-center py-3 my-3">{{__('New Post') }}</h1>
             <form action="{{route('posts.store')}}" method="post" enctype="multipart/form-data">
                 @csrf
-                <div class="form-group my-3 flex flex-wrap">
+                <div class="form-group my-3 flex flex-wrap ">
                     <div class="p-3 w-full md:w-2/4">
                         <label for="title" class="block">{{__('Title')}}</label>
                         <input type="text" name="title" value="{{ old('title') }}"
@@ -82,10 +82,10 @@
                             class="block w-full mt-1 rounded-md border-transparent focus:border-gray-500 focus:bg-white focus:ring-"
                             autocomplete="off">
                     </div>
-                    <div class="p-3 w-full md:w-1/4">
-                        <label for="image_file" class="bg-green-400 p-4 rounded">{{__('Add Mmage')}}
-                            <input type="file" name="image_file" id="image_file" class="hidden">
-                        </label>
+                    <div class="p-3 w-full  bg-green-300 rounded ">
+
+                            <input type="file" name="image_file" id="image_file" class="rounded">
+
                     </div>
 
                 </div>
