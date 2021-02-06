@@ -5,6 +5,9 @@
         </h2>
     </x-slot>
     <div class="p-4 flex flex-wrap">
+        @if (Session::has('success'))
+        <div class="bg-green-500 p-3 w-full rounded">{{ Session::get('success') }}</div>
+        @endif
         @if($errors->any())
         <div class="bg-red-500 p-3 w-full rounded">
             @foreach ($errors->all() as $error)
@@ -22,22 +25,30 @@
                     <th> {{__('Date')}}</th>
                     <th> {{__('Title')}}</th>
                     <th> {{__('Edit')}}</th>
+                    <th> {{__('Trash')}}</th>
                     <th> {{__('Stats')}}</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($posts as $post)
                     <tr >
-                        <td class="text-center">{{\Carbon\Carbon::parse($post->created_at)->format('d-m-Y')}}</td>
+                        <td class="text-center">{{\Carbon\Carbon::parse($post->created_at)->format('d-m-y')}}</td>
                         <td class="text-center">{{$post->title}}</td>
-                        <td class="p-4 text-center"><a href="{{route('posts.edit',$post)}}" class="bg-yellow-500 text-white px-4 py-2">Edit</a></td>
-                        <td class="text-center">1 <i class="far fa-thumbs-up"></i>  3 <i class="far fa-comment-alt"></i></td>
+                        <td class="p-4 text-center" x-data="{clicked:false}"><a href="{{route('posts.edit',$post)}}" @click="clicked=!clicked" :disabled="clicked" class="bg-yellow-500 text-white px-4 py-2">Edit</a></td>
+                        <td class="p-4 text-center" x-data="{clicked:false}">
+                            <form action="{{route('posts.destroy',$post->id)}}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button  class="rounded bg-red-500 px-4 py-2"><i class="fa fa-trash text-white"></i></button>
+                            </form> </td>
+                        <td class="text-center">1 <i class="far fa-thumbs-up "></i>  3 <i class="far fa-comment-alt"></i></td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
         </div>
         <div class="w-full md:w-1/2">
+            <h1 class="text-center py-3 my-3">{{__('New Post') }}</h1>
             <form action="{{route('posts.store')}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group my-3 flex flex-wrap">
@@ -75,7 +86,6 @@
                         <label for="image_file" class="bg-green-400 p-4 rounded">{{__('Add Mmage')}}
                             <input type="file" name="image_file" id="image_file" class="hidden">
                         </label>
-
                     </div>
 
                 </div>

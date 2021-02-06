@@ -22,7 +22,6 @@
         "tailwindcss": "^2.0.1"
     },
     "dependencies": {
-        "@fortawesome/fontawesome-free": "^5.15.2",
         "jquery": "^3.5.1",
         "scrollreveal": "^4.0.7",
         "tinymce": "^5.6.2"

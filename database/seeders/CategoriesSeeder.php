@@ -15,9 +15,9 @@ class CategoriesSeeder extends Seeder
     public function run()
     {
         $cats =[
-            ['name'=>'national'],
-            ['name'=>'international'],
-            ['name'=>'misc'],
+            ['name'=>'national','slug'=>'national'],
+            ['name'=>'international','slug'=>'international'],
+            ['name'=>'misc','slug'=>'misc'],
 
         ];
         DB::table('categories')->insert($cats);

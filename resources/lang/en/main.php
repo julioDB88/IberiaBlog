@@ -14,5 +14,9 @@ return [
     */
 
     'lema' => 'Existe una guerra por la verdad. Te guste o no eres parte de ella',
+    'pop_news'=>'Noticias destacadas',
+    'latest_news'=>'Últimas Noticias',
+    'authors'=>'Autores'
+
 
 ];

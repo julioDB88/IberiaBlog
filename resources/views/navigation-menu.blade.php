@@ -5,22 +5,32 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="/">
                         <x-jet-application-mark class="block h-9 w-auto" />
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex items-center">
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
                     <x-jet-nav-link href="{{ route('posts.index') }}" :active="request()->routeIs('posts')">
                         {{ __('Posts') }}
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('autors') }}" :active="request()->routeIs('posts')">
-                        {{ __('Autors') }}
-                    </x-jet-nav-link>
+                    <x-jet-dropdown >
+                        <x-slot name="trigger">
+                            <button type="button" class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">{{ __('IPages') }}</button>
+                        </x-slot>
+                        <x-slot name="content">
+                            <x-jet-dropdown-link href="{{ route('pages.edit','contact') }}">
+                                {{ __('Contact') }}
+                            </x-jet-dropdown-link>
+                            <x-jet-dropdown-link href="{{ route('pages.edit','about') }}">
+                                {{ __('About') }}
+                            </x-jet-dropdown-link>
+                        </x-slot>
+                    </x-jet-dropdown>
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('lorem')">
                         {{ __('Lorem') }}
                     </x-jet-nav-link>

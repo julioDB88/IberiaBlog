@@ -41,7 +41,7 @@ class PostController extends Controller
     {
 
         $request->validate([
-            'title'=>'required|max:33',
+            'title'=>'required|max:55',
             'keywords'=>'required|max:33',
             'content'=>'required',
             'description'=>'required',
@@ -55,12 +55,12 @@ class PostController extends Controller
         $post->content = $request->content;
         $post->description = $request->description;
         $post->category_id = $request->category;
-
+        $post->slug= $this->createSlug($post->title);
         $filename= time().".".$request->file('image_file')->getClientOriginalExtension();
-        $request->file('image_file')->storeAs("images/posts", $filename);
+        $request->file('image_file')->storeAs("public/posts/$post->id", $filename);
         $post->img_file= $filename;
         $post->save();
-        //Storage::putAs(filePath, $contents);
+
         return redirect()->back()->with('success',trans('correctly saved'));
     }
 
@@ -83,7 +83,8 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        $cats= DB::table('categories')->get();
+        return view('posts.edit',compact('post','cats'));
     }
 
     /**
@@ -95,7 +96,27 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+
+        $request['category']=$post->category_id;
+
+        if($post->title != $request->title){
+            $post->slug= $this->createSlug($request->title);
+            $post->save();
+        }
+
+
+
+        if($request->hasfile('image_file')){
+            $filename= time().".".$request->file('image_file')->getClientOriginalExtension();
+            $request->file('image_file')->storeAs("public/posts/$post->id", $filename);
+            $post->img_file= $filename;
+            $post->save();
+        }
+
+        $post->update($request->except(['_token','_method','category','image_file']));
+
+        return redirect()->route('posts.index')->with('success',trans('correctly saved'));
+
     }
 
     /**
@@ -106,6 +127,23 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $removed=Storage::delete("public/posts/".$post->img_file);
+        if(!$removed){
+
+             return redirect()->back()->with('error',trans('image_not_removed'));
+
+        }
+        $post->delete();
+        //post->commetns
+        return redirect()->back()->with('success',trans('removed_success'));
+
+    }
+    public function createSlug($str){
+
+            $str = strtolower(trim($str));
+            $str = preg_replace('/[^a-z0-9-]/', '-', $str);
+            $str = preg_replace('/-+/', "-", $str);
+            return $str;
+
     }
 }

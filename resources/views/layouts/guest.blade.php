@@ -14,12 +14,14 @@
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
         <!-- Scripts -->
-        <script src="{{ mix('js/app.js') }}" defer></script>
+        <script src="{{ mix('js/app.js') }}" ></script>
     </head>
     <body>
         @include('guest.includes.guest-nav')
         <div class="font-sans text-gray-900 antialiased">
             {{ $slot }}
         </div>
+        @include('layouts.footer')
+        @stack('js')
     </body>
 </html>

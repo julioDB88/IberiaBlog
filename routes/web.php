@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,11 +17,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware(['web'])->group(function(){
-    Route::get('/', function () {return view('guest.home');})->name('home');
+
+    Route::get('/',[HomeController::class,'index'])->name('home');
+    Route::get('news/category/{slug}',[HomeController::class,'showCategoryNews'])->name('news.category');
+    Route::get('news/{slug}',[HomeController::class,'showNews'])->name('news.show');
+    Route::get('{page}',[HomeController::class,'showPage'])->name('page.show');
+    Route::post('contact',[HomeController::class,'contactMe'])->name('contact');
+
+
 });
 
 Route::prefix('admin')->middleware(['auth:sanctum', 'verified','isMember'])->group(function () {
-   Route::get('/',function(){ return view('dashboard');})->name('dashboard');
+   Route::get('/dashboard',function(){ return view('dashboard');})->name('dashboard');
    Route::resource('posts',PostController::class);
-   Route::get('autors',function(){ return view('dashboard');})->name('autors');
+   Route::get('pages/{page}',[AdminController::class,'editPage'])->name('pages.edit');
+   Route::put('pages/{page}',[AdminController::class,'updatePage'])->name('pages.update');
 });
