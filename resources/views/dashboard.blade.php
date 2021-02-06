@@ -72,25 +72,25 @@
                             </div>
                         </div>
                         <div class="flex flex-wrap">
-                            <div class="p-3 w-full md:w-1/2  bg-green-300 rounded ">
+                            <div class="p-3 w-full md:w-1/2  bg-indigo-700 rounded ">
                                 <h3 class="tracking-widest text-lg border-b-4 border-white p-2">{{__('Change_Logo')}}</h3>
                                 <form action="{{route('changeLogo')}}" method="post" enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
 
                                 <input type="file" name="logo" id="logo_file" class="rounded text-xs md:text-base m-2 p-2">
-                                <button type="submit" class="bg-indigo-500 text-white px-4 py-2 rounded font-bold">{{__('Save')}}</button>
+                                <button type="submit" class="bg-gray-700 text-white px-4 py-2 rounded font-bold">{{__('Save')}}</button>
 
                                 </form>
 
                             </div>
-                            <div class="p-3 w-full md:w-1/2   bg-green-300 rounded ">
+                            <div class="p-3 w-full md:w-1/2   bg-indigo-700 rounded ">
                                 <h3 class="tracking-widest text-lg border-b-4 border-white p-2">{{__('Change_Video')}}</h3>
                                 <form action="{{route('changeVideo')}}" method="post" enctype="multipart/form-data">
                                     @method('PUT')
                                     @csrf
                                     <input type="file" name="video" id="vid_file" class="rounded text-xs md:text-base m-2 p-2">
-                                    <button type="submit" class="bg-indigo-500 text-white px-4 py-2 rounded font-bold">{{__('Save')}}</button>
+                                    <button type="submit" class="bg-gray-700 text-white px-4 py-2 rounded font-bold">{{__('Save')}}</button>
                                 </form>
 
 

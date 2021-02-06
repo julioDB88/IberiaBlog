@@ -51,37 +51,37 @@ class AdminController extends Controller
     public function saveSocialUrl(Request $request){
 
         $request->validate([
-            'twitter'=>'sometimes|url',
-            'facebook'=>'sometimes|url',
-            'instagram'=>'sometimes|url',
-            'youtube'=>'sometimes|url',
+            'twitter'=>'sometimes|nullable|url',
+            'facebook'=>'sometimes|nullable|url',
+            'instagram'=>'sometimes|nullable|url',
+            'youtube'=>'sometimes|nullable|url',
         ]);
 
         if($request->twitter){
             DB::table('social_links')->where('name','twitter')->update(['url'=>$request->twitter]);
         }
-        $request->twitter_c?
+        $request->twitter_c == 'on' ?
             DB::table('social_links')->where('name','twitter')->update(['active'=>1]):
             DB::table('social_links')->where('name','twitter')->update(['active'=>0]);
 
         if($request->facebook){
             DB::table('social_links')->where('name','facebook')->update(['url'=>$request->facebook]);
         }
-        $request->facebook_c ?
+        $request->facebook_c  == 'on' ?
             DB::table('social_links')->where('name','facebook')->update(['active'=>1]):
             DB::table('social_links')->where('name','facebook')->update(['active'=>0]);
 
         if($request->instagram){
             DB::table('social_links')->where('name','instagram')->update(['url'=>$request->instagram]);
         }
-        $request->instagram_c ?
+        $request->instagram_c  == 'on' ?
             DB::table('social_links')->where('name','instagram')->update(['active'=>1]):
             DB::table('social_links')->where('name','instagram')->update(['active'=>0]);
 
         if($request->youtube){
             DB::table('social_links')->where('name','youtube')->update(['url'=>$request->youtube]);
         }
-        $request->youtube_c ?
+        $request->youtube_c  == 'on' ?
             DB::table('social_links')->where('name','youtube')->update(['active'=>1]):DB::table('social_links')->where('name','youtube')->update(['active'=>0]);
 
         return redirect()->back()->with('success','updated succesfully');

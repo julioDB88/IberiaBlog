@@ -31,7 +31,7 @@ Route::middleware(['web'])->group(function(){
 
 Route::prefix('admin')->middleware(['auth:sanctum', 'verified','isMember'])->group(function () {
    Route::get('/dashboard',[AdminController::class,'index'])->name('dashboard');
-   Route::get('/social',[AdminController::class,'saveSocialUrl'])->name('rrss.update');
+   Route::put('/social',[AdminController::class,'saveSocialUrl'])->name('rrss.update');
    Route::resource('categories',CategoryController::class);
    Route::resource('posts',PostController::class);
    Route::get('pages/{page}',[AdminController::class,'editPage'])->name('pages.edit');

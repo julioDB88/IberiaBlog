@@ -17,8 +17,8 @@
         @endif
 
 
-        <div class="w-full md:w-1/2 p-4 border-2 bg-gray-300">
-            <h1 class="text-center py-3 my-3 font-bold">{{__('Last Posts') }}</h1>
+        <div class="w-full md:w-1/2 p-4 border-2 bg-gray-600">
+            <h1 class="text-center py-3 my-3 font-bold text-white">{{__('Last Posts') }}</h1>
             <table class="border-collapse table-auto w-full whitespace-no-wrap bg-white table-striped relative">
             <thead>
                 <tr class="border-b-2">
@@ -34,14 +34,14 @@
                     <tr >
                         <td class="text-center">{{\Carbon\Carbon::parse($post->created_at)->format('d-m-y')}}</td>
                         <td class="text-center">{{$post->title}}</td>
-                        <td class="p-4 text-center" x-data="{clicked:false}"><a href="{{route('posts.edit',$post)}}" @click="clicked=!clicked" :disabled="clicked" class="bg-yellow-500 text-white px-4 py-2">Edit</a></td>
-                        <td class="p-4 text-center" x-data="{clicked:false}">
+                        <td class="p-4 text-center" ><a href="{{route('posts.edit',$post)}}" class="bg-yellow-500 rounded text-white px-4 py-2" ><i class="fas fa-edit"></i></a></td>
+                        <td class="p-4 text-center" >
                             <form action="{{route('posts.destroy',$post->id)}}" method="post">
                             @csrf
                             @method('DELETE')
                             <button  class="rounded bg-red-500 px-4 py-2"><i class="fa fa-trash text-white"></i></button>
                             </form> </td>
-                        <td class="text-center">1 <i class="far fa-thumbs-up "></i>  3 <i class="far fa-comment-alt"></i></td>
+                        <td class="text-center"> {{$post->Comments->count()}} <i class="far fa-comment-alt"></i></td>
                     </tr>
                 @endforeach
             </tbody>
@@ -82,7 +82,7 @@
                             class="block w-full mt-1 rounded-md border-transparent focus:border-gray-500 focus:bg-white text-gray-700"
                             autocomplete="off">
                     </div>
-                    <div class="p-3 w-full  bg-green-300 rounded ">
+                    <div class="p-3 w-full  bg-indigo-700 rounded text-white">
 
                             <input type="file" name="image_file" id="image_file" class="rounded text-xs md:text-base">
 
@@ -92,7 +92,7 @@
 
 
                 <textarea name="content" id="contents">Hello, World!</textarea>
-                <input type="submit" class="bg-green-400 p-4 rounded m-6" value="{{__('Submit')}}">
+                <input type="submit" class="bg-indigo-700 p-4 rounded m-6 text-white" value="{{__('Submit')}}">
 
             </form>
         </div>

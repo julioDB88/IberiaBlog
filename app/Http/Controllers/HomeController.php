@@ -6,6 +6,7 @@ use App\Mail\ContactMail;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -26,8 +27,8 @@ class HomeController extends Controller
         $latest_posts= Post::take(6)->get();
         $top_comment=Post::withCount('Comments')->take(6)->get();
         //related algorithm
-        $related =Post::where('category_id',1)->take(6)->get();
-        return view('guest.home',compact('latest_posts','top_comment'));
+        $related =Post::whereMonth('created_at',Carbon::now()->month)->take(6)->inRandomOrder()->get();
+        return view('guest.home',compact('latest_posts','top_comment','related'));
 
     }
     public function showCategoryNews($slug){

@@ -22,8 +22,8 @@
         @lang('main.authors')
     </div>
     <div class="section">
-        <div class="grid grid-cols-1 md:grid-cols-4">
-            <section class="text-gray-700 body-font">
+        <div class="grid grid-cols-1 md:grid-cols-4 bg-gray-700">
+            <section class="text-gray-700 body-font ">
                 <div class="container p-6">
                     <div class="flex flex-wrap">
                         {{-- foreach --}}
@@ -34,11 +34,11 @@
                                         class="inline-block object-cover object-center w-16 h-16 bg-gray-100 rounded-full"
                                         src="https://dummyimage.com/302x302/94a3b8/ffffff"> <span
                                         class="flex flex-col flex-grow pl-4">
-                                        <span class="font-medium text-gray-900 title-font">Adi Pio</span>
-                                        <span class="text-sm text-gray-500 uppercase">Corporate Position</span>
+                                        <span class="font-medium  title-font text-white font-bold">Adi Pio</span>
+                                        <span class="text-sm  uppercase text-white ">Corporate Position</span>
                                     </span>
                                 </a>
-                                <p class="text-base font-medium leading-relaxed text-gray-700">"Skate ipsum dolor sit
+                                <p class="text-base font-medium leading-relaxed text-white">"Skate ipsum dolor sit
                                     amet, slam birdie wheels ollie darkslide egg plant. Baseplate 540 helipop flypaper
                                     feeble griptape."</p>
                             </div>
