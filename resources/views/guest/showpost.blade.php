@@ -91,6 +91,10 @@
             </div>
             @endif
         </section>
+@push('js')
+    <script>
 
+    </script>
+@endpush
 
 </x-news-layout>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -15,8 +16,9 @@ class AdminController extends Controller
         $cats= Category::all(); ;
         $last_posts= Post::orderBy('id','desc')->take(10)->get();
         $most_commented= Post::withCount('Comments')->get();
+        $comments= Comment::where('visible',0)->get();
 
-        return view('dashboard',compact('cats','last_posts','most_commented'));
+        return view('dashboard',compact('cats','last_posts','most_commented','comments'));
 
     }
 
