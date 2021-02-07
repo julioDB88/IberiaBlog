@@ -28,24 +28,35 @@
             <section class="text-gray-700 body-font ">
                 <div class="container p-6">
                     <div class="flex flex-wrap">
-                        {{-- foreach --}}
+                        @foreach (User::all() as $user)
                         <div class="">
-                            <div class="h-full text-left">
+                            <div class="h-full text-left bg-indigo-700 rounded p-5">
                                 <a class="inline-flex items-center py-6">
+                                    @if($user->profile_foto_url)
                                     <img alt="testimonial"
                                         class="inline-block object-cover object-center w-16 h-16 bg-gray-100 rounded-full"
-                                        src="https://dummyimage.com/302x302/94a3b8/ffffff"> <span
+                                        src="{{$user->profile_foto_url}}">
+
+                                    @else
+                                    <img alt="testimonial"
+                                    class="inline-block object-cover object-center w-16 h-16 bg-gray-100 rounded-full"
+                                    src="{{asset('media')}}/anon.svg">
+                                    @endif
+                                        <span
                                         class="flex flex-col flex-grow pl-4">
-                                        <span class="font-medium  title-font text-white font-bold">Adi Pio</span>
-                                        <span class="text-sm  uppercase text-white ">Corporate Position</span>
+                                        <span class="font-medium  title-font text-white font-bold">{{$user->name}}</span>
+                                        <span class="text-sm  uppercase text-white ">{{$user->subtitle}}</span>
                                     </span>
                                 </a>
-                                <p class="text-base font-medium leading-relaxed text-white">"Skate ipsum dolor sit
-                                    amet, slam birdie wheels ollie darkslide egg plant. Baseplate 540 helipop flypaper
-                                    feeble griptape."</p>
+                                @if($user->description)
+                                <p class="text-base font-medium leading-relaxed text-white">{{$user->description}}</p>
+                                @else
+                                <p class="text-base font-medium leading-relaxed text-white">{{__('I would write something about me to show some of my skills and let you know ehre i come from. Have a nice day!')}}</p>
+                                @endif
                             </div>
                         </div>
 
+                        @endforeach
                     </div>
                 </div>
             </section>

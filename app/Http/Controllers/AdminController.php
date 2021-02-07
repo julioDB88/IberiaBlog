@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
@@ -32,9 +34,10 @@ class AdminController extends Controller
     }
 
     public function editPage($page){
-        $cats= Category::all(); ;
+        $cats= Category::all();
+        $social= DB::table('social_links')->get();
 
-        return view("pages.".$page,compact('cats'));
+        return view("pages.".$page,compact('cats','social'));
     }
 
     public function updatePage(Request $request,$page){
@@ -46,6 +49,20 @@ class AdminController extends Controller
             DB::table('pages_content')->where('page',$page)->update(['content'=>$request->email]);
         }
         return redirect()->back()->with('success','Actualizado correctamente');
+    }
+
+    public function updateAuthor(Request $request){
+
+        $request->validate([
+            'subtitle'=>'required|string|max:25',
+            'description'=>'required|string|max:121'
+        ]);
+
+        $user=User::find(Auth::user()->id);
+        $user->update(['subtitle'=>$request->subtitle,'description'=>$request->description]);
+        return redirect()->back()->with('success','Actualizado correctamente');
+
+
     }
 
     public function saveSocialUrl(Request $request){

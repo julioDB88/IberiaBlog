@@ -5,11 +5,10 @@
         </h2>
     </x-slot>
     <div class="py-12">
-        @if (Session::has('success'))
-        <div class="alert-banner mb-4">
-            {{ Session::get('success') }}
-          </div>
-
+        @if(session('success'))
+                <div class="w-1/2 px-8 py-2 mx-auto my-2 font-semibold text-white transition duration-500 ease-in-out transform rounded-lg shadow-xl bg-indigo-700">
+                    {!! session('success')!!}
+                </div>
         @endif
         @if($errors->any())
         <div class="bg-red-500 p-3 w-full mb-3 rounded">
@@ -49,39 +48,27 @@
                                 </tbody>
                             </table>
                         </div>
+                        @admin
                         <div class="lg:w-2/4 p-2 w-full p-6  ">
                             <h3 class="tracking-widest text-lg border-b-4 border-gray-600 text-white">{{__("Social Url's")}}</h3>
                             <form action="{{route('rrss.update')}}" method="post">
                                 @csrf
                                 @method('PUT')
+                                @foreach ($social as $item)
                                 <div class="grid  p-2">
-                                    <label for="" class="text-white">Twitter</label><input type="text" name="twitter">
-                                    <label for="" class="flex items-center p-2 text-white"><input type="checkbox" name="twitter_c"
+                                    <label for="" class="text-white">{{$item->name}}</label>
+                                    <input type="text" name="{{$item->name}}" class="rounded focus:ring-green-300" @if($item->url != 'none' ) value="{{$item->url}}" @endif>
+                                    <label for="" class="flex items-center p-2 text-white">
+                                        <input type="checkbox" name="{{$item->name}}_c" @if($item->active) checked @endif
                                             class="mr-2">Active</label>
                                 </div>
-                                <div class="grid p-2">
-                                    <label for="" class="text-white">Instagram</label><input type="text"
-                                        name="instagram">
-                                    <label for="" class=" flex items-center p-2 text-white"><input type="checkbox"
-                                            name="instagram_c" class="mr-2">Active</label>
-                                </div>
-                                <div class="grid  p-2">
-                                    <label for="" class="text-white">Facebook</label><input type="text" name="facebook">
-                                    <label for="" class="flex items-center p-2 text-white"><input type="checkbox" name="facebook_c"
-                                            class="mr-2">Active</label>
-                                </div>
-                                <div class="grid  p-2">
-                                    <label for="" class="text-white">Youtube</label><input type="text" name="youtube">
-                                    <label for="" class="flex items-center p-2 text-white"><input type="checkbox" name="youtube_c"
-                                            class="mr-2">Active</label>
-                                </div>
-                                <button type="submit"
-                                    class="bg-indigo-500  px-4 p-2 w-full">{{__('Save')}}</button>
+                                @endforeach
+                                <button type="submit" class="bg-indigo-500  px-4 p-2 w-full">{{__('Save')}}</button>
                             </form>
 
                         </div>
+                        @endadmin
                     </div>
-
                 </div>
             </section>
         </div>

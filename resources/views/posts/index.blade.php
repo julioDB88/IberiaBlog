@@ -34,7 +34,13 @@
                     <tr >
                         <td class="text-center">{{\Carbon\Carbon::parse($post->created_at)->format('d-m-y')}}</td>
                         <td class="text-center">{{$post->title}}</td>
+                        @if ($post->author_id===auth()->user()->id)
                         <td class="p-4 text-center" ><a href="{{route('posts.edit',$post)}}" class="bg-yellow-500 rounded text-white px-4 py-2" ><i class="fas fa-edit"></i></a></td>
+
+                        @else
+                        <td class="p-4 text-center" ><p class="bg-red-500 rounded text-white px-4 py-2" ><i class="fas fa-cross"></i></p></td>
+
+                        @endif
                         <td class="p-4 text-center" >
                             <form action="{{route('posts.destroy',$post->id)}}" method="post">
                             @csrf

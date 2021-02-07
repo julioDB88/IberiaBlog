@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\InvitationController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,16 +28,22 @@ Route::middleware(['web'])->group(function(){
     Route::get('{page}',[HomeController::class,'showPage'])->name('page.show');
     Route::post('contact',[HomeController::class,'contactMe'])->name('contact');
 
+    //invitations
+
+    Route::get('invitation/{invitation}',[InvitationController::class,'accept'])->name('invitation.accept');
+    Route::get('invitations/list',[InvitationController::class,'show'])->name('invitations.list');
+    Route::post('invitation',[InvitationController::class,'store'])->name('invitation.store');
 
 });
 
 Route::prefix('admin')->middleware(['auth:sanctum', 'verified','isMember'])->group(function () {
    Route::get('/dashboard',[AdminController::class,'index'])->name('dashboard');
-   Route::put('/social',[AdminController::class,'saveSocialUrl'])->name('rrss.update');
+   Route::put('/social',[AdminController::class,'saveSocialUrl'])->name('rrss.update')->middleware('isAdmin');;
    Route::resource('categories',CategoryController::class);
    Route::resource('posts',PostController::class);
    Route::get('pages/{page}',[AdminController::class,'editPage'])->name('pages.edit');
    Route::put('pages/{page}',[AdminController::class,'updatePage'])->name('pages.update');
-   Route::put('settings/video',[AdminController::class,'changeBgVideo'])->name('changeVideo');
-   Route::put('settings/logo',[AdminController::class,'changeLogo'])->name('changeLogo');
+   Route::put('author',[AdminController::class,'updateAuthor'])->name('author.update');
+   Route::put('settings/video',[AdminController::class,'changeBgVideo'])->name('changeVideo')->middleware('isAdmin');
+   Route::put('settings/logo',[AdminController::class,'changeLogo'])->name('changeLogo')->middleware('isAdmin');
 });

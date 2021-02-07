@@ -11,6 +11,12 @@
                 {{ session('status') }}
             </div>
         @endif
+        @if (session('success'))
+        <div class="mb-4 font-medium text-sm bg-indigo-700 text-white p-5 rounded">
+            <p>{{ session('success') }}</p>
+            <p>Once verified, log in and Update your name and password</p>
+        </div>
+    @endif
 
         <form method="POST" action="{{ route('login') }}">
             @csrf

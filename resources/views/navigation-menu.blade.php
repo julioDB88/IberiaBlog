@@ -19,9 +19,11 @@
                     <x-jet-nav-link href="{{ route('posts.index') }}" :active="request()->routeIs('posts')">
                         {{ __('Posts') }}
                     </x-jet-nav-link>
+                    @admin
                     <x-jet-nav-link href="{{ route('pages.edit','about') }}" :active="request()->routeIs('posts')">
                         {{ __('About') }}
                     </x-jet-nav-link>
+                    @endadmin
                     <x-jet-nav-link href="{{ route('pages.edit','settings') }}" :active="request()->routeIs('lorem')">
                         {{ __('Settings') }}
                     </x-jet-nav-link>
@@ -62,7 +64,11 @@
                             <x-jet-dropdown-link href="{{ route('profile.show') }}">
                                 {{ __('Profile') }}
                             </x-jet-dropdown-link>
-
+                            @admin
+                            <x-jet-dropdown-link href="{{ route('invitations.list') }}">
+                                {{ __('Invitations') }}
+                            </x-jet-dropdown-link>
+                            @endadmin
                             @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                                 <x-jet-dropdown-link href="{{ route('api-tokens.index') }}">
                                     {{ __('API Tokens') }}
@@ -127,7 +133,11 @@
                 <x-jet-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
                     {{ __('Profile') }}
                 </x-jet-responsive-nav-link>
-
+                @admin
+                <x-jet-responsive-nav-link href="{{ route('invitations.list') }}" :active="request()->routeIs('profile.show')">
+                    {{ __('Invitations') }}
+                </x-jet-responsive-nav-link>
+                @endadmin
                 @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                     <x-jet-responsive-nav-link href="{{ route('api-tokens.index') }}" :active="request()->routeIs('api-tokens.index')">
                         {{ __('API Tokens') }}

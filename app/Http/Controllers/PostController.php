@@ -44,6 +44,7 @@ class PostController extends Controller
             'title'=>'required|max:55',
             'keywords'=>'required|max:33',
             'content'=>'required',
+            'category_id'=>'required',
             'description'=>'required',
             'image_file'=>'required|image|mimes:jpg,jpeg,png',
         ]);
@@ -83,8 +84,11 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        $cats= DB::table('categories')->get();
-        return view('posts.edit',compact('post','cats'));
+        if ($post->author_id===auth()->user()->id){
+            $cats= DB::table('categories')->get();
+            return view('posts.edit',compact('post','cats'));
+        }
+       abort(403);
     }
 
     /**
@@ -96,7 +100,7 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-
+        if ($post->author_id===auth()->user()->id){
         $request['category']=$post->category_id;
 
         if($post->title != $request->title){
@@ -116,6 +120,8 @@ class PostController extends Controller
         $post->update($request->except(['_token','_method','category','image_file']));
 
         return redirect()->route('posts.index')->with('success',trans('correctly saved'));
+    }
+        abort(403);
 
     }
 

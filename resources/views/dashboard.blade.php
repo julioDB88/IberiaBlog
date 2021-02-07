@@ -16,6 +16,8 @@
             <section class="text-gray-700 body-font">
                 <div class="container">
                     <div class="rounded border-gray-100 bg-gray-700 text-white  ">
+                        @admin
+
                         <div class="flex flex-wrap">
                             <div class="p-3 w-full md:w-1/2  bg-indigo-700 rounded ">
                                 <h3 class="tracking-widest text-lg border-b-4 border-white p-2">{{__('Change_Logo')}}</h3>
@@ -41,6 +43,7 @@
 
                             </div>
                         </div>
+                        @endadmin
                         <h3 class="tracking-widest text-lg border-b-4 border-white p-2">{{__('Posts')}}</h3>
                         <div class="flex flex-wrap">
                             <div class="lg:w-2/4 p-2 w-full text-white">
@@ -52,6 +55,7 @@
                                             <tr>
                                                 <th class="py-2">{{__('Date')}}</th>
                                                 <th class="py-2">{{__('Title')}}</th>
+                                                <th class="py-2">{{__('Author')}}</th>
                                                 <th class="py-2">{{__('Comments')}}</th>
                                             </tr>
                                         </thead>
@@ -61,6 +65,7 @@
                                                 <td class="p-3 m-3">
                                                     {{\Carbon\Carbon::parse($most->created_at)->format('d/m/y')}}</td>
                                                 <td class="p-3 m-3">{{$most->title}}</td>
+                                                <td class="p-3 m-3">{{$most->Author->name}}</td>
                                                 <td class="p-3 m-3">{{$most->Comments->count()}}</td>
                                             </tr>
                                             @endforeach
@@ -79,6 +84,7 @@
                                             <tr>
                                                 <th class="py-2">{{__('Date')}}</th>
                                                 <th class="py-2">{{__('Title')}}</th>
+                                                <th class="py-2">{{__('Author')}}</th>
                                                 <th class="py-2">{{__('Comments')}}</th>
                                             </tr>
                                         </thead>
@@ -86,8 +92,9 @@
                                             @foreach ($last_posts as $post)
                                             <tr>
                                                 <td class="p-3 m-3">
-                                                    {{\Carbon\Carbon::parse($most->created_at)->format('d/m/y')}}</td>
+                                                    {{\Carbon\Carbon::parse($post->created_at)->format('d/m/y')}}</td>
                                                 <td class="p-3 m-3">{{$post->title}}</td>
+                                                <td class="p-3 m-3">{{$post->Author->name}}</td>
                                                 <td class="p-3 m-3">{{$post->Comments->count()}}</td>
                                             </tr>
                                             @endforeach
@@ -100,7 +107,14 @@
                     </div>
                 </div>
             </section>
+            <section class="text-gray-700 body-font">
+                <div class="container">
+                    <div class="rounded border-gray-100 bg-gray-700 text-white  ">
+                        <h3 class="tracking-widest text-lg border-b-4 border-white p-2">{{__('Comments')}}</h3>
 
+                    </div>
+                </div>
+            </section>
         </div>
     </div>
 </x-app-layout>
