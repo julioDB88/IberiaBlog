@@ -45,6 +45,11 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'verified','isMember'])->gro
    Route::put('/social',[AdminController::class,'saveSocialUrl'])->name('rrss.update')->middleware('isAdmin');;
    Route::resource('categories',CategoryController::class);
    Route::resource('posts',PostController::class);
+   // coments
+   Route::put('comment/{comment}',[AdminController::class,'acceptComment'])->name('comment.accept');
+   Route::delete('comment/{comment}',[AdminController::class,'deleteComment'])->name('comment.delete');
+
+
    Route::get('pages/{page}',[AdminController::class,'editPage'])->name('pages.edit');
    Route::put('pages/{page}',[AdminController::class,'updatePage'])->name('pages.update');
    Route::put('author',[AdminController::class,'updateAuthor'])->name('author.update');

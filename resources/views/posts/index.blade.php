@@ -5,11 +5,9 @@
         </h2>
     </x-slot>
     <div class="p-4 flex flex-wrap">
-        @if (Session::has('success'))
-        <div class="bg-green-500 p-3 w-full rounded">{{ Session::get('success') }}</div>
-        @endif
+
         @if($errors->any())
-        <div class="bg-red-500 p-3 w-full rounded">
+        <div class="bg-red-500 p-3 w-full rounded text-white">
             @foreach ($errors->all() as $error)
             <p class=text-white">{{$error}} </p>
             @endforeach
@@ -18,7 +16,14 @@
 
 
         <div class="w-full md:w-1/2 p-4 border-2 bg-gray-600">
+            @if (session('success'))
+            <div class="bg-green-500 p-3 my-2 w-full rounded text-white">{{ session('success') }}</div>
+            @endif
+            @if (session('error'))
+            <div class="bg-red-500 p-3 my-2 w-full rounded text-white">{{ session('error') }}</div>
+            @endif
             <h1 class="text-center py-3 my-3 font-bold text-white">{{__('Last Posts') }}</h1>
+            <div style="max-height: 600px; overflow-y:scroll">
             <table class="border-collapse table-auto w-full whitespace-no-wrap bg-white table-striped relative">
             <thead>
                 <tr class="border-b-2">
@@ -29,6 +34,7 @@
                     <th> {{__('Stats')}}</th>
                 </tr>
             </thead>
+
             <tbody class="bg-gray-300 text-gray-700">
                 @foreach ($posts as $post)
                     <tr >
@@ -51,7 +57,13 @@
                     </tr>
                 @endforeach
             </tbody>
+            <div class="text-gray-600 bg-white">
+                {{$posts->links()}}
+            </div>
+
         </table>
+    </div>
+
         </div>
         <div class="w-full md:w-1/2 p-4 border-2 bg-gray-700 text-white">
             <h1 class="text-center py-3 my-3 font-bold">{{__('New Post') }}</h1>
@@ -67,7 +79,7 @@
                     <div class="p-3 w-full md:w-2/4">
                         <label for="category" class="block">{{__('Category')}}</label>
 
-                        <select name="category"
+                        <select name="category_id"
                             class="block w-full mt-1 rounded-md border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-gray-700">
                             @foreach ($cats as $cat)
                             <option value="{{$cat->id}}">{{$cat->name}}</option>

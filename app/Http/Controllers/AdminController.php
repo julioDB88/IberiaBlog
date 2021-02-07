@@ -15,7 +15,8 @@ class AdminController extends Controller
     public function index(){
         $cats= Category::all(); ;
         $last_posts= Post::orderBy('id','desc')->take(10)->get();
-        $most_commented= Post::withCount('Comments')->get();
+        $most_commented= Post::withCount('Comments')->orderBy('comments_count','desc')->take(10)->get();
+
         $comments= Comment::where('visible',0)->get();
 
         return view('dashboard',compact('cats','last_posts','most_commented','comments'));
@@ -23,13 +24,13 @@ class AdminController extends Controller
     }
 
     public function changeBgVideo(Request $request){
-        $request->validate(['video'=>'file|mimes:mp4']);
+        $request->validate(['video'=>'file|mimes:mp4|required']);
         unlink(public_path('media/bg-video.mp4'));
         $request->file('video')->move(public_path('/media'),'bg-video.mp4');
         return redirect()->back()->with('success','Video updated');
     }
     public function changeLogo(Request $request){
-        $request->validate(['logo'=>'image|mimes:png']);
+        $request->validate(['logo'=>'image|mimes:png|required']);
         unlink(public_path('media/logo.png'));
         $request->file('logo')->move(public_path('/media'),'logo.png');
         return redirect()->back()->with('success','Logo updated');
@@ -65,6 +66,17 @@ class AdminController extends Controller
         return redirect()->back()->with('success','Actualizado correctamente');
 
 
+    }
+    public function acceptComment(Request $request,Comment $comment){
+
+        $comment->update(['visible'=>1]);
+        return redirect()->back()->with('success','Actualizado correctamente');
+
+    }
+
+    public function deleteComment(Comment $comment){
+        $comment->delete();
+        return redirect()->back()->with('success','Actualizado correctamente');
     }
 
     public function saveSocialUrl(Request $request){

@@ -71,17 +71,28 @@
                 {{__('No comments yet')}}
               </h1>
             @else
-            <div class="bg-gray-300  border-2 border-indigo-500 p-2">
+            <div class="p-2">
                 @foreach($comments as $com)
                     @if ($com->visible)
-                    <div class="border-b-2">
-                        <div class="flex w-full md:w-1/2 justify-between">
+                    <div class="border-b-2 w-full md:w-1/2 bg-gray-300 border-indigo-500 p-2">
+                        <div class="flex justify-between">
                             <p>{{$com->name}}</p>
                             <p>{{\Carbon\Carbon::parse($com->created_at)->format('d-m-y')}}</p>
                         </div>
                         <div class="p-4">
                             <p>{{$com->comment}}</p>
-
+                            @admin
+                            <form action="{{route('comment.delete',$com->id)}}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit"
+                                class=" submi bg-red-500 p-2 rounded text-white float-right">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="h-4" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                  </svg>
+                              </button>
+                            </form>
+                            @endadmin
                         </div>
                     </div>
 

@@ -115,18 +115,6 @@
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
-            <div class="flex items-center px-4">
-                @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
-                    <div class="flex-shrink-0 mr-3">
-                        <img class="h-10 w-10 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
-                    </div>
-                @endif
-
-                <div>
-                    <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
-                    <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
-                </div>
-            </div>
 
             <div class="mt-3 space-y-1">
                 <!-- Account Management -->
@@ -143,6 +131,20 @@
                         {{ __('API Tokens') }}
                     </x-jet-responsive-nav-link>
                 @endif
+                <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                    {{ __('Dashboard') }}
+                </x-jet-responsive-nav-link>
+                <x-jet-responsive-nav-link href="{{ route('posts.index') }}" :active="request()->routeIs('posts')">
+                    {{ __('Posts') }}
+                </x-jet-responsive-nav-link>
+                @admin
+                <x-jet-responsive-nav-link href="{{ route('pages.edit','about') }}" :active="request()->routeIs('posts')">
+                    {{ __('About') }}
+                </x-jet-responsive-nav-link>
+                @endadmin
+                <x-jet-responsive-nav-link href="{{ route('pages.edit','settings') }}" :active="request()->routeIs('lorem')">
+                    {{ __('Settings') }}
+                </x-jet-responsive-nav-link>
 
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">

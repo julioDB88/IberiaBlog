@@ -37,9 +37,9 @@ class HomeController extends Controller
         if(!$cat){
          return abort(404)    ;
         }
+        $category= $cat->name;
         $posts= Post::where('category_id',$cat->id)->orderBy('id','desc')->get();
-
-        return view('guest.pages.newscategory',compact('posts'));
+        return view('guest.pages.newscategory',compact('posts','category'));
 
     }
 
