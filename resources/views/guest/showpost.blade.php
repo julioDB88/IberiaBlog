@@ -28,14 +28,18 @@
         <section class="text-gray-700 body-font">
             <div class="container px-8 pt-2 pb-2 mx-auto lg:px-4">
                 <div class="flex flex-col w-full mb-12 text-left lg:text-center">
+
                     <h1 class="mb-6 text-2xl font-semibold tracking-tighter text-blue-800 sm:text-3xl title-font">
                       {{$post->title}}
                     </h1>
-                    <a href="https://www.facebook.com/sharer/sharer.php?u={{Request::url()}}" target="_blank">
-                        Share on Facebook
-                      </a>
-                    <a href="whatsapp://send?text={{Request::url()}}" data-action="share/whatsapp/share">Share via Whatsapp</a>
-                </div>
+                    <div class="flex w-full justify-between">
+                        <a href="https://www.facebook.com/sharer/sharer.php?u={{Request::url()}}" target="_blank">
+                            Share on Facebook
+                          </a>
+                        <a href="whatsapp://send?text={{Request::url()}}" data-action="share/whatsapp/share">Share via Whatsapp</a>
+
+                    </div>
+                 </div>
                 <div class="tinymce">
                     {!! $post->content !!}
                 </div>
