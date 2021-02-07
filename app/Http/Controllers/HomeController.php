@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\ContactMail;
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
 use Carbon\Carbon;
@@ -45,7 +46,8 @@ class HomeController extends Controller
     public function showNews($slug){
         $post= Post::where('slug',$slug)->first();
         if($post){
-            return view('guest.showpost',compact('post'));
+            $comments= $post->Comments;
+            return view('guest.showpost',compact('post','comments'));
         }
         abort(404);
     }
@@ -86,5 +88,28 @@ class HomeController extends Controller
         Mail::to($this->admin_email)->send(new ContactMail($data));
         return redirect()->back()->with('success','Enviado Correctamente');
 
+    }
+
+    public function storeComment(Request $request){
+
+        $request->validate([
+            'name2'=>'required|string|max:25',
+            'email2'=>'required|email',
+            'text'=>'required|max:300|string'
+        ]);
+
+        if($request->name || $request->email){
+            return redirect()->back()->with('success',trans('Your comment will be reviewed soonly and published if commplies with our policies'));
+
+        }
+        $com = new Comment();
+        $com->name= $request->name2;
+        $com->email= $request->email2;
+        $com->post_id= $request->post_id;
+        $com->comment= $request->text;
+        $com->visible=0;
+        $com->save();
+
+        return redirect()->back()->with('success',trans('Your comment will be reviewed soonly and published if commplies with our policies'));
     }
 }

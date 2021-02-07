@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/logout','Laravel\Fortify\Http\Controllers\AuthenticatedSessionController@destroy');
+
 
 Route::middleware(['web'])->group(function(){
 
@@ -27,6 +27,10 @@ Route::middleware(['web'])->group(function(){
     Route::get('legal/{page}',[HomeController::class,'showLegal'])->name('legal.show');
     Route::get('{page}',[HomeController::class,'showPage'])->name('page.show');
     Route::post('contact',[HomeController::class,'contactMe'])->name('contact');
+
+    //coment store
+    Route::post('comments',[HomeController::class,'storeComment'])->name('comment.store');
+
 
     //invitations
 
