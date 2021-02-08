@@ -35,8 +35,10 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $request['slug']= $this->createSlug($request->title);
-        Category::create($request->except('_token'));
+        $request->validate(['title'=>'string|max:25']);
+        $slug= $this->createSlug($request->name);
+
+        Category::create(['name'=>$request->name,'slug'=>$slug]);
         return  redirect()->back()->with('success',trans('Updated_succesfully'));
     }
 

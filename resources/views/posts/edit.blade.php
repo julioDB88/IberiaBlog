@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Posts') }}
+            @lang('main.Posts')
         </h2>
     </x-slot>
     <div class="p-4 flex flex-wrap">
@@ -20,23 +20,23 @@
             @endforeach
         </div>
         @endif
-        <div class="w-full ">
-            <h1 class="text-center py-3 my-3">{{__('Edit Post') }}</h1>
+        <div class="w-full bg-gray-700 text-white rounded p-6">
+            <h1 class="tracking-widest font-bold text-3xl border-b-4 border-blue-700 ">@lang('main.Edit_Post')  </h1>
             <form action="{{route('posts.update',$post->id)}}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="form-group my-3 flex flex-wrap">
                     <div class="p-3 w-full md:w-2/4">
-                        <label for="title" class="block">{{__('Title')}}</label>
+                        <label for="title" class="block">@lang('main.Title')</label>
                         <input type="text" name="title" value="{{ $post->title }}"
-                            class="block w-full mt-1 rounded-md border-transparent focus:border-gray-500 focus:bg-white focus:ring-"
+                            class="block text-black w-full mt-1 rounded-md border-transparent focus:border-gray-500 focus:bg-white focus:ring-"
                             autocomplete="off">
                     </div>
                     <div class="p-3 w-full md:w-2/4">
-                        <label for="category" class="block">{{__('Category')}}</label>
+                        <label for="category" class="block">@lang('main.Category')</label>
 
                         <select name="category"
-                            class="block w-full mt-1 rounded-md border-transparent focus:border-gray-500 focus:bg-white focus:ring-0">
+                            class=" text-black block w-full mt-1 rounded-md border-transparent focus:border-gray-500 focus:bg-white focus:ring-0">
                             @foreach ($cats as $cat)
                             <option value="{{$cat->id}}" @if ($post->category_id === $cat->id) selected @endif >{{$cat->name}}</option>
                             @endforeach
@@ -45,19 +45,19 @@
                     </div>
 
                     <div class="p-3 w-full md:w-2/4">
-                        <label for="title" class="block">{{__('Meta keywords')}}</label>
+                        <label for="title" class="block">@lang('main.Meta keywords')</label>
                         <input type="text" name="keywords" value="{{ $post->keywords }}"
-                            class="block w-full mt-1 rounded-md border-transparent focus:border-gray-500 focus:bg-white focus:ring-"
+                            class="block w-full text-black mt-1 rounded-md border-transparent focus:border-gray-500 focus:bg-white focus:ring-"
                             autocomplete="off">
                     </div>
                     <div class="p-3 w-full md:w-2/4">
-                        <label for="title" class="block">{{__('Meta Description')}}</label>
+                        <label for="title" class="block">@lang('main.Meta Description')</label>
                         <input type="text" name="description" value="{{ $post->description }}"
-                            class="block w-full mt-1 rounded-md border-transparent focus:border-gray-500 focus:bg-white focus:ring-"
+                            class="block w-full text-black mt-1 rounded-md border-transparent focus:border-gray-500 focus:bg-white focus:ring-"
                             autocomplete="off">
                     </div>
                     <div class="p-3 w-full md:w-1/4">
-                        <label for="image_file" class="bg-green-400 p-4 rounded">{{__('Add Mmage')}}
+                        <label for="image_file" class="bg-blue-700 p-4 rounded">@lang('main.Add Mmage')
                             <input type="file" name="image_file" id="image_file" class="hidden">
                         </label>
 
@@ -67,7 +67,7 @@
 
 
                 <textarea name="content" id="contents">{{$post->content}}</textarea>
-                <input type="submit" class="bg-green-400 p-4 rounded m-6" value="{{__('Submit')}}">
+                <input type="submit" class="bg-blue-700 p-4 rounded m-6" value="@lang('main.Submit')">
 
             </form>
         </div>

@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('About') }}
+            @lang('main.About')
         </h2>
     </x-slot>
     <div class="py-12">
@@ -35,7 +35,7 @@
 
                         <textarea name="content" id="contents">Hello, World!</textarea>
                         <input type="submit" class="bg-blue-700 cursor-pointer p-4 rounded m-6 text-white font-bold"
-                            value="{{__('Submit')}}">
+                            value=@lang('main.Submit')>
                     </form>
                 </div>
             </section>

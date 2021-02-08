@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Invitations') }}
+            @lang('main.Invitations')
         </h2>
     </x-slot>
     <div class="p-5 flex flex-wrap">
@@ -9,15 +9,15 @@
         <div class="w-full md:w-1/2 bg-gray-700">
             <div class="p-6">
                 <h2 class="mb-3  border-b-2 border-blue-700 text-lg font-bold text-white lg:text-4xl title-font">
-                    {{__('Pending Invitations')}}
+                    @lang('main.Pending Invitations')
                 </h2>
                 <table class="w-full bg-white rounded-t py-2">
                     <thead class="">
                         <tr>
-                            <th class="py-2">{{__('Invited')}}</th>
-                            <th>{{__('password')}}</th>
-                            <th>{{__('Date')}}</th>
-                            <th>{{__('Remove')}}</th>
+                            <th class="py-2">@lang('main.Invited')</th>
+                            <th>@lang('main.password')</th>
+                            <th>@lang('main.Date')</th>
+                            <th>@lang('main.Remove')</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -52,7 +52,7 @@
 
                     <h2
                         class="mb-3  border-b-2 border-blue-700 text-lg font-semibold text-white lg:text-4xl title-font">
-                        {{__('Send Invitation')}}
+                        @lang('main.Send_Invitation')
                     </h2>
                     <div class="flex flex-col w-full mx-auto mt-10 rounded-lg md:ml-auto md:mt-0">
                         <div class="relative ">
@@ -64,7 +64,7 @@
                                 class="w-full px-4 py-2 mb-4 mr-4 text-base text-blue-700 bg-gray-100 border-transparent rounded-lg focus:border-gray-500 focus:bg-white focus:ring-0">
                         </div>
                         <button
-                            class="px-8 py-2 font-semibold text-white transition duration-500 ease-in-out transform rounded-lg shadow-xl bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 focus:ring focus:outline-none">{{__('send')}}</button>
+                            class="px-8 py-2 font-semibold text-white transition duration-500 ease-in-out transform rounded-lg shadow-xl bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 focus:ring focus:outline-none">@lang('main.Send')</button>
 
                     </div>
                 </form>

@@ -25,21 +25,21 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex items-center">
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        @lang('main.Dashboard')
                     </x-jet-nav-link>
                     <x-jet-nav-link href="{{ route('posts.index') }}" :active="request()->routeIs('posts')">
-                        {{ __('Posts') }}
+                        @lang('main.Posts')
                     </x-jet-nav-link>
                     <x-jet-nav-link href="{{ route('pages.edit','comments') }}" >
-                        {{ __('Comments') }}
+                        @lang('main.Comments')
                     </x-jet-nav-link>
                     @admin
                     <x-jet-nav-link href="{{ route('pages.edit','about') }}" >
-                        {{ __('About') }}
+                        @lang('main.About')
                     </x-jet-nav-link>
                     @endadmin
                     <x-jet-nav-link href="{{ route('pages.edit','settings') }}" >
-                        {{ __('Settings') }}
+                        @lang('main.Settings')
                     </x-jet-nav-link>
                 </div>
             </div>
@@ -77,20 +77,20 @@
                         <x-slot name="content">
                             <!-- Account Management -->
                             <div class="block px-4 py-2 text-xs text-gray-400">
-                                {{ __('Manage Account') }}
+                                @lang('main.Manage Account')
                             </div>
 
                             <x-jet-dropdown-link href="{{ route('profile.show') }}">
-                                {{ __('Profile') }}
+                                @lang('main.Profile')
                             </x-jet-dropdown-link>
                             @admin
                             <x-jet-dropdown-link href="{{ route('invitations.list') }}">
-                                {{ __('Invitations') }}
+                                @lang('main.Invitations')
                             </x-jet-dropdown-link>
                             @endadmin
                             @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                                 <x-jet-dropdown-link href="{{ route('api-tokens.index') }}">
-                                    {{ __('API Tokens') }}
+                                    @lang('main.API Tokens')
                                 </x-jet-dropdown-link>
                             @endif
 
@@ -104,7 +104,7 @@
                                 <x-jet-dropdown-link href="{{ route('logout') }}"
                                          onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                    {{ __('Logout') }}
+                                    @lang('main.Logout')
                                 </x-jet-dropdown-link>
                             </form>
                         </x-slot>
@@ -128,7 +128,7 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+                @lang('main.Dashboard')
             </x-jet-responsive-nav-link>
         </div>
 
@@ -138,31 +138,31 @@
             <div class="mt-3 space-y-1">
                 <!-- Account Management -->
                 <x-jet-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
-                    {{ __('Profile') }}
+                    @lang('main.Profile')
                 </x-jet-responsive-nav-link>
                 @admin
                 <x-jet-responsive-nav-link href="{{ route('invitations.list') }}" :active="request()->routeIs('profile.show')">
-                    {{ __('Invitations') }}
+                    @lang('main.Invitations')
                 </x-jet-responsive-nav-link>
                 @endadmin
                 @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                     <x-jet-responsive-nav-link href="{{ route('api-tokens.index') }}" :active="request()->routeIs('api-tokens.index')">
-                        {{ __('API Tokens') }}
+                        @lang('main.API Tokens')
                     </x-jet-responsive-nav-link>
                 @endif
                 <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                    {{ __('Dashboard') }}
+                    @lang('main.Dashboard')
                 </x-jet-responsive-nav-link>
                 <x-jet-responsive-nav-link href="{{ route('posts.index') }}" :active="request()->routeIs('posts')">
-                    {{ __('Posts') }}
+                    @lang('main.Posts')
                 </x-jet-responsive-nav-link>
                 @admin
                 <x-jet-responsive-nav-link href="{{ route('pages.edit','about') }}" :active="request()->routeIs('posts')">
-                    {{ __('About') }}
+                    @lang('main.About')
                 </x-jet-responsive-nav-link>
                 @endadmin
                 <x-jet-responsive-nav-link href="{{ route('pages.edit','settings') }}" :active="request()->routeIs('lorem')">
-                    {{ __('Settings') }}
+                    @lang('main.Settings')
                 </x-jet-responsive-nav-link>
 
                 <!-- Authentication -->
@@ -172,7 +172,7 @@
                     <x-jet-responsive-nav-link href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                     this.closest('form').submit();">
-                        {{ __('Logout') }}
+                        @lang('main.Logout')
                     </x-jet-responsive-nav-link>
                 </form>
 

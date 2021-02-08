@@ -1,5 +1,5 @@
 <div class="hidden md:w-1/5 md:block pt-16 text-center">
-    <div class="p-3">{{__('Related Posts')}}</div>
+    <div class="p-3">@lang('main.Related Posts')</div>
     <div class="p-3 grid ">
         @foreach ($related as $rel)
         <div class="m-3 pb-3 border">

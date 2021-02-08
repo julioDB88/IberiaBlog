@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Settings') }}
+            @lang('Settings')
         </h2>
     </x-slot>
     <div class="py-12">
@@ -24,21 +24,21 @@
                     <div class="flex flex-wrap border-2 border-indigo-700 rounded">
                         <div class="lg:w-2/4 p-2 w-full p-6 ">
                             <h3 class="tracking-widest font-bold text-3xl border-b-4 border-blue-700 ">
-                                {{__('Post Categories')}}</h3>
+                                @lang('main.Post Categories')</h3>
                             <form action="{{route('categories.store')}}" method="post" class="py-4 flex">
                                 @csrf
-                                <input type="text" name="name" class="rounded w-full"
-                                    placeholder="{{__('New Post Category')}}">
+                                <input type="text" name="name" class="rounded w-full text-black"
+                                    placeholder="@lang('main.New Post Category')">
                                 <button
                                     class="px-6 bg-blue-700 py-2 border-gray-600 border-2 text-white-800 rounded font-bold">
-                                    {{__('Add')}}
+                                    @lang('main.Add')
                                 </button>
                             </form>
                             <table class="w-full border table-auto bg-white rounded">
                                 <thead class="bg-blue-700 text-white border-2">
                                     <tr>
-                                        <th class="py-2">{{__('Name')}}</th>
-                                        <th>{{__('Posts')}}</th>
+                                        <th class="py-2">@lang('main.Name')</th>
+                                        <th>@lang('main.Posts')</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -66,34 +66,34 @@
                         @admin
                         <div class="lg:w-2/4 p-2 w-full p-6  ">
                             <h3 class="tracking-widest font-bold text-3xl border-b-4 border-blue-700 ">
-                                {{__("Social Url's")}}</h3>
+                                @lang("main.Social_Urls")</h3>
                             <h3 class="text-xl font-semibold border-b-2  p-2 my-2 text-center">
-                                {{__("New_social")}}</h3>
+                                @lang("main.New_social")</h3>
                             <form action="{{route('social.store')}}" method="post" class="pb-4"
                                 enctype="multipart/form-data">
                                 @csrf
                                 <div class="flex flex-wrap">
                                     <input type="text" name="name" class="w-full md:w-1/3 rounded my-1 text-black"
-                                        placeholder="{{__('Name')}}">
+                                        placeholder="@lang('main.Name')">
                                     <input type="url" name="url" class="rounded w-full md:w-1/3 my-1 text-black"
-                                        placeholder="{{__('Url')}}">
+                                        placeholder="@lang('main.Url')">
 
                                     <div class="my-2 flex items-center w-1/2 md:w-1/3 px-2 ">
-                                        <label for="icon" class=" mr-4">{{__('Icon_image')}}</label>
+                                        <label for="icon" class=" mr-4">@lang('main.Icon_image')</label>
                                         <label for="icon" class="cursor-pointer px-2 py-1 border border-indigo-700 hover:bg-indigo-700 hover:text-white  rounded">
                                             <i class="fas fa-file"></i>
                                             <input type="file" name="icon" id="icon" class="hidden"
-                                                placeholder="{{__('Social_Icon')}}">
+                                                placeholder="@lang('main.Social_Icon')">
                                         </label>
                                     </div>
                                 </div>
 
                             <button class=" w-full border border-indigo-700 bg-blue-700 hover:bg-indigo-500 text-white   px-4 p-2 m-1 rounded">
-                                {{__('Add')}}
+                                @lang('main.Add')
                             </button>
                         </form>
                             <h3 class="text-xl font-semibold border-b-2  p-2 my-2 text-center">
-                                {{__("All_social")}}</h3>
+                                @lang('main.All_social')</h3>
 
                             @foreach ($social as $item)
 
@@ -111,11 +111,11 @@
                                         <div class="w-full md:w-1/3 flex justify-around">
                                             <label for="" class="flex items-center p-2 ">
                                                 <input type="checkbox" name="active" @if($item->active) checked @endif
-                                                class="mr-2">Active
+                                                class="mr-2">Visible
                                             </label>
 
                                             <button type="submit"
-                                                class=" border border-indigo-700  px-2 py-1   rounded hover:bg-indigo-700 hover:text-white">{{__('Save')}}</button>
+                                                class=" border border-indigo-700  px-2 py-1   rounded hover:bg-indigo-700 hover:text-white">@lang('main.Save')</button>
 
                                         </div>
 

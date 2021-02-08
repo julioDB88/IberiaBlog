@@ -48,7 +48,7 @@
         <section class="p-2 bg-gray-700 w-full my-4 ">
             <div class="mx-auto">
                 <h1 class="mb-6 text-2xl font-semibold tracking-tighter text-white sm:text-3xl title-font text-center">
-                    {{__('Leave a comment')}}
+                    @lang('main.Leave a comment')
                   </h1>
                     <form action="{{route('comment.store')}}" method="post" class="grid w-1/2 mx-auto">
                         @csrf
@@ -61,7 +61,7 @@
                         </div>
                     <div class=" grid w-full">
                         <textarea type="text" name="text" class="" ></textarea>
-                        <button type="submit" class="px-4 py-2 bg-indigo-700 text-white rounded my-4">{{__('Send')}}</button>
+                        <button type="submit" class="px-4 py-2 bg-indigo-700 text-white rounded my-4">@lang('main.Send')</button>
 
                     </div>
                     </form>
@@ -71,7 +71,7 @@
         <section class="container px-8 pt-2 pb-2 mx-auto lg:px-4">
             @if(count($comments)==0)
             <h1 class="mb-6 text-2xl font-semibold tracking-tighter text-blue-800 sm:text-3xl title-font">
-                {{__('No comments yet')}}
+                @lang('main.No_comments')
               </h1>
             @else
             <div class="p-2 bg-gray-700 text-white rounded">

@@ -35,7 +35,7 @@
                 <x-jet-dropdown>
                     <x-slot name="trigger">
                         <button type="button"
-                            class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">{{ __('News') }}</button>
+                            class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">@lang('main.News')</button>
                     </x-slot>
 
                     <x-slot name="content">
@@ -48,20 +48,20 @@
                     </x-slot>
                 </x-jet-dropdown>
                 <x-jet-nav-link href="{{ route('page.show','about')  }}" :active="request()->routeIs('dashboard')">
-                    {{ __('About') }}
+                    @lang('main.About')
                 </x-jet-nav-link>
                 <x-jet-nav-link href="{{ route('page.show','contact')  }}" :active="request()->routeIs('dashboard')">
-                    {{ __('Contact') }}
+                    @lang('main.Contact')
                 </x-jet-nav-link>
                 @auth
                 @writer
                 <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                    {{ __('Dashboard') }}
+                    @lang('main.Dashboard')
                 </x-jet-nav-link>
                 @endwriter
                 @admin
                 <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                    {{ __('Dashboard') }}
+                    @lang('main.Dashboard')
                 </x-jet-nav-link>
                 @endadmin
 
@@ -89,12 +89,12 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-jet-responsive-nav-link href="{{ route('home') }}" :active="request()->routeIs('home')">
-                {{ __('Home') }}
+                @lang('main.Home')
             </x-jet-responsive-nav-link>
             <x-jet-dropdown >
                 <x-slot name="trigger">
                     <button type="button"
-                        class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 transition duration-150 ease-in-out">{{ __('News') }}</button>
+                        class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 transition duration-150 ease-in-out">@lang('main.News')</button>
                 </x-slot>
                 <x-slot name="content">
                     @foreach ($categories as $cat)
@@ -105,10 +105,10 @@
                 </x-slot>
             </x-jet-dropdown>
             <x-jet-responsive-nav-link href="{{ route('page.show','about')  }}" :active="request()->routeIs('about')">
-                {{ __('About') }}
+                @lang('main.About')
             </x-jet-responsive-nav-link>
             <x-jet-responsive-nav-link href="{{ route('page.show','contact')  }}" :active="request()->routeIs('contact')">
-                {{ __('Contact') }}
+                @lang('main.Contact')
             </x-jet-responsive-nav-link>
         </div>
 

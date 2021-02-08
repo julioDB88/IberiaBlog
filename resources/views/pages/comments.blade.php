@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Comments') }}
+            @lang('main.Comments')
         </h2>
     </x-slot>
 <div class="p-5">
@@ -25,14 +25,14 @@
     <section class="body-font my-4">
         <div class="container mx-auto">
             <div class="rounded border-gray-700 border-2 bg-gray-700 text-white">
-                <h3 class="tracking-widest text-3xl border-b-2 border-blue-700 p-2 mx-2 font-bold ">{{__('Comments_for_Review')}}</h3>
+                <h3 class="tracking-widest text-3xl border-b-2 border-blue-700 p-2 mx-2 font-bold ">@lang('main.Comments_for_Review')</h3>
                 <div class="px-2 my-4" style="max-height: 600px; overflow-y:auto">
                 <table class="table-auto w-full">
                     <thead class="bg-blue-900 text-white">
                         <tr>
-                            <th class="p-2">{{__('Name')}}</th>
-                            <th>{{__('Date')}}</th>
-                            <th>{{__('Text')}}</th>
+                            <th class="p-2">@lang('main.Name')</th>
+                            <th>@lang('main.Date')</th>
+                            <th>@lang('main.Text')</th>
                             <th></th>
                             <th></th>
                         </tr>
@@ -54,7 +54,7 @@
                                 @csrf
                                 @method('PUT')
                                 <button type="submit"
-                                class="bg-green-500 px-4 py-2 rounded text-white ">{{__('Accept')}}</button>
+                                class="bg-green-500 px-4 py-2 rounded text-white ">@lang('main.Accept')</button>
                                 </form>
 
                             </td>
@@ -63,7 +63,7 @@
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit"
-                                    class=" submi bg-red-500 px-4 py-2 rounded text-white">{{__('Delete')}}</button>
+                                    class=" submi bg-red-500 px-4 py-2 rounded text-white">@lang('main.Delete')</button>
                                 </form>
                             </td>
 

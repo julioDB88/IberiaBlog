@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
+            @lang('main.Dashboard')
         </h2>
     </x-slot>
     <div class="py-12">
@@ -19,26 +19,26 @@
 
                 <div class="flex flex-wrap my-2 bg-gray-700 text-white">
                     <div class="p-3 w-full md:w-1/2 ">
-                        <h3 class="tracking-widest text-2xl border-b-4 border-blue-700 p-2 font-semibold">{{__('Change_Logo')}}</h3>
+                        <h3 class="tracking-widest text-2xl border-b-4 border-blue-700 p-2 font-semibold">@lang('main.Change_Logo')</h3>
                         <form action="{{route('changeLogo')}}" method="post" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
 
                             <input type="file" name="logo" id="logo_file" class="rounded text-xs md:text-base m-2 p-2">
                             <button type="submit"
-                                class="submi bg-blue-700 text-white px-4 py-2 rounded font-bold">{{__('Save')}}</button>
+                                class="submi bg-blue-700 text-white px-4 py-2 rounded font-bold">@lang('main.Save')</button>
 
                         </form>
 
                     </div>
                     <div class="p-3 w-full md:w-1/2">
-                        <h3 class="tracking-widest text-2xl border-b-4 border-blue-700 p-2 font-bold">{{__('Change_Video')}}</h3>
+                        <h3 class="tracking-widest text-2xl border-b-4 border-blue-700 p-2 font-bold">@lang('main.Change_Video')</h3>
                         <form action="{{route('changeVideo')}}" method="post" enctype="multipart/form-data">
                             @method('PUT')
                             @csrf
                             <input type="file" name="video" id="vid_file" class="rounded text-xs md:text-base m-2 p-2">
                             <button type="submit"
-                                class="submi bg-blue-700 text-white px-4 py-2 rounded font-bold">{{__('Save')}}</button>
+                                class="submi bg-blue-700 text-white px-4 py-2 rounded font-bold">@lang('main.Save')</button>
                         </form>
 
 
@@ -49,20 +49,20 @@
             <section class="body-font">
                 <div class="container">
                     <div class="rounded bg-gray-700 text-white ">
-                        <h3 class="tracking-widest text-2xl border-b-4 border-blue-700 mx-2 p-2 font-bold">{{__('Posts')}}</h3>
+                        <h3 class="tracking-widest text-2xl border-b-4 border-blue-700 mx-2 p-2 font-bold">@lang('main.Posts')</h3>
                         <div class="flex flex-wrap">
                             <div class="lg:w-2/4 p-2 w-full">
-                                <div class="h-full p-6 ">
+                                <div class="h-full p-2 ">
 
-                                    <p class="mb-4 text-base leading-relaxed my-4 font-xl font-semibold">{{__('Top_10_comented')}}</p>
+                                    <p class="mb-4 text-base leading-relaxed my-4 font-xl font-semibold">@lang('main.Top_10_comented')</p>
                                     <div style="max-height: 600px; overflow-y:auto">
                                         <table class="bg-white rounded table-auto w-full border border-gray-700">
                                             <thead class="w-full text-gray-700">
                                                 <tr>
-                                                    <th class="py-2">{{__('Date')}}</th>
-                                                    <th class="py-2">{{__('Title')}}</th>
-                                                    <th class="py-2">{{__('Author')}}</th>
-                                                    <th class="py-2">{{__('Comments')}}</th>
+                                                    <th class="py-2">@lang('main.Date')</th>
+                                                    <th class="py-2">@lang('main.Title')</th>
+                                                    <th class="py-2">@lang('main.Author')</th>
+                                                    <th class="py-2">@lang('main.Comments')</th>
                                                 </tr>
                                             </thead>
                                             <tbody class="bg-gray-300 w-full text-gray-700 text-center">
@@ -84,16 +84,16 @@
                             </div>
 
                             <div class="lg:w-2/4 p-2 w-full">
-                                <div class="h-full p-6 ">
-                                    <p class="mb-4 text-base leading-relaxed my-4">{{__('Last_10_posts')}}</p>
+                                <div class="h-full p-2 ">
+                                    <p class="mb-4 text-base leading-relaxed my-4">@lang('main.Last_10_posts')</p>
                                     <div style="max-height: 600px; overflow-y:auto">
                                         <table class="bg-white rounded table-auto w-full border border-gray-700">
                                             <thead class="w-full text-gray-700">
                                                 <tr>
-                                                    <th class="py-2">{{__('Date')}}</th>
-                                                    <th class="py-2">{{__('Title')}}</th>
-                                                    <th class="py-2">{{__('Author')}}</th>
-                                                    <th class="py-2">{{__('Comments')}}</th>
+                                                    <th class="py-2">@lang('main.Date')</th>
+                                                    <th class="py-2">@lang('main.Title')</th>
+                                                    <th class="py-2">@lang('main.Author')</th>
+                                                    <th class="py-2">@lang('main.Comments')</th>
                                                 </tr>
                                             </thead>
                                             <tbody class="bg-gray-300 w-full text-gray-700 text-center">

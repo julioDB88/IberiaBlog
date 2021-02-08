@@ -52,7 +52,7 @@
                                 @if($user->description)
                                 <p class="text-base font-medium leading-relaxed text-white">{{$user->description}}</p>
                                 @else
-                                <p class="text-base font-medium leading-relaxed text-white">{{__('I would write something about me to show some of my skills and let you know ehre i come from. Have a nice day!')}}</p>
+                                <p class="text-base font-medium leading-relaxed text-white">@lang('main.author_placeholder')</p>
                                 @endif
                             </div>
                         </div>
