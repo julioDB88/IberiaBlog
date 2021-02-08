@@ -39,8 +39,12 @@ class AdminController extends Controller
     public function editPage($page){
         $cats= Category::all();
         $social= DB::table('social_links')->get();
+        $coms='';
+        if($page=='comments'){
+          $coms=  Comment::paginate(15);
+        }
 
-        return view("pages.".$page,compact('cats','social'));
+        return view("pages.".$page,compact('cats','social','coms'));
     }
 
     public function updatePage(Request $request,$page){
@@ -51,6 +55,7 @@ class AdminController extends Controller
         if($page=='contact'){
             DB::table('pages_content')->where('page',$page)->update(['content'=>$request->email]);
         }
+
         return redirect()->back()->with('success','Actualizado correctamente');
     }
 
@@ -79,47 +84,53 @@ class AdminController extends Controller
         return redirect()->back()->with('success','Actualizado correctamente');
     }
 
-    public function saveSocialUrl(Request $request){
+    public function updateSocialUrl(Request $request,$id){
 
         $request->validate([
-            'twitter'=>'sometimes|nullable|url',
-            'facebook'=>'sometimes|nullable|url',
-            'instagram'=>'sometimes|nullable|url',
-            'youtube'=>'sometimes|nullable|url',
+            'name'=>'required|string|max:15',
+            'url'=>'required|url',
+            'icon'=>'nullable|image|mimes:png,jpg,svg'
+        ]);
+        if($request->icon){
+
+            $filename=DB::table('social_links')->where('id',$id)->icon;
+            $request->file('icon')->storeAs("public/logos", $filename);
+        }
+
+        $active = $request->active ? 1:0;
+
+        DB::table('social_links')->where('id',$id)->update([
+            'name'=>$request->name,
+            'url'=>$request->url,
+            'active'=>$active,
         ]);
 
-        if($request->twitter){
-            DB::table('social_links')->where('name','twitter')->update(['url'=>$request->twitter]);
-        }
-        $request->twitter_c == 'on' ?
-            DB::table('social_links')->where('name','twitter')->update(['active'=>1]):
-            DB::table('social_links')->where('name','twitter')->update(['active'=>0]);
 
-        if($request->facebook){
-            DB::table('social_links')->where('name','facebook')->update(['url'=>$request->facebook]);
-        }
-        $request->facebook_c  == 'on' ?
-            DB::table('social_links')->where('name','facebook')->update(['active'=>1]):
-            DB::table('social_links')->where('name','facebook')->update(['active'=>0]);
 
-        if($request->instagram){
-            DB::table('social_links')->where('name','instagram')->update(['url'=>$request->instagram]);
-        }
-        $request->instagram_c  == 'on' ?
-            DB::table('social_links')->where('name','instagram')->update(['active'=>1]):
-            DB::table('social_links')->where('name','instagram')->update(['active'=>0]);
 
-        if($request->youtube){
-            DB::table('social_links')->where('name','youtube')->update(['url'=>$request->youtube]);
-        }
-        $request->youtube_c  == 'on' ?
-            DB::table('social_links')->where('name','youtube')->update(['active'=>1]):DB::table('social_links')->where('name','youtube')->update(['active'=>0]);
+        return redirect()->back()->with('success','updated_succesfully');
 
-        return redirect()->back()->with('success','updated succesfully');
+    }
+    public function storeSocialUrl(Request $request){
+        $request->validate([
+            'name'=>'required|string|max:15',
+            'url'=>'required|string',
+            'icon'=>'required|image|mimes:png,jpg,svg'
+        ]);
+
+        $filename = time() . "." . $request->file('icon')->getClientOriginalExtension();
+        $request->file('icon')->storeAs("public/logos", $filename);
+
+        DB::table('social_links')->insert([
+            'name'=>$request->name,
+            'url'=>$request->url,
+            'icon'=>$filename,
+        ]);
+        return redirect()->back()->with('success',trans('created_succesfully'));
 
     }
 
-    public function activateSocialIcon(){
+    // public function activateSocialIcon(){
 
-    }
+    // }
 }

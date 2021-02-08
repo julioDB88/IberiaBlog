@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['web'])->group(function(){
 
     Route::get('/',[HomeController::class,'index'])->name('home');
+    Route::get('/news/search',[HomeController::class,'searchPosts'])->name('search.posts');
     Route::get('news/category/{slug}',[HomeController::class,'showCategoryNews'])->name('news.category');
     Route::get('news/{slug}',[HomeController::class,'showNews'])->name('news.show');
     Route::get('legal/{page}',[HomeController::class,'showLegal'])->name('legal.show');
@@ -35,20 +36,22 @@ Route::middleware(['web'])->group(function(){
     //invitations
 
     Route::get('invitation/{invitation}',[InvitationController::class,'accept'])->name('invitation.accept');
-    Route::get('invitations/list',[InvitationController::class,'show'])->name('invitations.list');
-    Route::post('invitation',[InvitationController::class,'store'])->name('invitation.store');
+
 
 });
 
 Route::prefix('admin')->middleware(['auth:sanctum', 'verified','isMember'])->group(function () {
    Route::get('/dashboard',[AdminController::class,'index'])->name('dashboard');
-   Route::put('/social',[AdminController::class,'saveSocialUrl'])->name('rrss.update')->middleware('isAdmin');;
+   Route::put('/social/{social}',[AdminController::class,'updateSocialUrl'])->name('social.update')->middleware('isAdmin');;
+   Route::post('/social',[AdminController::class,'storeSocialUrl'])->name('social.store')->middleware('isAdmin');;
    Route::resource('categories',CategoryController::class);
    Route::resource('posts',PostController::class);
    // coments
    Route::put('comment/{comment}',[AdminController::class,'acceptComment'])->name('comment.accept');
    Route::delete('comment/{comment}',[AdminController::class,'deleteComment'])->name('comment.delete');
-
+  // invitations
+    Route::get('invitations/list',[InvitationController::class,'show'])->name('invitations.list');
+    Route::post('invitation',[InvitationController::class,'store'])->name('invitation.store');
 
    Route::get('pages/{page}',[AdminController::class,'editPage'])->name('pages.edit');
    Route::put('pages/{page}',[AdminController::class,'updatePage'])->name('pages.update');

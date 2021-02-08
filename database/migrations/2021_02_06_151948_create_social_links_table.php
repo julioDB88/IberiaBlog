@@ -17,7 +17,8 @@ class CreateSocialLinksTable extends Migration
             $table->id();
             $table->char('name',15);
             $table->string('url',144);
-            $table->boolean('active');
+            $table->string('icon',20);
+            $table->boolean('active')->default(0);
         });
     }
 

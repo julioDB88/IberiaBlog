@@ -23,7 +23,7 @@
             <div class="bg-red-500 p-3 my-2 w-full rounded text-white">{{ session('error') }}</div>
             @endif
             <h1 class="text-center py-3 my-3 font-bold text-white">{{__('Last Posts') }}</h1>
-            <div style="max-height: 600px; overflow-y:scroll">
+            <div style="max-height: 600px; overflow-y:auto">
             <table class="border-collapse table-auto w-full whitespace-no-wrap bg-white table-striped relative">
             <thead>
                 <tr class="border-b-2">

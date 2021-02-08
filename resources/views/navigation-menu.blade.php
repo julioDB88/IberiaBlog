@@ -1,3 +1,14 @@
+<style>
+.toggle-checkbox:checked {
+    @apply: right-0 border-green-400;
+    right: 0;
+    border-color: #68D391;
+  }
+  .toggle-checkbox:checked + .toggle-label {
+    @apply: bg-indigo-400;
+    background-color: #68D391;
+  }
+</style>
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
 
@@ -19,12 +30,15 @@
                     <x-jet-nav-link href="{{ route('posts.index') }}" :active="request()->routeIs('posts')">
                         {{ __('Posts') }}
                     </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('pages.edit','comments') }}" >
+                        {{ __('Comments') }}
+                    </x-jet-nav-link>
                     @admin
-                    <x-jet-nav-link href="{{ route('pages.edit','about') }}" :active="request()->routeIs('posts')">
+                    <x-jet-nav-link href="{{ route('pages.edit','about') }}" >
                         {{ __('About') }}
                     </x-jet-nav-link>
                     @endadmin
-                    <x-jet-nav-link href="{{ route('pages.edit','settings') }}" :active="request()->routeIs('lorem')">
+                    <x-jet-nav-link href="{{ route('pages.edit','settings') }}" >
                         {{ __('Settings') }}
                     </x-jet-nav-link>
                 </div>
@@ -33,7 +47,12 @@
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <!-- Teams Dropdown -->
 
-
+                <div class="ml-3">
+                    <div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+                        <input type="checkbox" name="toggle" id="toggle" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
+                        <label for="toggle" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
+                    </div>
+                </div>
                 <!-- Settings Dropdown -->
                 <div class="ml-3 relative">
                     <x-jet-dropdown align="right" width="48">

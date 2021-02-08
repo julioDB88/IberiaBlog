@@ -4,7 +4,7 @@
             {{ __('About') }}
         </h2>
     </x-slot>
-    <div class="p-5 bg-gray-700">
+    <div class="p-5 bg-gray-700 m-4">
         @if (Session::has('success'))
         <div class="alert-banner w-full fixed top-0 ">
             <input type="checkbox" class="hidden" id="banneralert">
@@ -26,7 +26,7 @@
             @endforeach
         </div>
         @endif
-        <h1  class="my-4 py-4 text-white font-bold"> {{__('pages.about.edit')}}</h1>
+        <h1  class="my-4 py-4 text-white font-bold text-2xl"> {{__('pages.about.edit')}}</h1>
         <form action="{{ route('pages.update','about') }}" method="post">
             @csrf
             @method('PUT')

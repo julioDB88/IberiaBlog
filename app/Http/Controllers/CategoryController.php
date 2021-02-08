@@ -37,7 +37,7 @@ class CategoryController extends Controller
     {
         $request['slug']= $this->createSlug($request->title);
         Category::create($request->except('_token'));
-        return  redirect()->back()->with('success');
+        return  redirect()->back()->with('success',trans('Updated_succesfully'));
     }
 
     /**
@@ -82,7 +82,12 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        if(!$category->Posts->count()){
+            $category->delete();
+            return  redirect()->back()->with('success',trans('Removed_succesfully'));
+        }
+        return  redirect()->back()->with('error',trans('Cant_delete_category'));
+
     }
     public function createSlug($str){
 

@@ -117,62 +117,7 @@
                     </div>
                 </div>
             </section>
-            <section class="text-gray-700 body-font my-4">
-                <div class="container">
-                    <div class="rounded border-gray-700 border-2 bg-gray-200 ">
-                        <h3 class="tracking-widest text-lg border-b-4 border-gray-700 p-2">{{__('Comments_for_Review')}}</h3>
-                        <div style="max-height: 600px; overflow-y:auto">
-                        <table class="table-auto w-full">
-                            <thead>
-                                <tr>
-                                    <th class="p-2">{{__('Name')}}</th>
-                                    <th>{{__('Date')}}</th>
-                                    <th>{{__('text')}}</th>
-                                    <th>{{__('Setting')}}</th>
-                                    <th>{{__('Setting')}}</th>
-                                </tr>
-                            </thead>
-                            <tbody class="text-center">
-                                @foreach($comments as $com)
-                                <tr>
-                                    <td class="p-2 m-2">
-                                        <p>{{$com->name}}</p>
-                                    </td>
-                                    <td>
-                                        <p>{{\Carbon\Carbon::parse($com->created_at)->format('d-m-y')}}</p>
-                                    </td>
-                                    <td>
-                                        <p>{{$com->comment}}</p>
-                                    </td>
-                                    <td>
-                                        <form action="{{route('comment.accept',$com->id)}}" method="post">
-                                        @csrf
-                                        @method('PUT')
-                                        <button type="submit"
-                                        class="bg-green-500 px-4 py-2 rounded text-white ">{{__('Accept')}}</button>
-                                        </form>
 
-                                    </td>
-                                    <td>
-                                        <form action="{{route('comment.delete',$com->id)}}" method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit"
-                                            class=" submi bg-red-500 px-4 py-2 rounded text-white">{{__('Delete')}}</button>
-                                        </form>
-                                    </td>
-
-                                </tr>
-
-                                @endforeach
-
-                            </tbody>
-
-                        </table>
-
-                    </div>
-                </div>
-            </section>
         </div>
     </div>
     @push('js')
