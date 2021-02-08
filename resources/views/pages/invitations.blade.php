@@ -9,24 +9,39 @@
         <div class="w-full md:w-1/2 bg-gray-700">
             <div class="p-6">
                 <h2 class="mb-3  border-b-2 border-blue-700 text-lg font-bold text-white lg:text-4xl title-font">
-                    {{__('Invitations List')}}
+                    {{__('Pending Invitations')}}
                 </h2>
-                @foreach ($invits as $invi)
-                <div class="flex justify-between content-between p-2 bg-white items-center rounded">
-                    <p>{{$invi->email}}</p>
-                    <p>{{$invi->password}}</p>
-                    <p>{{Carbon\Carbon::parse($invi->created_at)->format('d-m-y')}}</p>
-                    <p>
-                        <form action="{{route('invitation.destroy',$invi->id)}}" method="post">
-                            @csrf
-                            @method('delete')
-                            <button class="invi-button px-4 py-2 rounded bg-red-500 text-white">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </form>
-                    </p>
-                </div>
-                @endforeach
+                <table class="w-full bg-white rounded-t py-2">
+                    <thead class="">
+                        <tr>
+                            <th class="py-2">{{__('Invited')}}</th>
+                            <th>{{__('password')}}</th>
+                            <th>{{__('Date')}}</th>
+                            <th>{{__('Remove')}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($invits as $invi)
+                        <tr>
+
+                                <td class="p-2">{{$invi->email}}</td>
+                                <td class="p-2">{{$invi->password}}</td>
+                                <td class="p-2">{{Carbon\Carbon::parse($invi->created_at)->format('d-m-y')}}</td>
+                                <td class="p-2">
+                                    <form action="{{route('invitation.destroy',$invi->id)}}" method="post">
+                                        @csrf
+                                        @method('delete')
+                                        <button class="invi-button px-4 py-2 rounded bg-red-500 text-white">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </td>
+
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+
             </div>
         </div>
         <div class="w-full md:w-1/2">
