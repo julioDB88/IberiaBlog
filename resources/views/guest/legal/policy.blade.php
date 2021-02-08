@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <div class="bg-gray-600 p-6">
+    <div class="bg-gray-600 md:p-6">
         <div class="p-4 m-4 bg-white">
 
 
@@ -108,35 +108,38 @@
             Learn more about cookies: Cookies: What Do They Do?.</p>
 
             <p class="text-sm m-1 p-2 ">We use both Session and Persistent Cookies for the purposes set out below:</p>
-            <table class="table-fixed text-center border border-gra">
-                <thead class="bg-green-400 text-gray-600">
-                    <tr>
-                        <th class="w-1/6 py-4 ">Name</th>
-                        <th class="w-1/6">Type</th>
-                        <th class="w-1/6">Administred by</th>
-                        <th class="w-3/6">Purpose</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Necessary / Essential Cookies</td>
-                        <td>Session Cookies</td>
-                        <td>Us</td>
-                        <td> These Cookies are essential to provide You with services available through the Website and to
-                            enable You to use some of its features. They help to authenticate users and prevent fraudulent use of user
-                            accounts. Without these Cookies, the services that You have asked for cannot be provided, and We only use
-                            these Cookies to provide You with those services.</td>
-                    </tr>
-                    <tr>
-                        <td>Cookies Policy / Notice Acceptance Cookies</td>
-                        <td>Persistent Cookies</td>
-                        <td>Us</td>
-                        <td>These Cookies allow us to remember choices You make when You use the Website, such as remembering
-                            your login details or language preference. The purpose of these Cookies is to provide You with a more
-                            personal experience and to avoid You having to re-enter your preferences every time You use the Website.</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div style="overflow:auto">
+                <table class="table-auto text-center border text-sm">
+                    <thead class="bg-green-400 text-gray-600">
+                        <tr>
+                            <th class="w-1/6 py-4 ">Name</th>
+                            <th class="w-1/6">Type</th>
+                            <th class="w-1/6">Administred by</th>
+                            <th class="w-3/6">Purpose</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Necessary / Essential Cookies</td>
+                            <td>Session Cookies</td>
+                            <td>Us</td>
+                            <td> These Cookies are essential to provide You with services available through the Website and to
+                                enable You to use some of its features. They help to authenticate users and prevent fraudulent use of user
+                                accounts. Without these Cookies, the services that You have asked for cannot be provided, and We only use
+                                these Cookies to provide You with those services.</td>
+                        </tr>
+                        <tr>
+                            <td>Cookies Policy / Notice Acceptance Cookies</td>
+                            <td>Persistent Cookies</td>
+                            <td>Us</td>
+                            <td>These Cookies allow us to remember choices You make when You use the Website, such as remembering
+                                your login details or language preference. The purpose of these Cookies is to provide You with a more
+                                personal experience and to avoid You having to re-enter your preferences every time You use the Website.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
 
             <h3 class="text-base m-2 font-bold">Use of Your Personal Data</h3>
             <p class="text-sm m-1 p-2 ">{{config('app.name')}} may use Personal Data for the following purposes:</p>

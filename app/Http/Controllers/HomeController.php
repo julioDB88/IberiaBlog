@@ -9,6 +9,7 @@ use App\Models\Post;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
@@ -22,7 +23,8 @@ class HomeController extends Controller
 
     public function __construct()
     {
-        $email = DB::table('pages_content')->where('page', 'contact')->first()->content;
+        $email = DB::table('pages_content')->where('name', 'contact')->first()->content;
+        $video_page= DB::table('pages_content')->where('name', 'videos')->first()->active;
 
         $this->admin_email = $email === 'null' ? config('app.email') : $email;
     }
@@ -71,8 +73,13 @@ class HomeController extends Controller
      */
     public function showPage($page)
     {
-        $content = DB::table('pages_content')->where('page', $page)->first();
+        if($page=== 'videos' and !$this->video_page){
+            abort(404);
+        }
+
+        $content = DB::table('pages_content')->where('name', $page)->first();
         if (view()->exists("guest.pages.{$page}")) {
+
             return view("guest.pages.{$page}", compact('content'));
         }
 

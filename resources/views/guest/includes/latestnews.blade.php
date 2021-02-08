@@ -15,10 +15,9 @@
                             <div alt="gallery"
                                 class="flex items-base items-end object-contain object-center w-full rounded-lg @if(in_array($key,[0,1,4,5])) h-36 @else h-64 @endif"
                                 style="background:url('{{asset('storage/posts')}}/{{$post->img_file}}') no-repeat center;">
-                                <div class=" w-full main-banner rounded">
-                                    <p class="text-white ">{{$post->title}}</p>
+                                <div class=" w-full main-banner rounded h-full flex justify-center items-center">
+                                    <p class="text-white ">{{ ucfirst($post->title)}}</p>
                                 </div>
-
                             </div>
                         </a>
                     </div>
@@ -34,8 +33,8 @@
                             <div alt="gallery"
                                 class="flex items-base items-end object-contain object-center w-full rounded-lg @if(in_array($key,[0,1,4,5])) h-36 @else h-64 @endif"
                                 style="background:url('{{asset('storage/posts')}}/{{$post->img_file}}') no-repeat center;">
-                                <div class="h-full w-full main-banner rounded">
-                                    <p class="text-white ">{{$post->title}}</p>
+                                <div class=" w-full main-banner rounded h-full flex justify-center items-center>
+                                    <p class="text-white ">{{ucfirst($post->title)}}</p>
                                 </div>
                             </div>
                         </a>

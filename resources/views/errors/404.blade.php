@@ -206,3 +206,4 @@ div{
 </svg>
 
 <h2>Page Not Found</h2>
+<h2 style="bottom:0;top:25%;"><a href="/">Go back</a></h2>

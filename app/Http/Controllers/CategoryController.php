@@ -35,11 +35,11 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(['title'=>'string|max:25']);
-        $slug= $this->createSlug($request->name);
+        $request->validate(['title' => 'string|max:25']);
+        $slug = $this->createSlug($request->name);
 
-        Category::create(['name'=>$request->name,'slug'=>$slug]);
-        return  redirect()->back()->with('success',trans('Updated_succesfully'));
+        Category::create(['name' => $request->name, 'slug' => $slug]);
+        return  redirect()->back()->with('success', trans('Updated_succesfully'));
     }
 
     /**
@@ -84,19 +84,18 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        if(!$category->Posts->count()){
+        if (!$category->Posts->count()) {
             $category->delete();
-            return  redirect()->back()->with('success',trans('Removed_succesfully'));
+            return  redirect()->back()->with('success', trans('Removed_succesfully'));
         }
-        return  redirect()->back()->with('error',trans('Cant_delete_category'));
-
+        return  redirect()->back()->with('error', trans('Cant_delete_category'));
     }
-    public function createSlug($str){
+    public function createSlug($str)
+    {
 
         $str = strtolower(trim($str));
         $str = preg_replace('/[^a-z0-9-]/', '-', $str);
         $str = preg_replace('/-+/', "-", $str);
         return $str;
-
-}
+    }
 }

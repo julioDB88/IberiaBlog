@@ -2,7 +2,7 @@
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
-            <div class="flex">
+            <div class="hidden md:flex">
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
                     <a href="{{ route('home') }}">
@@ -47,23 +47,37 @@
 
                     </x-slot>
                 </x-jet-dropdown>
+                @php $active_about = DB::table('pages_content')->where('name','about')->first()->active @endphp
+                @php $active_videos = DB::table('pages_content')->where('name','videos')->first()->active @endphp
+                @php $shop = DB::table('pages_content')->where('name','shop')->first() @endphp
+
+                @if($active_about)
                 <x-jet-nav-link href="{{ route('page.show','about')  }}" :active="request()->routeIs('dashboard')">
                     @lang('main.About')
                 </x-jet-nav-link>
-                <x-jet-nav-link href="{{ route('page.show','contact')  }}" :active="request()->routeIs('dashboard')">
+                @endif
+
+                @if($active_videos)
+                <x-jet-nav-link href="{{ route('page.show','about')  }}" :active="request()->routeIs('dashboard')">
+                    @lang('main.Videos')
+                </x-jet-nav-link>
+                @endif
+
+                @if($shop->active)
+                <x-jet-nav-link href="//{{ $shop->content }}" :active="request()->routeIs('dashboard')">
+                    @lang('main.Shop')
+                </x-jet-nav-link>
+                @endif
+
+                <x-jet-nav-link href="{{ route('contact')  }}" :active="request()->routeIs('dashboard')">
                     @lang('main.Contact')
                 </x-jet-nav-link>
+
                 @auth
-                @writer
+
                 <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                     @lang('main.Dashboard')
                 </x-jet-nav-link>
-                @endwriter
-                @admin
-                <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                    @lang('main.Dashboard')
-                </x-jet-nav-link>
-                @endadmin
 
                 @endauth
 
@@ -104,10 +118,26 @@
                     @endforeach
                 </x-slot>
             </x-jet-dropdown>
+
+            @if($active_videos)
+            <x-jet-responsive-nav-link href="{{ route('page.show','about')  }}" :active="request()->routeIs('dashboard')">
+                @lang('main.Videos')
+            </x-jet-responsive-nav-link >
+            @endif
+
+            @if($active_about)
             <x-jet-responsive-nav-link href="{{ route('page.show','about')  }}" :active="request()->routeIs('about')">
                 @lang('main.About')
             </x-jet-responsive-nav-link>
-            <x-jet-responsive-nav-link href="{{ route('page.show','contact')  }}" :active="request()->routeIs('contact')">
+            @endif
+
+            @if($shop->active)
+            <x-jet-responsive-nav-link href="{{ $shop->content }}" :active="request()->routeIs('about')">
+                @lang('main.Shop')
+            </x-jet-responsive-nav-link>
+            @endif
+
+            <x-jet-responsive-nav-link href="{{ route('contact')  }}" :active="request()->routeIs('contact')">
                 @lang('main.Contact')
             </x-jet-responsive-nav-link>
         </div>

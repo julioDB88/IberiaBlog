@@ -16,7 +16,9 @@ class PageContentSeeder extends Seeder
     {
      $content=[
          ['page'=>'about','content'=>'null'],
-         ['page'=>'contact','content'=>'null']
+         ['page'=>'contact','content'=>'null'],
+         ['page'=>'shop','content'=>'null'],
+         ['page'=>'videos','content'=>'null'],
      ];
         DB::table('pages_content')->insert($content); //
     }

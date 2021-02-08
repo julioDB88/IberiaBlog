@@ -38,7 +38,7 @@
                         @lang('main.About')
                     </x-jet-nav-link>
                     @endadmin
-                    <x-jet-nav-link href="{{ route('pages.edit','settings') }}" >
+                    <x-jet-nav-link href="{{ route('settings') }}" >
                         @lang('main.Settings')
                     </x-jet-nav-link>
                 </div>
@@ -161,7 +161,7 @@
                     @lang('main.About')
                 </x-jet-responsive-nav-link>
                 @endadmin
-                <x-jet-responsive-nav-link href="{{ route('pages.edit','settings') }}" :active="request()->routeIs('lorem')">
+                <x-jet-responsive-nav-link href="{{ route('settings') }}" :active="request()->routeIs('lorem')">
                     @lang('main.Settings')
                 </x-jet-responsive-nav-link>
 

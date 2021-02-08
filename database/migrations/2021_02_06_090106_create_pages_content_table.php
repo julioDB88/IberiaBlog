@@ -15,8 +15,9 @@ class CreatePagesContentTable extends Migration
     {
         Schema::create('pages_content', function (Blueprint $table) {
             $table->id();
-            $table->char('page',44);
+            $table->char('name',14);
             $table->longtext('content');
+            $table->boolean('active')->default(0);
         });
     }
 

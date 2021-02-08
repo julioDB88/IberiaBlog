@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <div class="bg-gray-600 p-6">
+    <div class="bg-gray-600 md:p-6">
         <div class="p-4 m-4 bg-white">
     <h2 class="text-lg"><strong>Terms and Conditions</strong></h2>
 
