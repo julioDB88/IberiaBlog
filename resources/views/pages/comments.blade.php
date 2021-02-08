@@ -6,15 +6,11 @@
     </x-slot>
 <div class="p-5">
     @if (Session::has('success'))
-    <div class="alert-banner w-full fixed top-0">
+    <div class="alert-banner w-full">
         <input type="checkbox" class="hidden" id="banneralert">
 
         <label class="close cursor-pointer flex items-center justify-between w-full p-2 bg-red-500 shadow text-white" title="close" for="banneralert">
             {{ Session::get('success') }}
-
-          <svg class="fill-current text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
-            <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
-          </svg>
         </label>
       </div>
 
@@ -26,13 +22,13 @@
         @endforeach
     </div>
     @endif
-    <section class="text-gray-700 body-font my-4">
+    <section class="body-font my-4">
         <div class="container mx-auto">
-            <div class="rounded border-gray-700 border-2 bg-gray-200 ">
-                <h3 class="tracking-widest text-lg border-b-4 border-gray-700 p-2 mx-2">{{__('Comments_for_Review')}}</h3>
-                <div style="max-height: 600px; overflow-y:auto">
+            <div class="rounded border-gray-700 border-2 bg-gray-700 text-white">
+                <h3 class="tracking-widest text-3xl border-b-2 border-blue-700 p-2 mx-2 font-bold ">{{__('Comments_for_Review')}}</h3>
+                <div class="px-2 my-4" style="max-height: 600px; overflow-y:auto">
                 <table class="table-auto w-full">
-                    <thead>
+                    <thead class="bg-blue-900 text-white">
                         <tr>
                             <th class="p-2">{{__('Name')}}</th>
                             <th>{{__('Date')}}</th>
@@ -41,9 +37,9 @@
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody class="text-center">
+                    <tbody class="text-center bg-white">
                         @foreach($coms as $com)
-                        <tr>
+                        <tr class="text-black">
                             <td class="p-2 m-2">
                                 <p>{{$com->name}}</p>
                             </td>

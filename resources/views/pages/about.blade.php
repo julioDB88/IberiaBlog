@@ -4,36 +4,42 @@
             {{ __('About') }}
         </h2>
     </x-slot>
-    <div class="p-5 bg-gray-700 m-4">
-        @if (Session::has('success'))
-        <div class="alert-banner w-full fixed top-0 ">
-            <input type="checkbox" class="hidden" id="banneralert">
+    <div class="py-12">
 
-            <label class="close cursor-pointer flex items-center justify-between w-full p-2 bg-red-500 shadow text-white" title="close" for="banneralert">
-                {{ Session::get('success') }}
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8" >
+            <section class="container text-white bg-gray-700 rounded ">
+                <div class="p-5  m-4 ">
+                    @if (Session::has('success'))
+                    <div class="alert-banner w-full ">
+                        <input type="checkbox" class="hidden" id="banneralert">
 
-              <svg class="fill-current text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
-                <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
-              </svg>
-            </label>
-          </div>
+                        <label
+                            class="close cursor-pointer flex items-center justify-between w-full p-2 bg-red-500 shadow text-white"
+                            title="close" for="banneralert">
+                            {{ Session::get('success') }}
+                        </label>
+                    </div>
 
-        @endif
-        @if($errors->any())
-        <div class="bg-red-500 p-3 w-full rounded">
-            @foreach ($errors->all() as $error)
-            <p class=text-white">{{$error}} </p>
-            @endforeach
+                    @endif
+                    @if($errors->any())
+                    <div class="bg-red-500 p-3 w-full rounded">
+                        @foreach ($errors->all() as $error)
+                        <p class=text-white">{{$error}} </p>
+                        @endforeach
+                    </div>
+                    @endif
+                    <h1 class="my-4 py-4 font-bold text-2xl border-b-2 border-blue-700"> {{__('pages.about.edit')}}</h1>
+                    <form action="{{ route('pages.update','about') }}" method="post">
+                        @csrf
+                        @method('PUT')
+
+                        <textarea name="content" id="contents">Hello, World!</textarea>
+                        <input type="submit" class="bg-blue-700 cursor-pointer p-4 rounded m-6 text-white font-bold"
+                            value="{{__('Submit')}}">
+                    </form>
+                </div>
+            </section>
         </div>
-        @endif
-        <h1  class="my-4 py-4 text-white font-bold text-2xl"> {{__('pages.about.edit')}}</h1>
-        <form action="{{ route('pages.update','about') }}" method="post">
-            @csrf
-            @method('PUT')
-
-            <textarea name="content" id="contents">Hello, World!</textarea>
-                <input type="submit" class="bg-indigo-700 p-4 rounded m-6 text-white font-bold" value="{{__('Submit')}}">
-        </form>
     </div>
     @push('js')
     <script defer>

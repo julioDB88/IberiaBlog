@@ -42,8 +42,9 @@ Route::middleware(['web'])->group(function(){
 
 Route::prefix('admin')->middleware(['auth:sanctum', 'verified','isMember'])->group(function () {
    Route::get('/dashboard',[AdminController::class,'index'])->name('dashboard');
-   Route::put('/social/{social}',[AdminController::class,'updateSocialUrl'])->name('social.update')->middleware('isAdmin');;
-   Route::post('/social',[AdminController::class,'storeSocialUrl'])->name('social.store')->middleware('isAdmin');;
+   Route::put('/social/{social}',[AdminController::class,'updateSocialLink'])->name('social.update')->middleware('isAdmin');;
+   Route::post('/social',[AdminController::class,'storeSocialLink'])->name('social.store')->middleware('isAdmin');;
+   Route::delete('/social/{social}',[AdminController::class,'destroySocialLink'])->name('social.destroy')->middleware('isAdmin');;
    Route::resource('categories',CategoryController::class);
    Route::resource('posts',PostController::class);
    // coments
@@ -52,6 +53,7 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'verified','isMember'])->gro
   // invitations
     Route::get('invitations/list',[InvitationController::class,'show'])->name('invitations.list');
     Route::post('invitation',[InvitationController::class,'store'])->name('invitation.store');
+    Route::delete('invitations/{invitation}',[InvitationController::class,'destroy'])->name('invitation.destroy');
 
    Route::get('pages/{page}',[AdminController::class,'editPage'])->name('pages.edit');
    Route::put('pages/{page}',[AdminController::class,'updatePage'])->name('pages.update');

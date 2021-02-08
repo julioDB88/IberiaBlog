@@ -40,30 +40,33 @@
 
                     </div>
                  </div>
-                <div class="tinymce">
+                <div class="py-12">
                     {!! $post->content !!}
                 </div>
             </div>
         </section>
-        <section class="container px-8 pt-2 pb-2 mx-auto lg:px-4">
-            <h1 class="mb-6 text-2xl font-semibold tracking-tighter text-blue-800 sm:text-3xl title-font">
-                {{__('Leave a comment')}}
-              </h1>
-            <form action="{{route('comment.store')}}" method="post" class="grid">
-                @csrf
-                <input type="hidden" name="post_id" value="{{$post->id}}">
-                <div class="flex flex-wrap w-full md:w-1/2">
-                    <input type="text" name="name" class="hidden">
-                    <input type="text" name="name2" class="w-full md:w-1/2" placeholder="name">
-                    <input type="email" name="email" class="hidden">
-                    <input type="email" name="email2" class="w-full md:w-1/2" placeholder="email">
-                </div>
-            <div class=" grid w-full md:w-1/2 ">
-                <textarea type="text" name="text" class="" ></textarea>
-                <button type="submit" class="px-4 py-2 bg-indigo-700 text-white rounded my-4">{{__('Send')}}</button>
+        <section class="p-2 bg-gray-700 w-full my-4 ">
+            <div class="mx-auto">
+                <h1 class="mb-6 text-2xl font-semibold tracking-tighter text-white sm:text-3xl title-font text-center">
+                    {{__('Leave a comment')}}
+                  </h1>
+                    <form action="{{route('comment.store')}}" method="post" class="grid w-1/2 mx-auto">
+                        @csrf
+                        <input type="hidden" name="post_id" value="{{$post->id}}">
+                        <div class="flex flex-wrap w-full">
+                            <input type="text" name="name" class="hidden">
+                            <input type="text" name="name2" class="w-full md:w-1/2" placeholder="name">
+                            <input type="email" name="email" class="hidden">
+                            <input type="email" name="email2" class="w-full md:w-1/2" placeholder="email">
+                        </div>
+                    <div class=" grid w-full">
+                        <textarea type="text" name="text" class="" ></textarea>
+                        <button type="submit" class="px-4 py-2 bg-indigo-700 text-white rounded my-4">{{__('Send')}}</button>
 
+                    </div>
+                    </form>
             </div>
-            </form>
+
         </section>
         <section class="container px-8 pt-2 pb-2 mx-auto lg:px-4">
             @if(count($comments)==0)
@@ -71,10 +74,10 @@
                 {{__('No comments yet')}}
               </h1>
             @else
-            <div class="p-2">
+            <div class="p-2 bg-gray-700 text-white rounded">
                 @foreach($comments as $com)
                     @if ($com->visible)
-                    <div class="border-b-2 w-full md:w-1/2 bg-gray-300 border-indigo-500 p-2">
+                    <div class="border-b-2  border-white p-2">
                         <div class="flex justify-between">
                             <p>{{$com->name}}</p>
                             <p>{{\Carbon\Carbon::parse($com->created_at)->format('d-m-y')}}</p>

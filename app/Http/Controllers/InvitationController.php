@@ -109,5 +109,6 @@ class InvitationController extends Controller
     public function destroy(Invitation $invitation)
     {
         $invitation->delete();   //
+        return redirect()->back()->with('success',trans('invitation.destroyed'));
     }
 }

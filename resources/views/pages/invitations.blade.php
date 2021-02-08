@@ -6,18 +6,25 @@
     </x-slot>
     <div class="p-5 flex flex-wrap">
 
-        <div class="w-full md:w-1/2">
+        <div class="w-full md:w-1/2 bg-gray-700">
             <div class="p-6">
-                <h2 class="mb-3  border-b-2 border-gray-700 text-lg font-bold text-blue-700 lg:text-4xl title-font">
+                <h2 class="mb-3  border-b-2 border-blue-700 text-lg font-bold text-white lg:text-4xl title-font">
                     {{__('Invitations List')}}
                 </h2>
                 @foreach ($invits as $invi)
-                <div class="flex justify-between content-between p-4 border-b2 border-green-600">
+                <div class="flex justify-between content-between p-2 bg-white items-center rounded">
                     <p>{{$invi->email}}</p>
                     <p>{{$invi->password}}</p>
                     <p>{{Carbon\Carbon::parse($invi->created_at)->format('d-m-y')}}</p>
-                    <p><button class="invi-button px-4 py-2 rounded bg-red-500" id="{{$invi->id}}"><i
-                                class="fas fa-trash"></i></button></p>
+                    <p>
+                        <form action="{{route('invitation.destroy',$invi->id)}}" method="post">
+                            @csrf
+                            @method('delete')
+                            <button class="invi-button px-4 py-2 rounded bg-red-500 text-white">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </form>
+                    </p>
                 </div>
                 @endforeach
             </div>

@@ -15,18 +15,18 @@
         @endif
 
 
-        <div class="w-full md:w-1/2 p-4 border-2 bg-gray-600">
+        <div class="w-full md:w-1/2 p-4 border-2 text-white bg-gray-700">
             @if (session('success'))
             <div class="bg-green-500 p-3 my-2 w-full rounded text-white">{{ session('success') }}</div>
             @endif
             @if (session('error'))
             <div class="bg-red-500 p-3 my-2 w-full rounded text-white">{{ session('error') }}</div>
             @endif
-            <h1 class="text-center py-3 my-3 font-bold text-white">{{__('Last Posts') }}</h1>
-            <div style="max-height: 600px; overflow-y:auto">
+            <h1 class="tracking-widest font-bold text-3xl border-b-4 border-blue-700 ">{{__('Last Posts') }}</h1>
+            <div  class="my-3" style="max-height: 600px; overflow-y:auto">
             <table class="border-collapse table-auto w-full whitespace-no-wrap bg-white table-striped relative">
             <thead>
-                <tr class="border-b-2">
+                <tr class="border-b-2 text-black">
                     <th class="py-3"> {{__('Date')}}</th>
                     <th> {{__('Title')}}</th>
                     <th> {{__('Edit')}}</th>
@@ -66,7 +66,7 @@
 
         </div>
         <div class="w-full md:w-1/2 p-4 border-2 bg-gray-700 text-white">
-            <h1 class="text-center py-3 my-3 font-bold">{{__('New Post') }}</h1>
+            <h1 class="tracking-widest font-bold text-3xl border-b-4 border-blue-700 ">{{__('New Post') }}</h1>
             <form action="{{route('posts.store')}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group my-3 flex flex-wrap">

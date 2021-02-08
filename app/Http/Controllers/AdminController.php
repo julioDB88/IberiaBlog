@@ -16,10 +16,7 @@ class AdminController extends Controller
         $cats= Category::all(); ;
         $last_posts= Post::orderBy('id','desc')->take(10)->get();
         $most_commented= Post::withCount('Comments')->orderBy('comments_count','desc')->take(10)->get();
-
-        $comments= Comment::where('visible',0)->get();
-
-        return view('dashboard',compact('cats','last_posts','most_commented','comments'));
+        return view('dashboard',compact('cats','last_posts','most_commented'));
 
     }
 
@@ -30,7 +27,7 @@ class AdminController extends Controller
         return redirect()->back()->with('success','Video updated');
     }
     public function changeLogo(Request $request){
-        $request->validate(['logo'=>'image|mimes:png|required']);
+        $request->validate(['logo'=>'image|mimes:png|required|max:2048']);
         unlink(public_path('media/logo.png'));
         $request->file('logo')->move(public_path('/media'),'logo.png');
         return redirect()->back()->with('success','Logo updated');
@@ -41,7 +38,7 @@ class AdminController extends Controller
         $social= DB::table('social_links')->get();
         $coms='';
         if($page=='comments'){
-          $coms=  Comment::paginate(15);
+          $coms=  Comment::where('visible',0)->paginate(15);
         }
 
         return view("pages.".$page,compact('cats','social','coms'));
@@ -84,18 +81,12 @@ class AdminController extends Controller
         return redirect()->back()->with('success','Actualizado correctamente');
     }
 
-    public function updateSocialUrl(Request $request,$id){
+    public function updateSocialLink(Request $request,$id){
 
         $request->validate([
             'name'=>'required|string|max:15',
             'url'=>'required|url',
-            'icon'=>'nullable|image|mimes:png,jpg,svg'
         ]);
-        if($request->icon){
-
-            $filename=DB::table('social_links')->where('id',$id)->icon;
-            $request->file('icon')->storeAs("public/logos", $filename);
-        }
 
         $active = $request->active ? 1:0;
 
@@ -111,11 +102,11 @@ class AdminController extends Controller
         return redirect()->back()->with('success','updated_succesfully');
 
     }
-    public function storeSocialUrl(Request $request){
+    public function storeSocialLink(Request $request){
         $request->validate([
             'name'=>'required|string|max:15',
             'url'=>'required|string',
-            'icon'=>'required|image|mimes:png,jpg,svg'
+            'icon'=>'required|image|mimes:png,jpg,svg|max:2048'
         ]);
 
         $filename = time() . "." . $request->file('icon')->getClientOriginalExtension();
@@ -127,6 +118,14 @@ class AdminController extends Controller
             'icon'=>$filename,
         ]);
         return redirect()->back()->with('success',trans('created_succesfully'));
+
+    }
+
+    public function destroySocialLink(Request $request,$id){
+        $filename=DB::table('social_links')->where('id',$id)->first()->icon;
+         unlink(storage_path("app/public/logos/".$filename));
+        DB::table('social_links')->where('id',$id)->delete();
+        return redirect()->back()->with('success',trans('removed_succesfully'));
 
     }
 
