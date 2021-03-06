@@ -67,39 +67,9 @@
                     <div class="flex items-center justify-around w-full flex-wrap">
 
                         @foreach ($sections as $section)
-                            @if ($section->name=='videos')
-                            <form action="{{route('activate.video')}}" method="post" class="text-black m-2 p-2">
-                                @csrf @method('PUT')
 
-                                <label for="video" class="text-white"> <input type="checkbox" class="rounded" name="video"
-                                        id="video" @if($section->active) checked @endif> Videos </label>
-                                <input type="submit" value="@lang('main.Save')"
-                                    class=" rounded px-2 py-1 bg-blue-700 text-white cursor-pointer">
 
-                            </form>
-                            @elseif($section->name=='shop')
-                            <form action="{{route('activate.shop')}}" method="post" class="text-black m-2 p-2">
-                                @csrf @method('PUT')
-
-                                <label for="shop" class="text-white"> <input type="checkbox" class="rounded" name="shop"
-                                        id="shop" @if($section->active) checked @endif> Shop </label>
-                                <input type="url" name="url" id="" placeholder="url" class="rounded ml-2"
-                                    value="{{$section->content}}">
-                                <input type="submit" value="@lang('main.Save')"
-                                    class="rounded px-2 py-1 bg-blue-700 text-white cursor-pointer">
-                            </form>
-                            @elseif($section->name=='about')
-                            <form action="{{route('activate.about')}}" method="post" class="text-black m-2 p-2">
-                                @csrf @method('PUT')
-
-                                <label for="about" class="text-white"> <input type="checkbox" class="rounded" name="about"
-                                        id="about" @if($section->active)checked @endif> @lang('main.About') </label>
-                                <input type="submit" value="@lang('main.Save')"
-                                    class=" rounded px-2 py-1 bg-blue-700 text-white cursor-pointer">
-
-                            </form>
-
-                            @endif
+                        @livewire('activate-section', ['section' => $section], key($section->id))
 
                         @endforeach
 

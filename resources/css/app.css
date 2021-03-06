@@ -14,6 +14,13 @@
     font-family: 'Montserrat', sans-serif;
 }
 
+.btn{
+    padding: .5rem 1.25rem;
+    border-radius: 8px;
+}
+.btn-offset{
+
+}
 .c-shadow{
     box-shadow: 0 4px 8px 2px;
 }

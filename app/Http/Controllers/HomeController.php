@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Mail;
 class HomeController extends Controller
 {
     protected $admin_email;
+    protected $video_page;
+
 
     /**
      * take the email for contact purposes
@@ -24,7 +26,7 @@ class HomeController extends Controller
     public function __construct()
     {
         $email = DB::table('pages_content')->where('name', 'contact')->first()->content;
-        $video_page= DB::table('pages_content')->where('name', 'videos')->first()->active;
+        $this->video_page= DB::table('pages_content')->where('name', 'videos')->first()->active;
 
         $this->admin_email = $email === 'null' ? config('app.email') : $email;
     }
@@ -73,8 +75,11 @@ class HomeController extends Controller
      */
     public function showPage($page)
     {
-        if($page=== 'videos' and !$this->video_page){
-            abort(404);
+        if($page=== 'videos'){
+            if(!$this->video_page) abort(404);
+
+            $vids = DB::table('videos')->paginate(15);
+            return view('guest.pages.videos',compact('vids'));
         }
 
         $content = DB::table('pages_content')->where('name', $page)->first();

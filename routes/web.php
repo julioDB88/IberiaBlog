@@ -54,6 +54,7 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'verified','isMember'])->gro
 
 
 
+
     Route::get('pages/{page}',[AdminController::class,'editPage'])->name('pages.edit');
     Route::put('pages/{page}',[AdminController::class,'updatePage'])->name('pages.update');
     Route::put('author',[AdminController::class,'updateAuthor'])->name('author.update');
@@ -69,9 +70,6 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'verified','isMember'])->gro
 
     //settings
     Route::get('settings',[SettingsController::class,'index'])->name('settings');
-    Route::put('settings/activate-videos',[SettingsController::class,'activeVideo'])->name('activate.video');
-    Route::put('settings/activate-about',[SettingsController::class,'activeAbout'])->name('activate.about');
-    Route::put('settings/activate-shop',[SettingsController::class,'activeShop'])->name('activate.shop');
     Route::put('settings/video',[SettingsController::class,'changeBgVideo'])->name('changeVideo')->middleware('isAdmin');
     Route::put('settings/logo',[SettingsController::class,'changeLogo'])->name('changeLogo')->middleware('isAdmin');
 

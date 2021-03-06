@@ -1,21 +1,5 @@
 {
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
-    "/js/tinymce/tinymce.min.js": "/js/tinymce/tinymce.min.js",
-    "/css/fontawesome/all.css": "/css/fontawesome/all.css",
-    "/css/webfonts/fa-brands-400.eot": "/css/webfonts/fa-brands-400.eot",
-    "/css/webfonts/fa-brands-400.svg": "/css/webfonts/fa-brands-400.svg",
-    "/css/webfonts/fa-brands-400.ttf": "/css/webfonts/fa-brands-400.ttf",
-    "/css/webfonts/fa-brands-400.woff": "/css/webfonts/fa-brands-400.woff",
-    "/css/webfonts/fa-brands-400.woff2": "/css/webfonts/fa-brands-400.woff2",
-    "/css/webfonts/fa-regular-400.eot": "/css/webfonts/fa-regular-400.eot",
-    "/css/webfonts/fa-regular-400.svg": "/css/webfonts/fa-regular-400.svg",
-    "/css/webfonts/fa-regular-400.ttf": "/css/webfonts/fa-regular-400.ttf",
-    "/css/webfonts/fa-regular-400.woff": "/css/webfonts/fa-regular-400.woff",
-    "/css/webfonts/fa-regular-400.woff2": "/css/webfonts/fa-regular-400.woff2",
-    "/css/webfonts/fa-solid-900.eot": "/css/webfonts/fa-solid-900.eot",
-    "/css/webfonts/fa-solid-900.svg": "/css/webfonts/fa-solid-900.svg",
-    "/css/webfonts/fa-solid-900.ttf": "/css/webfonts/fa-solid-900.ttf",
-    "/css/webfonts/fa-solid-900.woff": "/css/webfonts/fa-solid-900.woff",
-    "/css/webfonts/fa-solid-900.woff2": "/css/webfonts/fa-solid-900.woff2"
+    "/js/tinymce/tinymce.min.js": "/js/tinymce/tinymce.min.js"
 }

@@ -73,13 +73,13 @@
                     @lang('main.Contact')
                 </x-jet-nav-link>
 
-                @auth
+                @admin
 
                 <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                     @lang('main.Dashboard')
                 </x-jet-nav-link>
 
-                @endauth
+                @endadmin
 
             </div>
 
@@ -140,6 +140,11 @@
             <x-jet-responsive-nav-link href="{{ route('contact')  }}" :active="request()->routeIs('contact')">
                 @lang('main.Contact')
             </x-jet-responsive-nav-link>
+            @admin
+            <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('contact')">
+                @lang('main.Dashboard')
+            </x-jet-responsive-nav-link>
+            @endadmin
         </div>
 
 

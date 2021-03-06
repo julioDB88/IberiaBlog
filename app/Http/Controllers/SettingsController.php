@@ -76,45 +76,14 @@ class SettingsController extends Controller
         return redirect()->back()->with('success',trans('created_succesfully'));
 
     }
-    public function activeVideo(Request $request){
 
-        if($request->video){
-            DB::table('pages_content')->where('name','videos')->update(['active'=>1]);
-        }else{
-            DB::table('pages_content')->where('name','videos')->update(['active'=>0]);
-        }
-        return redirect()->back()->with('success',trans('updated_succesfully'));
-    }
-    public function activeShop(Request $request){
 
-        if($request->shop){
-            DB::table('pages_content')->where('name','shop')->update(['active'=>1]);
-        }else {
-            DB::table('pages_content')->where('name','shop')->update(['active'=>0]);
+        public function destroySocialLink(Request $request,$id){
+            $filename=DB::table('social_links')->where('id',$id)->first()->icon;
+            unlink(storage_path("app/public/logos/".$filename));
+            DB::table('social_links')->where('id',$id)->delete();
+            return redirect()->back()->with('success',trans('removed_succesfully'));
 
         }
-        if($request->url){
-            DB::table('pages_content')->where('name','shop')->update(['content'=>$request->url]);
-        }
-        return redirect()->back()->with('success',trans('updated_succesfully'));
-
-    }
-    public function activeAbout(Request $request){
-
-        if($request->about){
-            DB::table('pages_content')->where('name','about')->update(['active'=>1]);
-        }else{
-            DB::table('pages_content')->where('name','about')->update(['active'=>0]);
-        }
-        return redirect()->back()->with('success',trans('updated_succesfully'));
-    }
-
-    public function destroySocialLink(Request $request,$id){
-        $filename=DB::table('social_links')->where('id',$id)->first()->icon;
-         unlink(storage_path("app/public/logos/".$filename));
-        DB::table('social_links')->where('id',$id)->delete();
-        return redirect()->back()->with('success',trans('removed_succesfully'));
-
-    }
 
 }
