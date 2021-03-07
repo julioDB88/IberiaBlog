@@ -23,7 +23,7 @@
 
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
-        <script src="{{ asset('js/tinymce/tinymce.min.js') }}" defer></script>
+        <script src="{{ asset('js/tinymce/tinymce.min.js') }}" ></script>
 
 
 

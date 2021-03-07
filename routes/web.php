@@ -34,7 +34,7 @@ Route::middleware(['web'])->group(function(){
     Route::post('contact',[HomeController::class,'contactMe'])->name('contact.post');
 
     //coment store
-    //Route::post('comments',[HomeController::class,'storeComment'])->name('comment.store');
+    Route::post('comments',[CommentController::class,'storeComment'])->name('comment.store');
 
 
     //invitations
@@ -53,7 +53,7 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'verified','isMember'])->gro
    Route::resource('posts',PostController::class);
 
 
-    Route::resource('comments', CommentController::class);
+    Route::resource('comments', CommentController::class)->except('store');
 
     Route::get('pages/{page}',[AdminController::class,'editPage'])->name('pages.edit');
     Route::put('pages/{page}',[AdminController::class,'updatePage'])->name('pages.update');

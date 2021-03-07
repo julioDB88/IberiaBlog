@@ -15,7 +15,7 @@ class CommentController extends Controller
     public function index(Request $request)
     {
 
-        if($request->ajax()){
+        if ($request->ajax()) {
 
             return datatables()->of(Comment::with('Post')->get())->make(true);
         }
@@ -26,7 +26,18 @@ class CommentController extends Controller
         return view('pages.comments');
     }
 
+    public function switchVisible(Request $request)
+    {
+        if($request->ajax()){
+            $comment=Comment::where('id',$request->comment)->first();
+            $switch = $comment->visible===1 ? 0:1;
+            $comment->visible=$switch;
+            $comment->save();
 
+
+        }
+        return response()->json('ok',200);
+    }
 
 
     /**
