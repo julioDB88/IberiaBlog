@@ -12,6 +12,7 @@ class ActivateRrss extends Component
     public $social_id;
     public $icon;
     public $url;
+    public $show=true;
 
     public function mount($social)
     {
@@ -21,10 +22,12 @@ class ActivateRrss extends Component
         $this->active = $social->active ==1? 1:0;
         $this->social_id = $social->id;
         $this->icon = $social->icon;
+
     }
     public function delete(){
-        unlink(storage_path("app/public/logos/".$this->social->icon));
+        unlink(storage_path("app/public/logos/".$this->icon));
         DB::table('social_links')->where('id',$this->social_id)->delete();
+        $this->show= false;
 
     }
 
