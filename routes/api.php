@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\PostController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
@@ -18,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::put('/comment/switch-visible',[CommentController::class,'switchVisible']);
+Route::delete('/posts/delete/{post}',[PostController::class,'destroy']);
 // Route::middleware('auth:sanctum')->group( function () {
 //     Route::get('/videos-active/{bool}',function(Request $request,$bool){
 //         if($bool){

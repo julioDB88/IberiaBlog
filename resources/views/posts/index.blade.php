@@ -24,7 +24,7 @@
             @endif
             <h1 class="tracking-widest font-bold text-3xl border-b-4 border-blue-700 ">@lang('main.Last Posts') </h1>
             <div  class="my-3" style="max-height: 600px; overflow-y:auto">
-            <table class="border-collapse table-auto w-full whitespace-no-wrap bg-white table-striped relative">
+            <table id="datatable" class="border-collapse table-auto w-full whitespace-no-wrap bg-white table-striped relative">
             <thead>
                 <tr class="border-b-2 text-black">
                     <th class="py-3"> @lang('main.Date')</th>
@@ -36,30 +36,9 @@
             </thead>
 
             <tbody class="bg-gray-300 text-gray-700">
-                @foreach ($posts as $post)
-                    <tr >
-                        <td class="text-center">{{\Carbon\Carbon::parse($post->created_at)->format('d-m-y')}}</td>
-                        <td class="text-center">{{$post->title}}</td>
-                        @if ($post->author_id===auth()->user()->id)
-                        <td class="p-4 text-center" ><a href="{{route('posts.edit',$post)}}" class="bg-yellow-500 rounded text-white px-4 py-2" ><i class="fas fa-edit"></i></a></td>
 
-                        @else
-                        <td class="p-4 text-center" ><p class="bg-red-500 rounded text-white px-4 py-2" ><i class="fas fa-cross"></i></p></td>
-
-                        @endif
-                        <td class="p-4 text-center" >
-                            <form action="{{route('posts.destroy',$post->id)}}" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <button  class="rounded bg-red-500 px-4 py-2"><i class="fa fa-trash text-white"></i></button>
-                            </form> </td>
-                        <td class="text-center"> {{$post->Comments->count()}} <i class="far fa-comment-alt"></i></td>
-                    </tr>
-                @endforeach
             </tbody>
-            <div class="text-gray-600 bg-white">
-                {{$posts->links()}}
-            </div>
+
 
         </table>
     </div>
@@ -122,6 +101,61 @@
 
 
     @push('js')
+
+    <script>
+        $(function() {
+
+
+
+            $('#datatable').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: '{{route('posts.index')}}',
+                columns: [
+
+                    { data: 'created_at', name: 'created_at',render:function(d,t,r,m){
+                        return new Date(d).toLocaleDateString()
+                    } },
+                    { data: 'title', name: 'title' },
+                    { data: 'id', name: 'id',render:function(d,t,r,m){
+                       return "<a href='/admin/posts/"+d+"/edit' class='bg-yellow-500 rounded text-white px-4 py-2'><i class='fas fa-edit'></i></a>"
+                    } },
+
+                    { data: 'id', name: 'id',render:function(d,t,r,m){
+                       return "<button class='bg-red-500 rounded text-white px-4 py-2 deleter' data-id='"+d+"'><i class='fas fa-trash'></i></button>"
+                    } },
+                    { data: 'comments_count', name: 'comments_count',render:function(d,t,r,m){
+
+                        return  '<i class="far fa-comment-alt"></i>  ' +d;
+
+
+                    } },
+
+                ],
+                initComplete: function () {
+                    $('.deleter').on('click',function(){
+                    $.ajax({
+                    type: "DELETE",
+                    url: "/api/posts/delete/"+$(this).attr('data-id'),
+
+                    success: function (response) {
+                    console.log(response)
+                    }
+                });
+
+            })
+
+                }
+            });
+
+
+
+
+        });
+
+
+    </script>
+
     <script defer>
         tinymce.init({
     selector:'#contents',

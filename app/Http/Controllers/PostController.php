@@ -14,11 +14,15 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::where('author_id', auth()->user()->id)->paginate(6);
+        if ($request->ajax()) {
+            $posts = Post::withCount('Comments')->get();
+            return datatables()->of($posts)->make(true);
+        }
+
         $cats = DB::table('categories')->get();
-        return view('posts.index', compact('posts', 'cats'));
+        return view('posts.index', compact( 'cats'));
     }
 
     /**
@@ -152,7 +156,7 @@ class PostController extends Controller
         }
 
         $post->delete();
-        return redirect()->back()->with('success', trans('removed_success'));
+        return response()->json(['success', trans('removed_success')]);
     }
 
     public static function generateTinyUrl()
