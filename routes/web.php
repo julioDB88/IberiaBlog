@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InvitationController;
 use App\Http\Controllers\PostController;
@@ -33,7 +34,7 @@ Route::middleware(['web'])->group(function(){
     Route::post('contact',[HomeController::class,'contactMe'])->name('contact.post');
 
     //coment store
-    Route::post('comments',[HomeController::class,'storeComment'])->name('comment.store');
+    //Route::post('comments',[HomeController::class,'storeComment'])->name('comment.store');
 
 
     //invitations
@@ -46,14 +47,13 @@ Route::middleware(['web'])->group(function(){
 
 Route::prefix('admin')->middleware(['auth:sanctum', 'verified','isMember'])->group(function () {
    Route::get('/dashboard',[AdminController::class,'index'])->name('dashboard');
-   Route::put('/social/{social}',[AdminController::class,'updateSocialLink'])->name('social.update')->middleware('isAdmin');;
-   Route::post('/social',[AdminController::class,'storeSocialLink'])->name('social.store')->middleware('isAdmin');;
+
    Route::delete('/social/{social}',[AdminController::class,'destroySocialLink'])->name('social.destroy')->middleware('isAdmin');;
    Route::resource('categories',CategoryController::class);
    Route::resource('posts',PostController::class);
 
 
-
+    Route::resource('comments', CommentController::class);
 
     Route::get('pages/{page}',[AdminController::class,'editPage'])->name('pages.edit');
     Route::put('pages/{page}',[AdminController::class,'updatePage'])->name('pages.update');
@@ -69,6 +69,8 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'verified','isMember'])->gro
      Route::delete('invitations/{invitation}',[InvitationController::class,'destroy'])->name('invitation.destroy');
 
     //settings
+    Route::put('/social/{social}',[SettingsController::class,'updateSocialLink'])->name('social.update')->middleware('isAdmin');;
+    Route::post('/social',[SettingsController::class,'storeSocialLink'])->name('social.store')->middleware('isAdmin');;
     Route::get('settings',[SettingsController::class,'index'])->name('settings');
     Route::put('settings/video',[SettingsController::class,'changeBgVideo'])->name('changeVideo')->middleware('isAdmin');
     Route::put('settings/logo',[SettingsController::class,'changeLogo'])->name('changeLogo')->middleware('isAdmin');

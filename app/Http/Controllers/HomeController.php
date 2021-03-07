@@ -151,7 +151,7 @@ class HomeController extends Controller
         $request->validate([
             'name2' => 'required|string|max:25',
             'email2' => 'required|email',
-            'text' => 'required|max:300|string'
+            'text' => 'required|string'
         ]);
             //honey pots for spammers
         if ($request->name || $request->email) {

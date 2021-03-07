@@ -4,12 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
-use App\Models\Comment;
-use App\Models\Post;
-use App\Models\User;
-
-use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class SettingsController extends Controller
 {
@@ -58,6 +55,7 @@ class SettingsController extends Controller
         return redirect()->back()->with('success','updated_succesfully');
 
     }
+
     public function storeSocialLink(Request $request){
         $request->validate([
             'name'=>'required|string|max:15',
@@ -66,6 +64,7 @@ class SettingsController extends Controller
         ]);
 
         $filename = time() . "." . $request->file('icon')->getClientOriginalExtension();
+
         $request->file('icon')->storeAs("public/logos", $filename);
 
         DB::table('social_links')->insert([

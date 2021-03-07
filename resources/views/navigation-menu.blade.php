@@ -30,7 +30,7 @@
                     <x-jet-nav-link href="{{ route('posts.index') }}" :active="request()->routeIs('posts')">
                         @lang('main.Posts')
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('pages.edit','comments') }}" >
+                    <x-jet-nav-link href="{{ route('comments.index') }}" >
                         @lang('main.Comments')
                     </x-jet-nav-link>
                     @admin

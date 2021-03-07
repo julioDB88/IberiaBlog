@@ -58,22 +58,33 @@
             <section class=" ">
                 @admin
 
-                <div class="flex flex-wrap my-2 bg-gray-700 text-white">
-                    <div class="p-3 w-full  ">
+                <div class="flex flex-wrap my-2 bg-gray-700 text-white w-full">
+                    <div class="p-3 w-1/2  ">
                         <h3 class="tracking-widest text-2xl border-b-4 border-blue-700 p-2 font-semibold">
                             @lang('main.Activate_sections')</h3>
+                            <div class="flex flex-col p-4">
+
+                                @foreach ($sections as $section)
+
+                                @livewire('activate-section', ['section' => $section], key($section->id))
+
+                                @endforeach
+
+
+                            </div>
                     </div>
 
-                    <div class="flex items-center justify-around w-full flex-wrap">
 
-                        @foreach ($sections as $section)
+                    <div class="p-3 w-1/2">
+                        <h3 class="tracking-widest text-2xl border-b-4 border-blue-700 p-2 font-semibold">
+                            @lang('main.All_social')</h3>
+                            <div class="p-2 flex flex-col">
+                        @foreach ($social as $social)
 
-
-                        @livewire('activate-section', ['section' => $section], key($section->id))
+                          @livewire('activate-rrss', ['social' => $social],   key($social->id))
 
                         @endforeach
-
-
+                            </div>
                     </div>
 
 
@@ -84,8 +95,8 @@
             <section class="container bg-gray-700 text-white">
                 <div class="rounded border-blue-500 ">
                     <div class="flex flex-wrap border-2 border-indigo-700 rounded">
-                        <div class="lg:w-2/4 p-2 w-full p-6 ">
-                            <h3 class="tracking-widest font-bold text-3xl border-b-4 border-blue-700 ">
+                        <div class="lg:w-2/4 p-2 w-full">
+                            <h3 class="tracking-widest text-2xl border-b-4 border-blue-700 p-2 font-semibold ">
                                 @lang('main.Post Categories')</h3>
                             <form action="{{route('categories.store')}}" method="post" class="py-4 flex">
                                 @csrf
@@ -117,7 +128,6 @@
                                                 <button type="submit"
                                                     class="border border-indigo-700 border-4 px-4 py-1 rounded hover:bg-indigo-700 hover:text-white"><i
                                                         class="fas fa-trash "></i></button>
-
                                             </form>
                                             @endif
                                         </td>
@@ -127,8 +137,8 @@
                             </table>
                         </div>
                         @admin
-                        <div class="lg:w-2/4 p-2 w-full p-6  ">
-                            <h3 class="tracking-widest font-bold text-3xl border-b-4 border-blue-700 ">
+                        <div class="lg:w-2/4 p-2 w-full">
+                            <h3 class="tracking-widest text-2xl border-b-4 border-blue-700 p-2 font-semibold ">
                                 @lang("main.Social_Urls")</h3>
                             <h3 class="text-xl font-semibold border-b-2  p-2 my-2 text-center">
                                 @lang("main.New_social")</h3>
@@ -157,48 +167,8 @@
                                     @lang('main.Add')
                                 </button>
                             </form>
-                            <h3 class="text-xl font-semibold border-b-2  p-2 my-2 text-center">
-                                @lang('main.All_social')</h3>
 
-                            @foreach ($social as $item)
-
-                            <div class="p-2 flex flex-wrap items-center">
-
-                                <form action="{{route('social.update',$item->id)}}" method="post"
-                                    class="flex flex-wrap w-full md:w-5/6" enctype="multipart/form-data">
-                                    @csrf
-                                    @method('PUT')
-
-                                    <input type="text" name="name"
-                                        class="text-black rounded focus:ring-green-300 w-full md:w-1/4"
-                                        value="{{$item->name}}">
-                                    <input type="text" name="url"
-                                        class="rounded  text-black focus:ring-green-300 w-full md:w-1/4"
-                                        value="{{$item->url}}">
-                                    <div class="w-full md:w-2/4 flex justify-around">
-                                        <label for="" class="flex items-center p-2 ">
-                                            <input type="checkbox" name="active" @if($item->active) checked @endif
-                                            class="mr-2">Visible
-                                        </label>
-
-                                        <button type="submit"
-                                            class=" border border-indigo-700  px-2 py-1   rounded hover:bg-indigo-700 hover:text-white">@lang('main.Save')</button>
-
-                                    </div>
-
-                                </form>
-                                <form action="{{route('social.destroy',$item->id)}}" method="post"
-                                    class="text-center w-full md:w-1/6">
-                                    @csrf
-                                    @method('delete')
-                                    <button type="submit" class="w-full md:w-min my-2 md:m-0"><i
-                                            class="fas fa-trash  border border-red-500 rounded px-4 py-2 w-full"></i></button>
-                                </form>
-
-                            </div>
-
-                            @endforeach
-
+                        </div>
 
                         </div>
                         @endadmin
