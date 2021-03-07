@@ -92,9 +92,9 @@
                 </div>
                 @endadmin
             </section>
-            <section class="container bg-gray-700 text-white">
-                <div class="rounded border-blue-500 ">
-                    <div class="flex flex-wrap border-2 border-indigo-700 rounded">
+            <section class="bg-gray-700 text-white">
+                <div class="rounded ">
+                    <div class="flex flex-wrap rounded">
                         <div class="lg:w-2/4 p-2 w-full">
                             <h3 class="tracking-widest text-2xl border-b-4 border-blue-700 p-2 font-semibold ">
                                 @lang('main.Post Categories')</h3>
