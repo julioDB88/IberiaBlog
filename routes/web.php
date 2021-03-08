@@ -34,7 +34,7 @@ Route::middleware(['web'])->group(function(){
     Route::post('contact',[HomeController::class,'contactMe'])->name('contact.post');
 
     //coment store
-    Route::post('comments',[CommentController::class,'storeComment'])->name('comment.store');
+    Route::post('comments',[CommentController::class,'store'])->name('comment.store');
 
 
     //invitations

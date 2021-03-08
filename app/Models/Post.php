@@ -15,7 +15,7 @@ class Post extends Model
     'category_id',
     'author_id',
     'description',
-    'image_file'];
+    'img_file'];
 
     public function Category(){
         return $this->belongsTo('App\Models\Category');

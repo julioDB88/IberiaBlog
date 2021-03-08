@@ -54,8 +54,8 @@ class HomeController extends Controller
             return abort(404);
         }
         $category = $cat->name;
-        $posts = Post::where('category_id', $cat->id)->orderBy('id', 'desc')->get();
-        return view('guest.pages.newscategory', compact('posts', 'category'));
+        $posts = Post::where('category_id', $cat->id)->orderBy('id', 'desc')->paginate(9);
+        return view('guest.newscategory', compact('posts', 'category'));
     }
     /**
      * show the specified post

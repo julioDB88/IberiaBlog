@@ -58,7 +58,27 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+
+        $request->validate([
+            'name2' => 'required|string|max:25',
+            'email2' => 'required|email',
+            'text' => 'required|string'
+        ]);
+            //honey pots for spammers
+        if ($request->name || $request->email) {
+            return redirect()->back()->with('success', trans('Your comment will be reviewed soonly and published if commplies with our policies'));
+        }
+        $com = new Comment();
+        $com->name = $request->name2;
+        $com->email = $request->email2;
+        $com->post_id = $request->post_id;
+        $com->comment = $request->text;
+        $com->visible = 0;
+        $com->save();
+
+        return redirect()->back()->with('success', trans('Your comment will be reviewed soonly and published if commplies with our policies'));
+
     }
 
     /**

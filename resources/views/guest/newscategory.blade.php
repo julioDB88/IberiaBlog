@@ -4,16 +4,16 @@
 
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
-<h1 class="text-lg md:text-3xl text-indigo-700 text-center font-bold tracker">{{$category}}</h1>
+<h1 class="text-lg md:text-3xl text-indigo-700 text-center font-bold tracker">{{ucfirst($category)}}</h1>
             <section class="text-gray-700 body-font">
                 <div class="container px-8 pt-2 mx-auto lg:px-10">
                     <div class="flex flex-wrap ">
                         @foreach($posts as $post)
                         <div class="px-2 py-2 lg:w-1/3 md:w-full">
                             <div class="border rounded-xl">
-                                <img class="object-cover object-center w-full h-64 rounded-t-xl"
+                                <img class="object-cover object-center w-full h-36 rounded-t-xl"
                                     src="{{asset('storage/posts')}}/{{$post->img_file}}" alt="content">
-                                <div class="p-6 ">
+                                <div class="p-4 ">
 
                                     <h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font">
                                         {{$post->title}}
@@ -26,6 +26,7 @@
                         </div>
                         @endforeach
                     </div>
+                    {{$posts->links()}}
                 </div>
             </section>
 
