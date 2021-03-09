@@ -65,7 +65,9 @@ class HomeController extends Controller
         $post = Post::where('slug', $slug)->first();
         if ($post) {
             $comments = $post->Comments;
-            return view('guest.showpost', compact('post', 'comments'));
+            $related = Post::whereMonth('created_at', Carbon::now()->month)->take(6)->inRandomOrder()->get();
+
+            return view('guest.showpost', compact('post', 'comments','related'));
         }
         abort(404);
     }
@@ -145,26 +147,5 @@ class HomeController extends Controller
 
     //stores the user comment
 
-    public function storeComment(Request $request)
-    {
 
-        $request->validate([
-            'name2' => 'required|string|max:25',
-            'email2' => 'required|email',
-            'text' => 'required|string'
-        ]);
-            //honey pots for spammers
-        if ($request->name || $request->email) {
-            return redirect()->back()->with('success', trans('Your comment will be reviewed soonly and published if commplies with our policies'));
-        }
-        $com = new Comment();
-        $com->name = $request->name2;
-        $com->email = $request->email2;
-        $com->post_id = $request->post_id;
-        $com->comment = $request->text;
-        $com->visible = 0;
-        $com->save();
-
-        return redirect()->back()->with('success', trans('Your comment will be reviewed soonly and published if commplies with our policies'));
-    }
 }

@@ -20,67 +20,9 @@
                     <div class="rounded bg-gray-700 text-white ">
                         <h3 class="tracking-widest text-2xl border-b-4 border-blue-700 mx-2 p-2 font-bold">@lang('main.Posts')</h3>
                         <div class="flex flex-wrap">
-                            <div class="lg:w-2/4 p-2 w-full">
-                                <div class="h-full p-2 ">
 
-                                    <p class="mb-4 text-base leading-relaxed my-4 font-xl font-semibold">@lang('main.Top_10_comented')</p>
-                                    <div style="max-height: 600px; overflow-y:auto">
-                                        <table class="bg-white rounded table-auto w-full border border-gray-700">
-                                            <thead class="w-full text-gray-700">
-                                                <tr>
-                                                    <th class="py-2">@lang('main.Date')</th>
-                                                    <th class="py-2">@lang('main.Title')</th>
-                                                    <th class="py-2">@lang('main.Author')</th>
-                                                    <th class="py-2">@lang('main.Comments')</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody class="bg-gray-300 w-full text-gray-700 text-center">
-                                                @foreach ($most_commented as $most)
-                                                <tr>
-                                                    <td class="p-3 m-3">
-                                                        {{\Carbon\Carbon::parse($most->created_at)->format('d/m/y')}}
-                                                    </td>
-                                                    <td class="p-3 m-3">{{$most->title}}</td>
-                                                    <td class="p-3 m-3">{{$most->Author->name}}</td>
-                                                    <td class="p-3 m-3">{{$most->Comments->count()}}</td>
-                                                </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
 
-                                </div>
-                            </div>
 
-                            <div class="lg:w-2/4 p-2 w-full">
-                                <div class="h-full p-2 ">
-                                    <p class="mb-4 text-base leading-relaxed my-4">@lang('main.Last_10_posts')</p>
-                                    <div style="max-height: 600px; overflow-y:auto">
-                                        <table class="bg-white rounded table-auto w-full border border-gray-700">
-                                            <thead class="w-full text-gray-700">
-                                                <tr>
-                                                    <th class="py-2">@lang('main.Date')</th>
-                                                    <th class="py-2">@lang('main.Title')</th>
-                                                    <th class="py-2">@lang('main.Author')</th>
-                                                    <th class="py-2">@lang('main.Comments')</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody class="bg-gray-300 w-full text-gray-700 text-center">
-                                                @foreach ($last_posts as $post)
-                                                <tr>
-                                                    <td class="p-3 m-3">
-                                                        {{\Carbon\Carbon::parse($post->created_at)->format('d/m/y')}}
-                                                    </td>
-                                                    <td class="p-3 m-3">{{$post->title}}</td>
-                                                    <td class="p-3 m-3">{{$post->Author->name}}</td>
-                                                    <td class="p-3 m-3">{{$post->Comments->count()}}</td>
-                                                </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
 
                     </div>

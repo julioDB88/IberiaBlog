@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -21,8 +22,9 @@ class PostController extends Controller
             return datatables()->of($posts)->make(true);
         }
 
-        $cats = DB::table('categories')->get();
-        return view('posts.index', compact( 'cats'));
+        $most_commented= Post::withCount('Comments')->orderBy('comments_count','desc')->take(10)->get();
+
+        return view('posts.index',compact('most_commented'));
     }
 
     /**
@@ -32,7 +34,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        $cats = DB::table('categories')->get();
+        return view('posts.create',compact( 'cats'));
     }
 
     /**

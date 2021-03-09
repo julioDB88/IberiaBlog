@@ -3,7 +3,7 @@
 
 
     <section class="text-gray-700 body-font">
-        <h1 class="text-center text-xl">@lang('main.About')</h1>
+
             <div class="container px-8 mx-auto pt-12 lg:px-4">
                 <div class="flex flex-col w-full mb-12 text-left">
                     <div
@@ -13,8 +13,9 @@
                     <h1 class="mb-6 text-2xl font-semibold tracking-tighter text-gray-800 sm:text-6xl title-font fzial text-center">
                         {{config('app.name')}}
                         <br class="">
+                        <h1 class="text-center text-xl">@lang('main.About')</h1>
                     </h1>
-                    <div class="mx-auto text-base font-medium leading-relaxed text-gray-700 ">
+                    <div class="mx-auto my-8 p-4 text-base font-medium leading-relaxed text-gray-700 ">
                    @if($content)
                    {!! $content->content !!}
 

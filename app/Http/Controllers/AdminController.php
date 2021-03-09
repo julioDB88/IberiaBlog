@@ -13,10 +13,8 @@ use Illuminate\Support\Facades\DB;
 class AdminController extends Controller
 {
     public function index(){
-        $cats= Category::all(); ;
-        $last_posts= Post::orderBy('id','desc')->take(10)->get();
-        $most_commented= Post::withCount('Comments')->orderBy('comments_count','desc')->take(10)->get();
-        return view('dashboard',compact('cats','last_posts','most_commented'));
+
+        return view('dashboard');
 
     }
 
