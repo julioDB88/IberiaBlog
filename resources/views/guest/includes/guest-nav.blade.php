@@ -47,9 +47,11 @@
 
                     </x-slot>
                 </x-jet-dropdown>
+
                 @php $active_about = DB::table('pages_content')->where('name','about')->first()->active @endphp
                 @php $active_videos = DB::table('pages_content')->where('name','videos')->first()->active @endphp
                 @php $shop = DB::table('pages_content')->where('name','shop')->first() @endphp
+
 
                 @if($active_about)
                 <x-jet-nav-link href="{{ route('page.show','about')  }}" :active="request()->routeIs('dashboard')">

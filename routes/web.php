@@ -62,7 +62,7 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'verified', 'isMember'])->gr
 
 
 
-    Route::middleware('isAdmin', function () {
+    Route::middleware('isAdmin')->group( function () {
 
         //settings
         Route::delete('/social/{social}', [AdminController::class, 'destroySocialLink'])->name('social.destroy');

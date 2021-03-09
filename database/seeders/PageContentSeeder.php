@@ -15,10 +15,10 @@ class PageContentSeeder extends Seeder
     public function run()
     {
      $content=[
-         ['page'=>'Conócenos','content'=>'null'],
-         ['page'=>'Contact','content'=>'null'],
-         ['page'=>'Shop','content'=>'null'],
-         ['page'=>'Videos','content'=>'null'],
+         ['name'=>'about','content'=>'null'],
+         ['name'=>'Contact','content'=>'null'],
+         ['name'=>'Shop','content'=>'null'],
+         ['name'=>'Videos','content'=>'null'],
      ];
         DB::table('pages_content')->insert($content); //
     }
