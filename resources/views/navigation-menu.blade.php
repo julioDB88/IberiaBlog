@@ -37,10 +37,11 @@
                     <x-jet-nav-link href="{{ route('pages.edit','about') }}" >
                         @lang('main.About')
                     </x-jet-nav-link>
-                    @endadmin
+
                     <x-jet-nav-link href="{{ route('settings') }}" >
                         @lang('main.Settings')
                     </x-jet-nav-link>
+                    @endadmin
                 </div>
             </div>
 
@@ -126,14 +127,14 @@
 
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
+        <div class="pt-2 space-y-1">
             <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 @lang('main.Dashboard')
             </x-jet-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
-        <div class="pt-4 pb-1 border-t border-gray-200">
+        <div class="pt-1 pb-1 border-t border-gray-200">
 
             <div class="mt-3 space-y-1">
                 <!-- Account Management -->
@@ -141,7 +142,7 @@
                     @lang('main.Profile')
                 </x-jet-responsive-nav-link>
                 @admin
-                <x-jet-responsive-nav-link href="{{ route('invitations.list') }}" :active="request()->routeIs('profile.show')">
+                <x-jet-responsive-nav-link href="{{ route('invitations.list') }}" :active="request()->routeIs('invitations.list')">
                     @lang('main.Invitations')
                 </x-jet-responsive-nav-link>
                 @endadmin
@@ -150,9 +151,6 @@
                         @lang('main.API Tokens')
                     </x-jet-responsive-nav-link>
                 @endif
-                <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                    @lang('main.Dashboard')
-                </x-jet-responsive-nav-link>
                 <x-jet-responsive-nav-link href="{{ route('posts.index') }}" :active="request()->routeIs('posts')">
                     @lang('main.Posts')
                 </x-jet-responsive-nav-link>
@@ -160,11 +158,11 @@
                 <x-jet-responsive-nav-link href="{{ route('pages.edit','about') }}" :active="request()->routeIs('posts')">
                     @lang('main.About')
                 </x-jet-responsive-nav-link>
-                @endadmin
+
                 <x-jet-responsive-nav-link href="{{ route('settings') }}" :active="request()->routeIs('lorem')">
                     @lang('main.Settings')
                 </x-jet-responsive-nav-link>
-
+                @endadmin
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf

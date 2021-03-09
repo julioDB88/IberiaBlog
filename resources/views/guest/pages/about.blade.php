@@ -4,7 +4,7 @@
 
     <section class="text-gray-700 body-font">
 
-            <div class="container px-8 mx-auto pt-12 lg:px-4">
+            <div class="container px-2  md:px-8 mx-auto pt-12 lg:px-4">
                 <div class="flex flex-col w-full mb-12 text-left">
                     <div
                         class="inline-flex items-center justify-center flex-shrink-0 w-20 h-20 mx-auto mb-5 text-blue-800 border-2 rounded-full">

@@ -1,66 +1,89 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import "datatables.net-bs/css/dataTables.bootstrap.min.css";
 
-
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap');
 @font-face {
     font-family: "unzialish";
     src: url("../fonts/unzialish.ttf");
 }
-
-*{
-    font-family: 'Montserrat', sans-serif;
+@font-face {
+    font-family: "Montserrat";
+    src: url("../fonts/montserrat/Montserrat-Bold.ttf");
+    font-weight: bold;
+}
+@font-face {
+    font-family: "Montserrat";
+    src: url("../fonts/montserrat/Montserrat-Medium.ttf");
+    font-weight: 500;
+}
+@font-face {
+    font-family: "Montserrat";
+    src: url("../fonts/montserrat/Montserrat-Light.ttf");
+    font-weight: 300;
 }
 
-.btn{
-    padding: .5rem 1.25rem;
+* {
+    font-family: "Montserrat", sans-serif;
+}
+table.dataTable thead .sorting:after {
+    opacity: 0.2;
+    content: "";
+}
+table.dataTable thead .sorting_asc:after {
+    content: "";
+}
+.post-dt{
+    overflow-x: auto;
+}
+.post-dt table{
+    width: 100% !important;
+
+}
+
+.btn {
+    padding: 0.5rem 1.25rem;
     border-radius: 8px;
 }
-.btn-offset{
 
-}
-.c-shadow{
+.c-shadow {
     box-shadow: 0 4px 8px 2px;
 }
 
-.main-banner{
-    backdrop-filter:brightness(0.4) ;
-
+.main-banner {
+    backdrop-filter: brightness(0.4);
 }
 
-.h-80{
+.h-80 {
     height: 50vh;
 }
-.header-section{
+.header-section {
     width: 100%;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
 }
 
-video{
+video {
     object-fit: cover;
     left: 0;
 }
-.fzial{
-    font-family: 'unzialish';
-
+.fzial {
+    font-family: "unzialish";
 }
 td.details-control {
-    background: url('../images/details_open.png') no-repeat center center;
+    background: url("../images/details_open.png") no-repeat center center;
     cursor: pointer;
 }
 tr.shown td.details-control {
-    background: url('../images/details_close.png') no-repeat center center;
+    background: url("../images/details_close.png") no-repeat center center;
 }
 .toggle__dot {
-    top: -.25rem;
-    left: -.25rem;
+    top: -0.25rem;
+    left: -0.25rem;
     transition: all 0.3s ease-in-out;
-  }
+}
 
-  input:checked ~ .toggle__dot {
+input:checked ~ .toggle__dot {
     transform: translateX(100%);
     background-color: #48bb78;
-  }
-
+}

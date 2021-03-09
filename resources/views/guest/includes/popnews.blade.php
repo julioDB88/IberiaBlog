@@ -2,13 +2,13 @@
     @lang('main.pop_news')
 </div>
 <div class="section">
-    <div class="grid grid-cols-1 md:grid-cols-3">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         @foreach ($top_comment as $tpost)
         <div class="p-4 ">
             <div class="h-full border-2 border-gray-200 rounded-lg overflow-hidden">
-                <img class="lg:h-48 md:h-36 w-full object-cover object-center"
+                <img class="lg:h-48 md:h-36 h-24 w-full object-cover object-center"
                     src="{{asset('storage/posts')}}/{{$tpost->img_file}}" alt="blog">
-                <div class="p-6">
+                <div class="p-2 md:p-6 ">
                     <h1 class="title-font text-lg font-medium text-gray-900 mb-1">{{$tpost->title}}</h1>
                     <div class="flex justify-between">
                         <h2 class="tracking-widest text-xs title-font font-medium text-gray-500 mb-3">by

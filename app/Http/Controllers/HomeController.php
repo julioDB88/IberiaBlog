@@ -38,7 +38,7 @@ class HomeController extends Controller
     public function index()
     {
 
-        $latest_posts = Post::take(6)->get();
+        $latest_posts = Post::take(6)->orderBy('id','desc')->get();
         $top_comment = Post::withCount('Comments')->take(6)->get();
         $related = Post::whereMonth('created_at', Carbon::now()->month)->take(6)->inRandomOrder()->get();
         return view('guest.home', compact('latest_posts', 'top_comment', 'related'));
@@ -62,12 +62,13 @@ class HomeController extends Controller
      */
     public function showNews($slug)
     {
-        $post = Post::where('slug', $slug)->first();
+        $post = Post::with('Comments')->where('slug', $slug)->first();
+
         if ($post) {
-            $comments = $post->Comments;
+
             $related = Post::whereMonth('created_at', Carbon::now()->month)->take(6)->inRandomOrder()->get();
 
-            return view('guest.showpost', compact('post', 'comments','related'));
+            return view('guest.showpost', compact('post','related'));
         }
         abort(404);
     }

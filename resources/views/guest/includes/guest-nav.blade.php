@@ -1,6 +1,6 @@
 <nav x-data="{ open: false }" class="bg-white border-b-2 border-gray-100 shadow-lg">
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto px-1 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="hidden md:flex">
                 <!-- Logo -->
@@ -72,14 +72,15 @@
                 <x-jet-nav-link href="{{ route('contact')  }}" :active="request()->routeIs('dashboard')">
                     @lang('main.Contact')
                 </x-jet-nav-link>
+                @auth
 
-                @admin
 
                 <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                     @lang('main.Dashboard')
                 </x-jet-nav-link>
 
-                @endadmin
+
+                @endauth
 
             </div>
 
@@ -140,11 +141,14 @@
             <x-jet-responsive-nav-link href="{{ route('contact')  }}" :active="request()->routeIs('contact')">
                 @lang('main.Contact')
             </x-jet-responsive-nav-link>
-            @admin
-            <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('contact')">
+            @auth
+
+            <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 @lang('main.Dashboard')
             </x-jet-responsive-nav-link>
-            @endadmin
+
+            @endauth
+
         </div>
 
 

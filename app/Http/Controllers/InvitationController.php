@@ -24,7 +24,7 @@ class InvitationController extends Controller
         }
         try {
             DB::transaction(function () use ($invitation) {
-                $user=User::create(['name' => 'Anon', 'email' => $invitation->email, 'password' => Hash::make($invitation->password), 'role_id' => 1]);
+                $user=User::create(['name' => 'Guest', 'email' => $invitation->email, 'password' => Hash::make($invitation->password), 'role_id' => 1]);
                 $this->destroy($invitation);
                 $user->sendEmailVerificationNotification();
             });
@@ -55,7 +55,7 @@ class InvitationController extends Controller
     {
 
         $request->validate([
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users,email|unique:invitations,email',
             'password' => 'required|string'
         ]);
 

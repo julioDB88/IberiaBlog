@@ -1,7 +1,11 @@
 require('./bootstrap');
 
 require('alpinejs');
-require('./jquery')
+
+require('./datatables')
+
+require('./comments')
+require('./posts')
 
 // require('./revelations')
 

@@ -20,12 +20,19 @@ class Post extends Model
     public function Category(){
         return $this->belongsTo('App\Models\Category');
     }
+
     public function Author(){
-        return $this->belongsTo('App\Models\User','author_id','id');
+        return $this->hasOne(User::class,'id','author_id');
     }
+
     public function Comments(){
         return $this->hasMany('App\Models\Comment');
     }
+
+    public function ActiveComments(){
+        return $this->Comments()->where('visible',1);
+    }
+
     public function Likes(){
         return $this->hasMany('App\Models\Like');
     }

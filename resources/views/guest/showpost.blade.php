@@ -33,10 +33,10 @@
                 </div>
             </section>
             <section class="text-gray-700 body-font">
-                <div class="container px-8 pt-2 pb-2 mx-auto lg:px-4">
+                <div class="container px-2 md:px-8 pt-2 pb-2 mx-auto lg:px-4">
                     <div class="flex flex-col w-full mb-6 text-left lg:text-center">
 
-                        <h1 class="mb-6 text-2xl font-semibold tracking-tighter text-blue-800 sm:text-3xl title-font">
+                        <h1 class="mb-6 text-2xl text-center font-semibold tracking-tighter text-blue-800 sm:text-3xl title-font">
                             {{$post->title}}
                         </h1>
                         <div class="flex w-full items-center justify-end">
@@ -55,12 +55,12 @@
                     </div>
                 </div>
             </section>
-            <section class="p-2 bg-gray-700 w-full my-4 ">
-                <div class="mx-auto">
+            <section class="p-2 w-full my-4 ">
+                <div class="mx-auto bg-gray-700 p-2">
                     <h1 class="mb-6 text-2xl font-semibold tracking-tighter text-white sm:text-3xl title-font text-center">
                         @lang('main.Leave a comment')
                     </h1>
-                    <form action="{{route('comment.store')}}" method="post" class="grid w-1/2 mx-auto">
+                    <form action="{{route('comment.store')}}" method="post" class="grid w-full md:w-1/2 mx-auto">
                         @csrf
                         <input type="hidden" name="post_id" value="{{$post->id}}">
                         <div class="flex flex-wrap w-full">
@@ -79,12 +79,13 @@
                 </div>
 
             </section>
-            <section class="container px-8 pt-2 pb-2 mx-auto lg:px-4">
-                @if(count($comments)==0)
-                <h1 class="mb-6 text-2xl font-semibold tracking-tighter text-blue-800 sm:text-3xl title-font">
-                    @lang('main.No_comments')
-                </h1>
-                @else
+            @if($post->ActiveComments->count()===0)
+            <h1 class="mb-6 text-2xl font-semibold tracking-tighter text-blue-800 sm:text-3xl title-font">
+                @lang('main.No_comments')
+            </h1>
+            @else
+            <section class="p-2 w-full my-4 ">
+
 
                 <div class="p-2 bg-gray-700 text-white rounded">
                     <h1 class="mb-6 text-xl font-semibold tracking-tighter text-white  sm:text-3xl title-font">
@@ -92,7 +93,7 @@
                     </h1>
                     <hr style="margin:5px">
                     <hr style="margin:5px">
-                    @foreach($comments as $com)
+                    @foreach($post->ActiveComments as $com)
                     @if ($com->visible)
                     <div class="border-b-2  border-white p-2">
                         <div class="flex justify-between">
@@ -121,8 +122,9 @@
 
                     @endforeach
                 </div>
-                @endif
+
             </section>
+            @endif
         </div>
         @include('guest.includes.relatedcontent')
     </div>

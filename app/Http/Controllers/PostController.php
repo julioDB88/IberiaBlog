@@ -17,12 +17,15 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
+        $role=auth()->user()->role_id;
+
         if ($request->ajax()) {
-            $posts = Post::withCount('Comments')->get();
+
+            $posts = $role===0 ? Post::withCount('Comments')->get():Post::where('author_id',auth()->user()->id)->withCount('Comments')->get();
             return datatables()->of($posts)->make(true);
         }
 
-        $most_commented= Post::withCount('Comments')->orderBy('comments_count','desc')->take(10)->get();
+        $most_commented= Post::withCount('Comments')->with('Author:id,name')->orderBy('comments_count','desc')->take(10)->get();
 
         return view('posts.index',compact('most_commented'));
     }

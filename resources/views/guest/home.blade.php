@@ -20,18 +20,17 @@
     </div>
 
 
-    <div class="section bg-gray-700">
+    <section class="section bg-gray-700">
         <div class="header-section w-full text-xl md:text-3xl py-8 text-center text-white">
             @lang('main.authors')
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-4 ">
 
-            <section class="text-gray-700 body-font ">
-                <div class="container p-6">
-                    <div class="flex flex-wrap">
+
+
+                    <div class="flex flex-wrap p-6">
                         @foreach (User::all() as $user)
-                        <div class="">
-                            <div class="h-full text-left bg-indigo-700 rounded p-5">
+
+                            <div class="h-full text-left bg-indigo-700 rounded p-5 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 m-2">
                                 <a class="inline-flex items-center py-6">
                                     @if($user->profile_foto_url)
                                     <img alt="testimonial"
@@ -55,15 +54,11 @@
                                 <p class="text-base font-medium leading-relaxed text-white">@lang('main.author_placeholder')</p>
                                 @endif
                             </div>
-                        </div>
+
 
                         @endforeach
                     </div>
-                </div>
-            </section>
 
-
-        </div>
-    </div>
+    </section>
 
 </x-guest-layout>

@@ -29,8 +29,8 @@
                 <div class="rounded border-gray-700 border-2 bg-gray-700 text-white">
                     <h3 class="tracking-widest text-3xl border-b-2 border-blue-700 p-2 mx-2 font-bold ">
                         @lang('main.Comments')</h3>
-                    <div class="px-2 my-4" style="max-height: 600px; overflow-y:auto">
-                        <table class="table-auto w-full" id="datatable">
+                    <div class="px-2 my-4">
+                        <table class="table-auto w-full" id="com-datatable">
                             <thead class="bg-blue-900 text-white">
                                 <tr>
                                     <th></th>
@@ -40,9 +40,11 @@
                                     <th class="p-2">@lang('main.Email')</th>
                                     <th>@lang('main.Post')</th>
                                     <th>@lang('main.Status')</th>
+                                    <th>@lang('main.Delete')</th>
+
                                 </tr>
                             </thead>
-                            <tbody class="text-black"></tbody>
+                            <tbody class="text-black bg-white"></tbody>
                             <tfoot>
                                 <tr>
                                     <th></th>
@@ -62,93 +64,7 @@
         </section>
         @push('js')
         <script>
-            $(function() {
 
-                function format ( d ) {
-                    // `d` is the original data object for the row
-                    return '<div class="slider">'+d.comment+'</div>';
-                }
-
-                let table=$('#datatable').DataTable({
-                    processing: true,
-                    serverSide: true,
-                    ajax: '{{route('comments.index')}}',
-                    columns: [
-                        {
-                            "class":          'details-control',
-                            "orderable":      false,
-                            "data":           null,
-                            "defaultContent": ''
-                        },
-                        { data: 'created_at', name: 'created_at',render:function(d,t,r,m){
-                            return new Date(d).toLocaleDateString()
-                        } },
-                        { data: 'id', name: 'id' },
-                        { data: 'name', name: 'name' },
-                        { data: 'email', name: 'email' },
-
-                        { data: 'post_id', name: 'post_id',render:function(d,t,r,m){
-                            return "<a href='/news/"+r.post.slug+"'>View </a>";
-                        } },
-                        { data: 'visible', name: 'visible',render:function(d,t,r,m){
-                            if(d===1)
-                            return '<input type="checkbox" class="switcher" checked data-id="'+r.id+'"/>';
-                            else
-                            return '<input type="checkbox" class="switcher" data-id="'+r.id+'" />';
-
-                        } },
-
-                    ],
-                    initComplete: function () {
-                        $('.switcher').on('change',function(){
-                    $.ajax({
-                        type: "PUT",
-                        url: "/api/comment/switch-visible",
-                        data: {comment:$(this).attr('data-id')},
-
-                        success: function (response) {
-                        console.log(response)
-                        }
-                    });
-
-                })
-                        this.api().columns([6]).every( function () {
-                            var column = this;
-                            var select = $('<select class="text-black"><option value="">All</option><option value="0">Not aproved</option><option value="1">Visible</option></select>')
-                                .appendTo( $(column.footer()).empty() )
-                                .on( 'change', function () {
-                                    var val = $.fn.dataTable.util.escapeRegex(
-                                        $(this).val()
-                                    );
-
-                                    column
-                                        .search( val ? '^'+val+'$' : '', true, false )
-                                        .draw();
-                                } );
-
-
-                        } );
-                    }
-                });
-
-                $('#datatable tbody').on('click', 'td.details-control', function () {
-                    var tr = $(this).closest('tr');
-                    var row = table.row( tr );
-
-                        if ( row.child.isShown() ) {
-                            // This row is already open - close it
-                            row.child.hide();
-                            tr.removeClass('shown');
-                        }
-                        else {
-                            // Open this row
-                            row.child( format(row.data()) ).show();
-                            tr.addClass('shown');
-                        }
-                });
-
-
-            });
 
 
         </script>

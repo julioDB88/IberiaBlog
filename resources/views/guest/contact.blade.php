@@ -1,8 +1,8 @@
 <x-guest-layout>
 
 
- <section class="text-gray-700 body-font pb-24 md:pb-36">
-            <div class="container px-8 pt-48 pb-24 mx-auto lg:px-4">
+ <section class="text-gray-700 body-font pb-12 md:pb-36">
+            <div class="container px-8 pt-24 md:pt-48 pb-12 md:pb-24 mx-auto lg:px-4">
                 <h1 class="text-xl text-center p-4">@lang('main.Contact_us')</h1>
                 @if(session('success'))
                 <div class="w-80 px-8 py-2 mx-auto my-2 font-semibold text-white transition duration-500 ease-in-out transform rounded-lg shadow-xl bg-indigo-700">

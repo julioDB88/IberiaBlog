@@ -16,8 +16,13 @@ class CommentController extends Controller
     {
 
         if ($request->ajax()) {
+           $comments = auth()->user()->role_id===0 ?
+                Comment::with('Post')->get():
+                Comment::with('Post')->whereHas('Post',function($query){
+                    $query->where('posts.author_id',auth()->user()->id);
+                })->get();
 
-            return datatables()->of(Comment::with('Post')->get())->make(true);
+            return datatables()->of($comments)->make(true);
         }
 
 
@@ -121,8 +126,8 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Comment $comment)
     {
-        //
+        $comment->delete();
     }
 }
