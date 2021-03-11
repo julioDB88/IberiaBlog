@@ -11,8 +11,8 @@
                 <div class="p-2 md:p-6 ">
                     <h1 class="title-font text-lg font-medium text-gray-900 mb-1">{{$tpost->title}}</h1>
                     <div class="flex justify-between">
-                        <h2 class="tracking-widest text-xs title-font font-medium text-gray-500 mb-3">by
-                            {{$tpost->Author->name}}</h2>
+                        <h2 class="tracking-widest text-xs title-font font-medium text-gray-500 mb-3">
+                            {{$tpost->Author->name}} - {{\Carbon\Carbon::parse($tpost->created_at)->format('d-m-y')}}</h2>
                         <h2 class="tracking-widest text-xs title-font font-medium text-gray-500 mb-3">
                             {{$tpost->Category->name}}</h2>
 

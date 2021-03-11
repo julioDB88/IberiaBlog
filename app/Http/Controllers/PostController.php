@@ -125,7 +125,7 @@ class PostController extends Controller
         ]);
 
         if ($post->author_id === auth()->user()->id) {
-            $request['category'] = $post->category_id;
+            $post->category_id= $request['category'] ;
 
             if ($post->title != $request->title) {
                 $post->slug = $this->createSlug($request->title);
