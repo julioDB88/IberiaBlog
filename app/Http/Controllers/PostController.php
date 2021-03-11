@@ -112,11 +112,11 @@ class PostController extends Controller
     {
         $request->validate([
             'title' => 'required|max:55',
-            'keywords' => 'required|max:33',
+            'keywords' => 'required|max:55',
             'content' => 'required',
             'category' => 'required',
             'description' => 'required',
-            'image_file' => 'sometimes|image|mimes:jpg,jpeg,png',
+            'image_file' => 'sometimes|image',
         ]);
 
         if ($post->author_id === auth()->user()->id) {

@@ -14,7 +14,7 @@
                         <a href="{{route('news.show',$post->slug)}}">
                             <div alt="gallery"
                                 class="flex items-base items-end object-contain object-center w-full rounded-lg @if(in_array($key,[0,1,4,5])) h-36 @else h-64 @endif"
-                                style="background:url('{{asset('storage/posts')}}/{{$post->img_file}}') no-repeat center;">
+                                style="background:url('{{asset('storage/posts')}}/{{$post->img_file}}') no-repeat center;background-size:cover;">
                                 <div class=" w-full main-banner rounded h-full flex justify-center items-center">
                                     <p class="text-white ">{{ ucfirst($post->title)}}</p>
                                 </div>
@@ -32,7 +32,7 @@
                         <a href="{{route('news.show',$post->slug)}}">
                             <div alt="gallery"
                                 class="flex items-base items-end object-contain object-center w-full rounded-lg @if(in_array($key,[0,1,4,5])) h-36 @else h-64 @endif"
-                                style="background:url('{{asset('storage/posts')}}/{{$post->img_file}}') no-repeat center;">
+                                style="background:url('{{asset('storage/posts')}}/{{$post->img_file}}') no-repeat center;background-size:cover;">
                                 <div class=" w-full main-banner rounded h-full flex justify-center items-center">
                                     <p class="text-white ">{{ucfirst($post->title)}}</p>
                                 </div>
