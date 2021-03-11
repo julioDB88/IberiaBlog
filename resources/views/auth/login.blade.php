@@ -51,11 +51,7 @@
             </div>
 
         </form>
-        <div class="py-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('register') }}">
-                {{ __('Dont have an account?') }}
-            </a>
-        </div>
+
 
     </x-jet-authentication-card>
 </x-AuthLayout>

@@ -26,7 +26,7 @@ class HomeController extends Controller
     public function __construct()
     {
         $email = DB::table('pages_content')->where('name', 'contact')->first()->content;
-        $this->video_page= DB::table('pages_content')->where('name', 'videos')->first()->active;
+        $this->video_page = DB::table('pages_content')->where('name', 'videos')->first()->active;
 
         $this->admin_email = $email === 'null' ? config('app.email') : $email;
     }
@@ -38,13 +38,13 @@ class HomeController extends Controller
     public function index()
     {
 
-        $latest_posts = Post::take(6)->orderBy('id','desc')->get();
+        $latest_posts = Post::take(6)->orderBy('id', 'desc')->get();
         $top_comment = Post::withCount('Comments')->take(6)->get();
         $related = Post::whereMonth('created_at', Carbon::now()->month)->take(6)->inRandomOrder()->get();
         return view('guest.home', compact('latest_posts', 'top_comment', 'related'));
     }
 
-     /**
+    /**
      * show some posts with same category
      */
     public function showCategoryNews($slug)
@@ -68,30 +68,42 @@ class HomeController extends Controller
 
             $related = Post::whereMonth('created_at', Carbon::now()->month)->take(6)->inRandomOrder()->get();
 
-            return view('guest.showpost', compact('post','related'));
+            return view('guest.showpost', compact('post', 'related'));
         }
         abort(404);
     }
 
-     /**
+    /**
      * show the specified page: about,contact,settings
      */
-    public function showPage($page)
+    public function showVideos()
     {
-        if($page=== 'videos'){
-            if(!$this->video_page) abort(404);
+        if (!$this->video_page) abort(404);
 
-            $vids = DB::table('videos')->paginate(15);
-            return view('guest.pages.videos',compact('vids'));
-        }
-
-        $content = DB::table('pages_content')->where('name', $page)->first();
-        if (view()->exists("guest.pages.{$page}")) {
-
-            return view("guest.pages.{$page}", compact('content'));
-        }
+        $vids = DB::table('videos')->paginate(15);
+        return view('guest.pages.videos', compact('vids'));
 
         return abort(404);
+    }
+
+    //show
+    public function showContact()
+    {
+
+        return view("guest.pages.contact");
+    }
+    public function showAbout()
+    {
+        $content2 = 'mola';DB::table('pages_content')->where('id',2)->first()->content;
+        return view("guest.pages.about",compact('content2'));
+    }
+
+    //show
+    public function showShop()
+    {
+
+
+        return view("guest.pages.contact");
     }
 
     //show legal pages: terms or policy
@@ -132,7 +144,7 @@ class HomeController extends Controller
             'email2' => 'required|email',
             'message2' => 'required|string'
         ]);
-            //honey pots for spammers
+        //honey pots for spammers
         if ($request->email || $request->address || $request->message) {
             return redirect()->back()->with('success', 'Enviado Correctamente');
         }

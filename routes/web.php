@@ -23,7 +23,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['web'])->group(function () {
 
+   // pages
     Route::get('/', [HomeController::class, 'index'])->name('home');
+
+    Route::get('videos', [HomeController::class, 'showVideos'])->name('videos')->middleware('activePage');
+    Route::get('shop', [HomeController::class, 'showShop'])->name('shop')->middleware('activePage');
+    Route::get('about', [HomeController::class, 'showAbout'])->name('about')->middleware('activePage');
     Route::get('/news/search', [HomeController::class, 'searchPosts'])->name('search.posts');
     Route::get('news/category/{slug}', [HomeController::class, 'showCategoryNews'])->name('news.category');
     Route::get('news/{slug}', [HomeController::class, 'showNews'])->name('news.show');
@@ -31,7 +36,7 @@ Route::middleware(['web'])->group(function () {
     Route::get('contact', function () {
         return view('guest.contact');
     })->name('contact');
-    Route::post('contact', [HomeController::class, 'contactMe'])->name('contact.post');
+
 
     //coment store
     Route::post('comments', [CommentController::class, 'store'])->name('comment.store');
@@ -39,8 +44,8 @@ Route::middleware(['web'])->group(function () {
 
     //invitations
     Route::get('invitation/{invitation}', [InvitationController::class, 'accept'])->name('invitation.accept');
-
-    Route::get('{page}', [HomeController::class, 'showPage'])->name('page.show')->middleware('activePage');
+    //  Send contact form
+    Route::post('contact', [HomeController::class, 'contactMe'])->name('contact.post');
 });
 
 Route::prefix('admin')->middleware(['auth:sanctum', 'verified', 'isMember'])->group(function () {
@@ -62,7 +67,7 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'verified', 'isMember'])->gr
 
 
 
-    Route::middleware('isAdmin')->group( function () {
+    Route::middleware('isAdmin')->group(function () {
 
         //settings
         Route::delete('/social/{social}', [AdminController::class, 'destroySocialLink'])->name('social.destroy');

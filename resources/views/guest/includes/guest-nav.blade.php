@@ -54,24 +54,24 @@
 
 
                 @if($active_about)
-                <x-jet-nav-link href="{{ route('page.show','about')  }}" :active="request()->routeIs('dashboard')">
+                <x-jet-nav-link href="{{ route('about')  }}" :active="request()->routeIs('about')">
                     @lang('main.About')
                 </x-jet-nav-link>
                 @endif
 
                 @if($active_videos)
-                <x-jet-nav-link href="{{ route('page.show','about')  }}" :active="request()->routeIs('dashboard')">
+                <x-jet-nav-link href="{{ route('videos')  }}" :active="request()->routeIs('videos')">
                     @lang('main.Videos')
                 </x-jet-nav-link>
                 @endif
 
-                @if($shop->active)
+                {{-- @if($shop->active)
                 <x-jet-nav-link href="//{{ $shop->content }}" :active="request()->routeIs('dashboard')">
                     @lang('main.Shop')
                 </x-jet-nav-link>
-                @endif
+                @endif --}}
 
-                <x-jet-nav-link href="{{ route('contact')  }}" :active="request()->routeIs('dashboard')">
+                <x-jet-nav-link href="{{ route('contact')  }}" :active="request()->routeIs('contact')">
                     @lang('main.Contact')
                 </x-jet-nav-link>
                 @auth
@@ -123,22 +123,22 @@
             </x-jet-dropdown>
 
             @if($active_videos)
-            <x-jet-responsive-nav-link href="{{ route('page.show','about')  }}" :active="request()->routeIs('dashboard')">
+            <x-jet-responsive-nav-link href="{{ route('videos')  }}" :active="request()->routeIs('videos')">
                 @lang('main.Videos')
             </x-jet-responsive-nav-link >
             @endif
 
             @if($active_about)
-            <x-jet-responsive-nav-link href="{{ route('page.show','about')  }}" :active="request()->routeIs('about')">
+            <x-jet-responsive-nav-link href="{{ route('about')  }}" :active="request()->routeIs('about')">
                 @lang('main.About')
             </x-jet-responsive-nav-link>
             @endif
 
-            @if($shop->active)
+            {{-- @if($shop->active)
             <x-jet-responsive-nav-link href="{{ $shop->content }}" :active="request()->routeIs('about')">
                 @lang('main.Shop')
             </x-jet-responsive-nav-link>
-            @endif
+            @endif --}}
 
             <x-jet-responsive-nav-link href="{{ route('contact')  }}" :active="request()->routeIs('contact')">
                 @lang('main.Contact')

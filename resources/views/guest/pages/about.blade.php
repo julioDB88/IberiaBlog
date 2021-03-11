@@ -16,8 +16,8 @@
                         <h1 class="text-center text-xl">@lang('main.About')</h1>
                     </h1>
                     <div class="mx-auto my-8 p-4 text-base font-medium leading-relaxed text-gray-700 ">
-                   @if($content)
-                   {!! $content->content !!}
+                   @if($content2)
+                   {!! $content2 !!}
 
                    @else
                    {!! __('pages.about.content')!!}
