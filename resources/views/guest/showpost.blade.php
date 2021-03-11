@@ -50,7 +50,9 @@
 
                         </div>
                     </div>
+
                     <div class="pt-6 pb-12 px-4">
+                        <p class="py-4"> {{\Carbon\Carbon::parse($post->created_at)->format('d-m-y')}}</p>
                         {!! $post->content !!}
                     </div>
                 </div>
