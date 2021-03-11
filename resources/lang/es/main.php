@@ -19,6 +19,7 @@ return [
     'cookies'=>'Utilizamos cookies propias y de terceros para mejorar la experiencia del usuario a través de su navegación. Si continúas navegando aceptas su uso.',
     'and'=>'y',
     'Videos'=>'Videos',
+    'publish_at'=>'Publicar',
     'Shop'=>'Tienda',
     'share'=>'Comparte',
     'Activate_sections'=>'Activar secciones',
@@ -80,12 +81,14 @@ return [
     'Icon_image'=>'Icono',
     'Title'=>'Título',
     'Category'=>'Categoria',
-    'Add Mmage'=>'Añadir Imagen',
+    'Add Image'=>'Añadir Imagen',
     'Last Posts'=>'Últimos Posts',
     'Edit'=>'Editar',
     'Trash'=>'Borrar',
-    'Stats'=>'Comentarios',
+    'Comments'=>'Comentarios',
+    'Status'=>'Estado',
     'New Post'=>'Nueva Publicación',
+    'Next_posts'=>'Programados'
 
 
 ];

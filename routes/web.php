@@ -52,6 +52,7 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'verified', 'isMember'])->gr
     Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
 
     Route::resource('categories', CategoryController::class);
+    Route::get('/posts/programed', [PostController::class,'nextPosts']);
     Route::resource('posts', PostController::class);
 
 

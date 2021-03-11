@@ -37,22 +37,27 @@
                     <div class="flex flex-col w-full mb-6 text-left lg:text-center">
 
                         <h1 class="mb-6 text-2xl text-center font-semibold tracking-tighter text-blue-800 sm:text-3xl title-font">
-                            {{$post->title}}
+                            {{strtoupper($post->title)}}
+
                         </h1>
-                        <div class="flex w-full items-center justify-end">
-                           <p class="mr-4">@lang('main.share')</p>
-                            <a href="https://www.facebook.com/sharer/sharer.php?u={{Request::url()}}" target="_blank">
-                                <img src="{{asset('media/logos/facebook.svg')}}" alt="" class="h-6 mr-4">
-                            </a>
-                            <a href="whatsapp://send?text={{Request::url()}}" data-action="share/whatsapp/share">
-                                <img src="{{asset('media/logos/whatsapp.svg')}}" alt="" class="h-8">
-                            </a>
+                        <div class="flex w-full items-center justify-between border-b-2">
+                            <div> <p class=" text-sm text-gray-500 py-4"> {{\Carbon\Carbon::parse($post->created_at)->format('d / m / Y')}}</p></div>
+                            <div class="flex items-center">
+                                <p class="mr-4">@lang('main.share')</p>
+                                <a href="https://www.facebook.com/sharer/sharer.php?u={{Request::url()}}" target="_blank">
+                                    <img src="{{asset('media/logos/facebook.svg')}}" alt="" class="h-6 mr-4">
+                                </a>
+                                <a href="whatsapp://send?text={{Request::url()}}" data-action="share/whatsapp/share">
+                                    <img src="{{asset('media/logos/whatsapp.svg')}}" alt="" class="h-8">
+                                </a>
+                            </div>
+
 
                         </div>
                     </div>
 
                     <div class="pt-6 pb-12 px-4">
-                        <p class="py-4"> {{\Carbon\Carbon::parse($post->created_at)->format('d-m-y')}}</p>
+
                         {!! $post->content !!}
                     </div>
                 </div>

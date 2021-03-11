@@ -57,7 +57,7 @@ return [
     'url' => env('APP_URL', 'http://localhost'),
 
     'asset_url' => env('ASSET_URL', null),
-    'email'=>'test@test.com',
+    'email'=>'juliodesplat@protonmail.com',
     /*
     |--------------------------------------------------------------------------
     | Application Timezone

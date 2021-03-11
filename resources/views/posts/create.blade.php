@@ -57,6 +57,13 @@
                             autocomplete="off">
                     </div>
                     <div class="p-3 w-full  bg-indigo-700 rounded text-white">
+                        <label for="active">
+                            <input type="checkbox" name="active" id="active"> Visible
+                        </label>
+                        <label for="publish_at" class=" mx-4">
+                            @lang('main.publish_at')<br>
+                            <input type="date" name="publish_at" id="" class="text-black rounded" value={{old('publish_at')}}>
+                        </label>
 
                         <input type="file" name="image_file" id="image_file" class="rounded text-xs md:text-base">
 
@@ -65,7 +72,7 @@
                 </div>
 
 
-                <textarea name="content" id="contents">Hello, World!</textarea>
+                <textarea name="content" id="contents">{{ old('content') }}</textarea>
                 <input type="submit" class="bg-indigo-700 p-4 rounded m-6 text-white" value="@lang('main.Submit')">
 
             </form>

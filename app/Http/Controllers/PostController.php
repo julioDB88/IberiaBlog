@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Post;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -21,13 +22,23 @@ class PostController extends Controller
 
         if ($request->ajax()) {
 
-            $posts = $role===0 ? Post::withCount('Comments')->get():Post::where('author_id',auth()->user()->id)->withCount('Comments')->get();
+            $posts = $role===0 ? Post::where('publish_at','<=',Carbon::now())->withCount('Comments')->get():Post::where('author_id',auth()->user()->id)->where('publish_at','<=',Carbon::now())->withCount('Comments')->get();
             return datatables()->of($posts)->make(true);
         }
 
         $most_commented= Post::withCount('Comments')->with('Author:id,name')->orderBy('comments_count','desc')->take(10)->get();
 
         return view('posts.index',compact('most_commented'));
+    }
+
+    public function nextPosts(Request $request){
+        $role=auth()->user()->role_id;
+
+        if ($request->ajax()) {
+
+            $posts = $role===0 ? Post::where('publish_at','>',Carbon::now())->withCount('Comments')->get():Post::where('author_id',auth()->user()->id)->where('publish_at','>',Carbon::now())->withCount('Comments')->get();
+            return datatables()->of($posts)->make(true);
+        }
     }
 
     /**
@@ -56,7 +67,7 @@ class PostController extends Controller
             'content' => 'required',
             'category_id' => 'required',
             'description' => 'required',
-            'image_file' => 'required|image|mimes:jpg,jpeg,png',
+            'image_file' => 'required|image|mimes:jpg,jpeg,png,webp,gif',
         ]);
 
         $post = new Post();
@@ -65,6 +76,11 @@ class PostController extends Controller
         $post->keywords = $request->keywords;
         $post->content = $request->content;
         $post->description = $request->description;
+        $post->active= $request->active ? 1:0;
+        if($request->publish_at && $request->publish_at >  Carbon::today() ){
+            $post->publish_at= $request->publish_at;
+        }
+
         $post->category_id = $request->category_id;
         $post->slug = $this->createSlug($post->title);
         $filename = time() . "." . $request->file('image_file')->getClientOriginalExtension();
@@ -131,6 +147,14 @@ class PostController extends Controller
                 $post->slug = $this->createSlug($request->title);
                 $post->save();
             }
+
+                $post->active = $request->active ? 1:0;
+                $post->publish_at=$request->publish_at;
+                $post->save();
+
+
+
+
 
 
 

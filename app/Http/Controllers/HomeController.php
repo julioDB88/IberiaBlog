@@ -9,6 +9,7 @@ use App\Models\Post;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Mail;
 class HomeController extends Controller
 {
     protected $admin_email;
-    protected $video_page;
+
 
 
     /**
@@ -25,10 +26,8 @@ class HomeController extends Controller
 
     public function __construct()
     {
-        $email = DB::table('pages_content')->where('name', 'contact')->first()->content;
-        $this->video_page = DB::table('pages_content')->where('name', 'videos')->first()->active;
 
-        $this->admin_email = $email === 'null' ? config('app.email') : $email;
+        $this->admin_email = config('app.email') ;
     }
 
     /**
@@ -38,9 +37,9 @@ class HomeController extends Controller
     public function index()
     {
 
-        $latest_posts = Post::take(6)->orderBy('id', 'desc')->get();
-        $top_comment = Post::withCount('Comments')->take(6)->get();
-        $related = Post::whereMonth('created_at', Carbon::now()->month)->take(6)->inRandomOrder()->get();
+        $latest_posts = Post::where('active',1)->where('publish_at','<=',Carbon::now())->take(6)->orderBy('id', 'desc')->get();
+        $top_comment = Post::where('active',1)->where('publish_at','<=',Carbon::now())->whereYear('publish_at',Carbon::now()->year)->withCount('Comments')->orderBy('comments_count','desc')->take(6)->get();
+        $related = Post::whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->month)->where('active',1)->where('publish_at','<=',Carbon::today())->take(6)->inRandomOrder()->get();
         return view('guest.home', compact('latest_posts', 'top_comment', 'related'));
     }
 
@@ -54,7 +53,7 @@ class HomeController extends Controller
             return abort(404);
         }
         $category = $cat->name;
-        $posts = Post::where('category_id', $cat->id)->orderBy('id', 'desc')->paginate(9);
+        $posts = Post::where('category_id', $cat->id)->where('publish_at','<=',Carbon::today())->where('active',1)->orderBy('id', 'desc')->paginate(9);
         return view('guest.newscategory', compact('posts', 'category'));
     }
     /**
@@ -64,13 +63,27 @@ class HomeController extends Controller
     {
         $post = Post::with('Comments')->where('slug', $slug)->first();
 
-        if ($post) {
+        if ($post && $post->active==1 && $post->publish_at <= Carbon::now()) {
 
-            $related = Post::whereMonth('created_at', Carbon::now()->month)->take(6)->inRandomOrder()->get();
+            $related = Post::whereYear('created_at', Carbon::now()->year)
+            ->whereMonth('created_at', Carbon::now()->month)
+            ->where('active',1)
+            ->where('publish_at','<=',Carbon::today())
+            ->take(6)->inRandomOrder()->get();
 
             return view('guest.showpost', compact('post', 'related'));
+        }else if(Auth::check()){
+            $related = Post::whereYear('created_at', Carbon::now()->year)
+            ->whereMonth('created_at', Carbon::now()->month)
+            ->where('active',1)
+            ->where('publish_at','<=',Carbon::today())
+            ->take(6)->inRandomOrder()->get();
+
+            return view('guest.showpost', compact('post', 'related'));
+        } else{
+            abort(404);
         }
-        abort(404);
+
     }
 
     /**
@@ -78,9 +91,8 @@ class HomeController extends Controller
      */
     public function showVideos()
     {
-        if (!$this->video_page) abort(404);
 
-        $vids = DB::table('videos')->paginate(15);
+        $vids = DB::table('videos')->orderBy('id','desc')->paginate(15);
         return view('guest.pages.videos', compact('vids'));
 
         return abort(404);

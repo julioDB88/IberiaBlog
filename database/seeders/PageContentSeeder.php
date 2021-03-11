@@ -16,7 +16,6 @@ class PageContentSeeder extends Seeder
     {
      $content=[
          ['name'=>'about','content'=>'null'],
-         ['name'=>'Contact','content'=>'null'],
          ['name'=>'Shop','content'=>'null'],
          ['name'=>'Videos','content'=>'null'],
      ];

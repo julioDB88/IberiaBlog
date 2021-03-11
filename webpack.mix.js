@@ -24,7 +24,7 @@ mix.js('resources/js/app.js', 'public/js')
     mix.copy('node_modules/tinymce/icons', 'public/js/tinymce/icons');
     mix.copy('node_modules/@fortawesome/fontawesome-free/css/all.css','public/css/fontawesome')
     mix.copy('node_modules/@fortawesome/fontawesome-free/webfonts','public/css/webfonts')
-    .options({ processCssUrls: false })
+
 if (mix.inProduction()) {
     mix.version();
 }

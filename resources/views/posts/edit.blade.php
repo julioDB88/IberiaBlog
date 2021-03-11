@@ -56,8 +56,15 @@
                             class="block w-full text-black mt-1 rounded-md border-transparent focus:border-gray-500 focus:bg-white focus:ring-"
                             autocomplete="off">
                     </div>
-                    <div class="p-3 w-full md:w-1/4">
-                        <label for="image_file" class="bg-blue-700 p-4 rounded">@lang('main.Add Mmage')
+                    <div class="p-3 w-full md:w-1/4 flex">
+                        <label for="active">
+                            <input type="checkbox" name="active" id="active" @if($post->active) checked @endif> Visible
+                        </label>
+                        <label for="publish_at" class=" mx-4">
+                            @lang('main.publish_at')<br>
+                            <input type="date" name="publish_at" id="" class="text-black rounded" value={{$post->publish_at}}>
+                        </label>
+                        <label for="image_file" class="bg-blue-700 px-4 py-2 rounded">@lang('main.Add Image')
                             <input type="file" name="image_file" id="image_file" class="hidden">
                         </label>
 
@@ -67,7 +74,7 @@
 
 
                 <textarea name="content" id="contents">{{$post->content}}</textarea>
-                <input type="submit" class="bg-blue-700 p-4 rounded m-6" value="@lang('main.Submit')">
+                <input type="submit" class="bg-blue-700 px-4 py-2 rounded m-6" value="@lang('main.Submit')">
 
             </form>
         </div>

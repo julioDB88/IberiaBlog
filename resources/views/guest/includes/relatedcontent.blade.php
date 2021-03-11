@@ -8,9 +8,7 @@
             <a href="{{route('news.show',$rel->slug)}}">
                 <img src="{{asset('storage/posts')}}/{{$rel->img_file}}" alt="{{config('app.name')}} - {{$rel->description}}" class="w-full pb-3 ">
                 <p>{{$rel->title}}</p>
-                <p> {{\Carbon\Carbon::parse($rel->created_at)->format('d-m-y')}}</p>
             </a>
-
         </div>
         @endforeach
 
