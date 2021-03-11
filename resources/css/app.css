@@ -8,21 +8,7 @@
     font-family: "unzialish";
     src: url("../fonts/unzialish.ttf");
 }
-@font-face {
-    font-family: "Montserrat";
-    src: url("../fonts/montserrat/Montserrat-Bold.ttf");
-    font-weight: bold;
-}
-@font-face {
-    font-family: "Montserrat";
-    src: url("../fonts/montserrat/Montserrat-Medium.ttf");
-    font-weight: 500;
-}
-@font-face {
-    font-family: "Montserrat";
-    src: url("../fonts/montserrat/Montserrat-Light.ttf");
-    font-weight: 300;
-}
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap');
 
 * {
     font-family: "Montserrat", sans-serif;

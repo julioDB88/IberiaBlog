@@ -68,7 +68,12 @@ class PostController extends Controller
         $post->category_id = $request->category_id;
         $post->slug = $this->createSlug($post->title);
         $filename = time() . "." . $request->file('image_file')->getClientOriginalExtension();
-        $request->file('image_file')->storeAs("public/posts/$post->id", $filename);
+        try {
+            $request->file('image_file')->storeAs("public/posts/$post->id", $filename);
+
+        } catch (\Throwable $th) {
+            throw $th;
+        }
         $post->img_file = $filename;
         $post->save();
 
