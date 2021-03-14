@@ -5,7 +5,7 @@
             <div class="container px-8 pt-24 md:pt-48 pb-12 md:pb-24 mx-auto lg:px-4">
                 <h1 class="text-xl text-center p-4">@lang('main.Contact_us')</h1>
                 @if(session('success'))
-                <div class="w-80 px-8 py-2 mx-auto my-2 font-semibold text-white transition duration-500 ease-in-out transform rounded-lg shadow-xl bg-indigo-700">
+                <div class="rounded-lg lg:w-2/6 md:w-1/2 md:ml-auto md:mt-0 px-8 py-2 mx-auto my-2 font-semibold text-white transition duration-500 ease-in-out transform rounded-lg shadow-xl bg-green-400">
                     {!! session('success')!!}
                 </div>
                 @endif
@@ -52,12 +52,6 @@
             </div>
         </section>
 
-        <script async>
-
-            $('#btn-submit').on('click',function(){
-                $(this).attr('disabled',true);
-            })
-        </script>
 
 
 </x-guest-layout>
