@@ -31,6 +31,7 @@ Route::middleware(['web'])->group(function () {
     Route::get('about', [HomeController::class, 'showAbout'])->name('about')->middleware('activePage');
     Route::get('/news/search', [HomeController::class, 'searchPosts'])->name('search.posts');
     Route::get('news/category/{slug}', [HomeController::class, 'showCategoryNews'])->name('news.category');
+    Route::get('news/month/{date}', [HomeController::class, 'showMonthNews'])->name('news.month');
     Route::get('news/{slug}', [HomeController::class, 'showNews'])->name('news.show');
     Route::get('legal/{page}', [HomeController::class, 'showLegal'])->name('legal.show');
     Route::get('contact', function () {

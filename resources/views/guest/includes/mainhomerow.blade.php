@@ -53,5 +53,5 @@
 
         </div>
     </div>
-    @include('guest.includes.popnews')
+    @include('guest.includes.secondhomerow')
 </div>

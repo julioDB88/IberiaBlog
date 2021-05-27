@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Mail;
 class HomeController extends Controller
 {
     protected $admin_email;
-
+    public $chronology;
 
 
     /**
@@ -28,6 +28,10 @@ class HomeController extends Controller
     {
 
         $this->admin_email = config('app.email') ;
+        $this->chronology = Post::where('active',1)->whereYear('publish_at',Carbon::now()->year)->get(['slug','title','publish_at'])->groupBy(function($item){
+            return Carbon::parse($item->publish_at)->format('Y-m');
+        });
+
     }
 
     /**
@@ -40,7 +44,9 @@ class HomeController extends Controller
         $latest_posts = Post::where('active',1)->where('publish_at','<=',Carbon::now())->take(6)->orderBy('id', 'desc')->get();
         $top_comment = Post::where('active',1)->where('publish_at','<=',Carbon::now())->whereYear('publish_at',Carbon::now()->year)->withCount('Comments')->orderBy('comments_count','desc')->take(6)->get();
         $related = Post::whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->month)->where('active',1)->where('publish_at','<=',Carbon::today())->take(6)->inRandomOrder()->get();
-        return view('guest.home', compact('latest_posts', 'top_comment', 'related'));
+        $chrono = $this->chronology;
+
+        return view('guest.home', compact('latest_posts', 'top_comment', 'related','chrono'));
     }
 
     /**
@@ -56,13 +62,26 @@ class HomeController extends Controller
         $posts = Post::where('category_id', $cat->id)->where('publish_at','<=',Carbon::today())->where('active',1)->orderBy('id', 'desc')->paginate(9);
         return view('guest.newscategory', compact('posts', 'category'));
     }
+        /**
+     * show some posts in same month
+     */
+    public function showMonthNews($date)
+    {
+        $month=Carbon::parse($date)->month;
+        $year=Carbon::parse($date)->year;
+        $posts = Post::whereMonth('publish_at',$month)->whereYear('publish_at',$year)->where('active',1)->orderBy('id', 'desc')->paginate(9);
+        if (empty($posts)) {
+            return abort(404);
+        }
+        return view('guest.newschrono', compact('posts','date'));
+    }
     /**
      * show the specified post
      */
     public function showNews($slug)
     {
         $post = Post::with('Comments')->where('slug', $slug)->first();
-
+        $chrono = $this->chronology;
         if ($post && $post->active==1 && $post->publish_at <= Carbon::now()) {
 
             $related = Post::whereYear('created_at', Carbon::now()->year)
@@ -71,7 +90,7 @@ class HomeController extends Controller
             ->where('publish_at','<=',Carbon::today())
             ->take(6)->inRandomOrder()->get();
 
-            return view('guest.showpost', compact('post', 'related'));
+            return view('guest.showpost', compact('post', 'related','chrono'));
         }else if(Auth::check()){
             $related = Post::whereYear('created_at', Carbon::now()->year)
             ->whereMonth('created_at', Carbon::now()->month)
@@ -79,7 +98,7 @@ class HomeController extends Controller
             ->where('publish_at','<=',Carbon::today())
             ->take(6)->inRandomOrder()->get();
 
-            return view('guest.showpost', compact('post', 'related'));
+            return view('guest.showpost', compact('post', 'related','chrono'));
         } else{
             abort(404);
         }
