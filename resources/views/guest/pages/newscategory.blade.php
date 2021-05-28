@@ -4,7 +4,7 @@
 
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
-<h1 class="text-lg md:text-3xl text-indigo-700 text-center font-bold tracker">{{ucfirst($category)}}</h1>
+            <h1 class="text-lg md:text-3xl text-indigo-700 text-center font-bold tracker">{{ucfirst($category)}}</h1>
             <section class="text-gray-700 body-font">
                 <div class="container px-8 pt-2 mx-auto lg:px-10">
                     <div class="flex flex-wrap ">
@@ -20,7 +20,8 @@
                                     </h2>
                                     <p class="mb-4 text-base leading-relaxed">
                                         {{ mb_strimwidth($post->description,0,95,'...') }}</p>
-                                    <a  href="{{route('news.show',$post->slug)}}" class="w-full px-8 py-2 font-semibold text-indigo-700 transition duration-500 ease-in-out transform bg-white border rounded-lg shadow-xl hover:text-white hover:border-black hover:bg-indigo-700 focus:shadow-outline focus:outline-none">@lang('main.Read')</a>
+                                    <a href="{{route('news.show',$post->slug)}}"
+                                        class="w-full px-8 py-2 font-semibold text-indigo-700 transition duration-500 ease-in-out transform bg-white border rounded-lg shadow-xl hover:text-white hover:border-black hover:bg-indigo-700 focus:shadow-outline focus:outline-none">@lang('main.Read')</a>
                                 </div>
                             </div>
                         </div>

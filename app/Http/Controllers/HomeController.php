@@ -60,7 +60,8 @@ class HomeController extends Controller
         }
         $category = $cat->name;
         $posts = Post::where('category_id', $cat->id)->where('publish_at','<=',Carbon::today())->where('active',1)->orderBy('id', 'desc')->paginate(9);
-        return view('guest.newscategory', compact('posts', 'category'));
+        $chrono = $this->chronology;
+        return view('guest.newscategory', compact('posts', 'category','chrono'));
     }
         /**
      * show some posts in same month

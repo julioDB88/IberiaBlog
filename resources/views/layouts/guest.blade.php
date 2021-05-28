@@ -24,6 +24,7 @@
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-WF36WNB');</script>
     <!-- End Google Tag Manager -->
+    <script data-ad-client="ca-pub-6863196324649759" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     </head>
     <body>
         @include('guest.includes.guest-nav')
